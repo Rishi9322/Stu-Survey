@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart.js Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 20px 0;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chart.js Loading Test</h1>
+        <div id="status" class="status info">Loading Chart.js...</div>
+        
+        <div class="chart-container">
+            <canvas id="testChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Try multiple CDNs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.js"></script>
+    
+    <script>
+    const statusDiv = document.getElementById('status');
+    
+    function updateStatus(message, type) {
+        statusDiv.textContent = message;
+        statusDiv.className = 'status ' + type;
+    }
+    
+    // Check if Chart.js loaded
+    if (typeof Chart !== 'undefined') {
+        updateStatus('✓ Chart.js loaded successfully! Version: ' + (Chart.version || 'Unknown'), 'success');
+        createTestChart();
+    } else {
+        updateStatus('✗ Chart.js failed to load from primary CDN. Trying backup...', 'error');
+        
+        // Try backup CDN
+        const backupScript = document.createElement('script');
+        backupScript.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js';
+        backupScript.onload = function() {
+            if (typeof Chart !== 'undefined') {
+                updateStatus('✓ Chart.js loaded from backup CDN! Version: ' + (Chart.version || 'Unknown'), 'success');
+                createTestChart();
+            } else {
+                updateStatus('✗ Chart.js failed to load from all CDNs', 'error');
+            }
+        };
+        backupScript.onerror = function() {
+            updateStatus('✗ All Chart.js CDNs failed to load', 'error');
+        };
+        document.head.appendChild(backupScript);
+    }
+    
+    function createTestChart() {
+        try {
+            const ctx = document.getElementById('testChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(255, 205, 86, 0.8)',
+                            'rgba(75, 192, 192, 0.8)',
+                            'rgba(153, 102, 255, 0.8)',
+                            'rgba(255, 159, 64, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 205, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Test Chart - If you see this, Chart.js is working!'
+                        }
+                    }
+                }
+            });
+            
+            updateStatus('✓ Chart.js is working perfectly! Test chart created.', 'success');
+            
+        } catch (error) {
+            updateStatus('✗ Error creating chart: ' + error.message, 'error');
+            console.error('Chart creation error:', error);
+        }
+    }
+    </script>
+</body>
+</html>

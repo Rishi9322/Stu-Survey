@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 AI Training Data Manager</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .training-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e9ecef;
+        }
+        .upload-area {
+            border: 3px dashed #007bff;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .upload-area:hover {
+            border-color: #0056b3;
+            background: #e3f2fd;
+        }
+        .upload-area.dragover {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+        .file-input {
+            display: none;
+        }
+        .upload-button {
+            background: linear-gradient(145deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        .upload-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,123,255,0.3);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #dee2e6;
+        }
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            color: #6c757d;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .url-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .url-input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        .results-area {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 15px 0;
+        }
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #dc3545;
+            margin: 15px 0;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .data-preview {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .data-preview table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-preview th, .data-preview td {
+            padding: 10px;
+            border-bottom: 1px solid #dee2e6;
+            text-align: left;
+        }
+        .data-preview th {
+            background: #f8f9fa;
+            font-weight: bold;
+        }
+        .help-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="training-container">
+        <h1>📚 AI Training Data Manager</h1>
+        <p>Import training data from CSV files or Google Sheets to enhance AI capabilities</p>
+
+        <!-- Statistics Section -->
+        <div class="section-card">
+            <h2>📊 Training Data Statistics</h2>
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalRecords">--</div>
+                    <div class="stat-label">Total Records</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="categoriesCount">--</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="sourcesCount">--</div>
+                    <div class="stat-label">Data Sources</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="lastImport">--</div>
+                    <div class="stat-label">Last Import</div>
+                </div>
+            </div>
+            <button class="upload-button" onclick="loadStats()">🔄 Refresh Statistics</button>
+        </div>
+
+        <!-- File Upload Section -->
+        <div class="section-card">
+            <h2>📁 Upload Training Data File</h2>
+            <div class="help-box">
+                <strong>Supported formats:</strong> CSV, Excel (XLSX, XLS)<br>
+                <strong>Expected columns:</strong> category, subject, content/description, sentiment, priority, tags<br>
+                <strong>Maximum file size:</strong> 10MB
+            </div>
+            
+            <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                <div>
+                    <h3>📤 Drag & Drop Files Here</h3>
+                    <p>or click to select files</p>
+                    <button type="button" class="upload-button">Choose File</button>
+                </div>
+            </div>
+            
+            <input type="file" id="fileInput" class="file-input" accept=".csv,.xlsx,.xls" onchange="handleFileUpload()">
+            
+            <div class="loading" id="fileLoading">
+                <div class="spinner"></div>
+                <div>Processing file...</div>
+            </div>
+            
+            <div id="fileResults" class="results-area" style="display: none;"></div>
+        </div>
+
+        <!-- Google Sheets Section -->
+        <div class="section-card">
+            <h2>🌐 Google Sheets Integration</h2>
+            <div class="help-box">
+                <strong>Instructions:</strong><br>
+                1. Make your Google Sheet public (Share → Anyone with link can view)<br>
+                2. Copy the share URL and paste it below<br>
+                3. Your sheet should have columns like: category, subject, description, sentiment, priority
+            </div>
+            
+            <input type="url" id="sheetsUrl" class="url-input" placeholder="https://docs.google.com/spreadsheets/d/your-sheet-id/edit...">
+            
+            <button class="upload-button" onclick="importFromGoogleSheets()">📊 Import from Google Sheets</button>
+            
+            <div class="loading" id="sheetsLoading">
+                <div class="spinner"></div>
+                <div>Importing from Google Sheets...</div>
+            </div>
+            
+            <div id="sheetsResults" class="results-area" style="display: none;"></div>
+        </div>
+
+        <!-- Data Preview Section -->
+        <div class="section-card">
+            <h2>👁️ Training Data Preview</h2>
+            <button class="upload-button" onclick="previewTrainingData()">👁️ Preview Data</button>
+            <button class="upload-button" onclick="exportTrainingData()" style="background: linear-gradient(145deg, #28a745, #1e7e34);">💾 Export for AI</button>
+            
+            <div id="dataPreview" class="data-preview" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Drag and drop functionality
+        const uploadArea = document.getElementById('uploadArea');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        uploadArea.addEventListener('drop', handleDrop, false);
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        function highlight(e) {
+            uploadArea.classList.add('dragover');
+        }
+        
+        function unhighlight(e) {
+            uploadArea.classList.remove('dragover');
+        }
+        
+        function handleDrop(e) {
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                document.getElementById('fileInput').files = files;
+                handleFileUpload();
+            }
+        }
+        
+        async function handleFileUpload() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+            
+            showLoading('fileLoading', true);
+            hideResults('fileResults');
+            
+            const formData = new FormData();
+            formData.append('action', 'upload_file');
+            formData.append('training_file', file);
+            
+            try {
+                const response = await fetch('training_endpoint.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                showLoading('fileLoading', false);
+                showResults('fileResults', result);
+                
+                if (result.success) {
+                    loadStats(); // Refresh stats
+                }
+                
+            } catch (error) {
+                showLoading('fileLoading', false);
+                showResults('fileResults', {
+                    success: false,
+                    error: `Upload error: ${error.message}`
+                });
+            }
+        }
+        
+        async function importFromGoogleSheets() {
+            const url = document.getElementById('sheetsUrl').value.trim();
+            
+            if (!url) {
+                alert('Please enter a Google Sheets URL');
+                return;
+            }
+            
+            showLoading('sheetsLoading', true);
+            hideResults('sheetsResults');
+            
+            const formData = new FormData();
+            formData.append('action', 'import_sheets');
+            formData.append('sheets_url', url);
+            
+            try {
+                const response = await fetch('training_endpoint.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                showLoading('sheetsLoading', false);
+                showResults('sheetsResults', result);
+                
+                if (result.success) {
+                    loadStats(); // Refresh stats
+                }
+                
+            } catch (error) {
+                showLoading('sheetsLoading', false);
+                showResults('sheetsResults', {
+                    success: false,
+                    error: `Import error: ${error.message}`
+                });
+            }
+        }
+        
+        async function loadStats() {
+            try {
+                const response = await fetch('training_endpoint.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'action=get_stats'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    document.getElementById('totalRecords').textContent = result.stats.total_records || 0;
+                    document.getElementById('categoriesCount').textContent = result.stats.categories?.length || 0;
+                    document.getElementById('sourcesCount').textContent = result.stats.sources?.length || 0;
+                    
+                    const lastImport = result.stats.sources?.[0]?.last_import;
+                    if (lastImport) {
+                        const date = new Date(lastImport);
+                        document.getElementById('lastImport').textContent = date.toLocaleDateString();
+                    } else {
+                        document.getElementById('lastImport').textContent = 'Never';
+                    }
+                } else {
+                    console.error('Stats error:', result.error);
+                }
+            } catch (error) {
+                console.error('Stats fetch error:', error);
+            }
+        }
+        
+        async function previewTrainingData() {
+            try {
+                const response = await fetch('training_endpoint.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'action=preview_data'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success && result.data.length > 0) {
+                    displayDataTable(result.data);
+                } else {
+                    document.getElementById('dataPreview').innerHTML = '<p>No training data available</p>';
+                    document.getElementById('dataPreview').style.display = 'block';
+                }
+            } catch (error) {
+                document.getElementById('dataPreview').innerHTML = `<p>Error loading data: ${error.message}</p>`;
+                document.getElementById('dataPreview').style.display = 'block';
+            }
+        }
+        
+        async function exportTrainingData() {
+            try {
+                const response = await fetch('training_endpoint.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'action=export_data'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    const blob = new Blob([JSON.stringify(result.data, null, 2)], 
+                        { type: 'application/json' });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'training_data_export.json';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                    
+                    alert(`Exported ${result.count} training records`);
+                } else {
+                    alert(`Export failed: ${result.error}`);
+                }
+            } catch (error) {
+                alert(`Export error: ${error.message}`);
+            }
+        }
+        
+        function displayDataTable(data) {
+            if (!data || data.length === 0) return;
+            
+            const keys = Object.keys(data[0]);
+            let html = '<table><thead><tr>';
+            
+            keys.forEach(key => {
+                html += `<th>${key}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+            
+            data.slice(0, 10).forEach(row => { // Show only first 10 rows
+                html += '<tr>';
+                keys.forEach(key => {
+                    const value = row[key] || '';
+                    const displayValue = value.length > 50 ? value.substring(0, 50) + '...' : value;
+                    html += `<td>${displayValue}</td>`;
+                });
+                html += '</tr>';
+            });
+            
+            html += '</tbody></table>';
+            
+            if (data.length > 10) {
+                html += `<p><em>Showing 10 of ${data.length} records</em></p>`;
+            }
+            
+            document.getElementById('dataPreview').innerHTML = html;
+            document.getElementById('dataPreview').style.display = 'block';
+        }
+        
+        function showLoading(elementId, show) {
+            document.getElementById(elementId).style.display = show ? 'block' : 'none';
+        }
+        
+        function hideResults(elementId) {
+            document.getElementById(elementId).style.display = 'none';
+        }
+        
+        function showResults(elementId, result) {
+            const element = document.getElementById(elementId);
+            
+            let html = '';
+            if (result.success) {
+                html += '<div class="success-message">';
+                html += `<strong>✅ Success!</strong><br>`;
+                html += `Imported: ${result.imported_count || 0} records<br>`;
+                html += `Total processed: ${result.total_rows || 0} rows<br>`;
+                
+                if (result.headers) {
+                    html += `Detected columns: ${result.headers.join(', ')}<br>`;
+                }
+                
+                if (result.errors && result.errors.length > 0) {
+                    html += `<br><strong>Warnings:</strong><br>`;
+                    result.errors.slice(0, 5).forEach(error => {
+                        html += `• ${error}<br>`;
+                    });
+                    if (result.errors.length > 5) {
+                        html += `• ... and ${result.errors.length - 5} more<br>`;
+                    }
+                }
+                html += '</div>';
+            } else {
+                html += '<div class="error-message">';
+                html += `<strong>❌ Error:</strong><br>${result.error}`;
+                html += '</div>';
+            }
+            
+            element.innerHTML = html;
+            element.style.display = 'block';
+        }
+        
+        // Load initial stats
+        window.onload = function() {
+            loadStats();
+        };
+    </script>
+</body>
+</html>

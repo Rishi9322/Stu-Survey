@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Complete AI System Test</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .test-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .test-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        .test-card:hover {
+            border-color: #007bff;
+            transform: translateY(-2px);
+        }
+        .test-card.success {
+            border-color: #28a745;
+            background: linear-gradient(145deg, #fff, #f8fff9);
+        }
+        .test-card.error {
+            border-color: #dc3545;
+            background: linear-gradient(145deg, #fff, #fff8f8);
+        }
+        .test-card.warning {
+            border-color: #ffc107;
+            background: linear-gradient(145deg, #fff, #fffdf8);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f3f4;
+        }
+        .status-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .status-icon.loading {
+            background: #6c757d;
+            animation: pulse 1.5s infinite;
+        }
+        .status-icon.success {
+            background: #28a745;
+        }
+        .status-icon.error {
+            background: #dc3545;
+        }
+        .status-icon.warning {
+            background: #ffc107;
+        }
+        .test-button {
+            background: linear-gradient(145deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin: 5px;
+        }
+        .test-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+        }
+        .test-button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .response-area {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            min-height: 120px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-size: 14px;
+            line-height: 1.5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .metric-item {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+        .metric-label {
+            font-size: 11px;
+            color: #6c757d;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .metric-value {
+            font-size: 14px;
+            font-weight: bold;
+            color: #495057;
+        }
+        .loading-spinner {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .query-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 2px solid #e9ecef;
+        }
+        .query-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: border-color 0.3s;
+        }
+        .query-input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        .query-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        .query-btn {
+            flex: 1;
+            min-width: 140px;
+            max-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+        }
+        .btn-icon {
+            font-size: 16px;
+        }
+        .btn-text {
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            .query-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .query-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            .test-grid {
+                grid-template-columns: 1fr;
+            }
+            .master-button {
+                display: block;
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+        .master-controls {
+            background: linear-gradient(145deg, #343a40, #495057);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .master-button {
+            background: linear-gradient(145deg, #28a745, #1e7e34);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        .master-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40,167,69,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Complete AI System Test Dashboard</h1>
+        <p>Comprehensive testing of API security, database integration, and AI functionality</p>
+
+        <div class="master-controls">
+            <h3>🎯 Master Test Controls</h3>
+            <button class="master-button" onclick="runAllTests()">🚀 Run All Tests</button>
+            <button class="master-button" onclick="resetAllTests()" style="background: linear-gradient(145deg, #dc3545, #c82333);">🔄 Reset Tests</button>
+        </div>
+
+        <div class="query-section">
+            <h3>💬 Custom AI Query</h3>
+            <textarea id="customQuery" class="query-input" rows="3" placeholder="Ask the AI to analyze your database data... e.g., 'What are the most critical issues in the system?' or 'Analyze WiFi-related complaints'">What are the most critical issues that need immediate attention based on our current data?</textarea>
+            <div class="query-buttons">
+                <button class="test-button query-btn" onclick="testCustomQuery('grok-compound')">
+                    <span class="btn-icon">🤖</span>
+                    <span class="btn-text">Ask Grok</span>
+                </button>
+                <button class="test-button query-btn" onclick="testCustomQuery('sonoma-sky')">
+                    <span class="btn-icon">🧠</span>
+                    <span class="btn-text">Ask Sonoma Sky</span>
+                </button>
+                <button class="test-button query-btn" onclick="testCustomQuery('local-python')">
+                    <span class="btn-icon">🔧</span>
+                    <span class="btn-text">Ask Local AI</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="test-grid">
+            <!-- API Security Test -->
+            <div class="test-card" id="security-card">
+                <div class="card-header">
+                    <div class="status-icon loading" id="security-icon">⏳</div>
+                    <h3>🔐 API Security Test</h3>
+                </div>
+                <p>Testing environment variable security and key masking</p>
+                <div class="response-area" id="security-response">Click "Test Security" to validate API key protection...</div>
+                <div class="metrics-grid" id="security-metrics">
+                    <div class="metric-item">
+                        <div class="metric-label">Keys Loaded</div>
+                        <div class="metric-value" id="keys-loaded">--</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Security</div>
+                        <div class="metric-value" id="security-status">--</div>
+                    </div>
+                </div>
+                <button class="test-button" onclick="testSecurity()">🔐 Test Security</button>
+            </div>
+
+            <!-- Database Connection Test -->
+            <div class="test-card" id="database-card">
+                <div class="card-header">
+                    <div class="status-icon loading" id="database-icon">⏳</div>
+                    <h3>🗃️ Database Connection</h3>
+                </div>
+                <p>Testing database connectivity and data access</p>
+                <div class="response-area" id="database-response">Click "Test Database" to check connection and data...</div>
+                <div class="metrics-grid" id="database-metrics">
+                    <div class="metric-item">
+                        <div class="metric-label">Tables</div>
+                        <div class="metric-value" id="table-count">--</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Records</div>
+                        <div class="metric-value" id="record-count">--</div>
+                    </div>
+                </div>
+                <button class="test-button" onclick="testDatabase()">🗃️ Test Database</button>
+            </div>
+
+            <!-- Grok API Test -->
+            <div class="test-card" id="grok-card">
+                <div class="card-header">
+                    <div class="status-icon loading" id="grok-icon">⏳</div>
+                    <h3>🤖 Grok API Test</h3>
+                </div>
+                <p>Testing Grok Compound AI with database context</p>
+                <div class="response-area" id="grok-response">Click "Test Grok" to validate API connectivity...</div>
+                <div class="metrics-grid" id="grok-metrics">
+                    <div class="metric-item">
+                        <div class="metric-label">Response Time</div>
+                        <div class="metric-value" id="grok-time">--</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Tokens</div>
+                        <div class="metric-value" id="grok-tokens">--</div>
+                    </div>
+                </div>
+                <button class="test-button" onclick="testGrokAPI()">🤖 Test Grok</button>
+            </div>
+
+            <!-- Sonoma Sky API Test -->
+            <div class="test-card" id="sonoma-card">
+                <div class="card-header">
+                    <div class="status-icon loading" id="sonoma-icon">⏳</div>
+                    <h3>🧠 Sonoma Sky API Test</h3>
+                </div>
+                <p>Testing Sonoma Sky Alpha via OpenRouter with advanced reasoning</p>
+                <div class="response-area" id="sonoma-response">Click "Test Sonoma Sky" to validate OpenRouter integration...</div>
+                <div class="metrics-grid" id="sonoma-metrics">
+                    <div class="metric-item">
+                        <div class="metric-label">Response Time</div>
+                        <div class="metric-value" id="sonoma-time">--</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Reasoning</div>
+                        <div class="metric-value" id="sonoma-reasoning">--</div>
+                    </div>
+                </div>
+                <button class="test-button" onclick="testSonomaSkyAPI()">🧠 Test Sonoma Sky</button>
+            </div>
+
+            <!-- Database AI Integration -->
+            <div class="test-card" id="dbai-card">
+                <div class="card-header">
+                    <div class="status-icon loading" id="dbai-icon">⏳</div>
+                    <h3>📊 Database AI Analysis</h3>
+                </div>
+                <p>Testing AI analysis of actual database data</p>
+                <div class="response-area" id="dbai-response">Click "Test DB AI" to analyze real data...</div>
+                <div class="metrics-grid" id="dbai-metrics">
+                    <div class="metric-item">
+                        <div class="metric-label">Data Points</div>
+                        <div class="metric-value" id="dbai-datapoints">--</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Insights</div>
+                        <div class="metric-value" id="dbai-insights">--</div>
+                    </div>
+                </div>
+                <button class="test-button" onclick="testDatabaseAI()">📊 Test DB AI</button>
+            </div>
+
+            <!-- Search & Analysis -->
+            <div class="test-card" id="search-card">
+                <div class="card-header">
+                    <div class="status-icon loading" id="search-icon">⏳</div>
+                    <h3>🔍 Smart Search Test</h3>
+                </div>
+                <p>Testing intelligent search and analysis features</p>
+                <div style="margin: 10px 0;">
+                    <input type="text" id="searchTerm" placeholder="Enter search term (e.g., 'wifi', 'teacher')" 
+                           style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div class="response-area" id="search-response">Enter a search term and click "Test Search"...</div>
+                <div class="metrics-grid" id="search-metrics">
+                    <div class="metric-item">
+                        <div class="metric-label">Matches</div>
+                        <div class="metric-value" id="search-matches">--</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Analysis</div>
+                        <div class="metric-value" id="search-analysis">--</div>
+                    </div>
+                </div>
+                <button class="test-button" onclick="testSmartSearch()">🔍 Test Search</button>
+            </div>
+        </div>
+
+        <div class="loading-spinner" id="globalLoading">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <script>
+        let testResults = {};
+
+        async function makeTestRequest(action, data = {}) {
+            const formData = new FormData();
+            formData.append('action', action);
+            
+            for (const [key, value] of Object.entries(data)) {
+                formData.append(key, value);
+            }
+
+            const response = await fetch('complete_test_endpoint.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+
+            return await response.json();
+        }
+
+        function renderMarkdown(text) {
+            if (!text) return '';
+            
+            // Convert markdown to HTML
+            let html = text
+                // Bold text: **text** or __text__
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/__(.*?)__/g, '<strong>$1</strong>')
+                
+                // Italic text: *text* or _text_
+                .replace(/(?<!\*)\*(?!\*)([^*]+)\*(?!\*)/g, '<em>$1</em>')
+                .replace(/(?<!_)_(?!_)([^_]+)_(?!_)/g, '<em>$1</em>')
+                
+                // Headers: ### Header, ## Header, # Header
+                .replace(/^### (.*$)/gm, '<h5 class="mt-3 mb-2">$1</h5>')
+                .replace(/^## (.*$)/gm, '<h4 class="mt-3 mb-2">$1</h4>')
+                .replace(/^# (.*$)/gm, '<h3 class="mt-3 mb-2">$1</h3>')
+                
+                // Lists: - item or * item
+                .replace(/^[\-\*]\s(.*)$/gm, '<li>$1</li>')
+                
+                // Line breaks
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>');
+            
+            // Wrap in paragraph if it doesn't start with a block element
+            if (!html.match(/^<[h1-6]|^<li|^<div|^<p/)) {
+                html = '<p>' + html + '</p>';
+            }
+            
+            // Wrap consecutive list items in ul tags
+            html = html.replace(/(<li>.*<\/li>)/gs, function(match) {
+                return '<ul class="mb-2">' + match + '</ul>';
+            });
+            
+            // Clean up extra paragraphs around block elements
+            html = html.replace(/<p>(<[h1-6].*?<\/[h1-6]>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<ul.*?<\/ul>)<\/p>/g, '$1');
+            
+            return html;
+        }
+
+        function updateCard(cardId, status, icon, response, metrics = {}) {
+            const card = document.getElementById(`${cardId}-card`);
+            const iconEl = document.getElementById(`${cardId}-icon`);
+            const responseEl = document.getElementById(`${cardId}-response`);
+
+            // Update card appearance
+            card.className = `test-card ${status}`;
+            
+            // Update icon
+            iconEl.className = `status-icon ${status}`;
+            iconEl.textContent = icon;
+            
+            // Update response with markdown rendering
+            responseEl.innerHTML = renderMarkdown(response);
+            
+            // Update metrics
+            for (const [key, value] of Object.entries(metrics)) {
+                const metricEl = document.getElementById(key);
+                if (metricEl) {
+                    metricEl.textContent = value;
+                }
+            }
+
+            testResults[cardId] = { status, response, metrics };
+        }
+
+        async function testSecurity() {
+            updateCard('security', 'loading', '⏳', 'Testing API security configuration...');
+            
+            try {
+                const result = await makeTestRequest('test_security');
+                
+                if (result.success) {
+                    updateCard('security', 'success', '✅', result.message, {
+                        'keys-loaded': result.keys_loaded,
+                        'security-status': result.secure ? 'Secure' : 'At Risk'
+                    });
+                } else {
+                    updateCard('security', 'error', '❌', `Security Test Failed: ${result.error}`);
+                }
+            } catch (error) {
+                updateCard('security', 'error', '❌', `Security Test Error: ${error.message}`);
+            }
+        }
+
+        async function testDatabase() {
+            updateCard('database', 'loading', '⏳', 'Testing database connection and data access...');
+            
+            try {
+                const result = await makeTestRequest('test_database');
+                
+                if (result.success) {
+                    updateCard('database', 'success', '✅', result.message, {
+                        'table-count': result.table_count,
+                        'record-count': result.total_records
+                    });
+                } else {
+                    updateCard('database', 'error', '❌', `Database Test Failed: ${result.error}`);
+                }
+            } catch (error) {
+                updateCard('database', 'error', '❌', `Database Test Error: ${error.message}`);
+            }
+        }
+
+        async function testGrokAPI() {
+            updateCard('grok', 'loading', '⏳', 'Testing Grok API with database context...');
+            
+            try {
+                const startTime = Date.now();
+                const result = await makeTestRequest('test_ai_model', { 
+                    model: 'grok-compound',
+                    query: 'Analyze our current system status and provide 3 key insights.'
+                });
+                const responseTime = Date.now() - startTime;
+                
+                if (result.success) {
+                    updateCard('grok', 'success', '✅', result.response, {
+                        'grok-time': `${responseTime}ms`,
+                        'grok-tokens': result.tokens_used || 'N/A'
+                    });
+                } else {
+                    updateCard('grok', 'error', '❌', `Grok Test Failed: ${result.error}`);
+                }
+            } catch (error) {
+                updateCard('grok', 'error', '❌', `Grok Test Error: ${error.message}`);
+            }
+        }
+
+        async function testSonomaSkyAPI() {
+            updateCard('sonoma', 'loading', '⏳', 'Testing Sonoma Sky API via OpenRouter...');
+            
+            try {
+                const startTime = Date.now();
+                const result = await makeTestRequest('test_ai_model', { 
+                    model: 'sonoma-sky',
+                    query: 'Provide reasoning-based analysis of our education system effectiveness.'
+                });
+                const responseTime = Date.now() - startTime;
+                
+                if (result.success) {
+                    updateCard('sonoma', 'success', '✅', result.response, {
+                        'sonoma-time': `${responseTime}ms`,
+                        'sonoma-reasoning': result.reasoning ? 'Yes' : 'No'
+                    });
+                } else {
+                    updateCard('sonoma', result.error.includes('key') ? 'warning' : 'error', 
+                              result.error.includes('key') ? '⚠️' : '❌', 
+                              `Sonoma Sky Test: ${result.error}`);
+                }
+            } catch (error) {
+                updateCard('sonoma', 'error', '❌', `Sonoma Sky Test Error: ${error.message}`);
+            }
+        }
+
+        async function testDatabaseAI() {
+            updateCard('dbai', 'loading', '⏳', 'Testing AI analysis of database data...');
+            
+            try {
+                const result = await makeTestRequest('test_database_ai');
+                
+                if (result.success) {
+                    updateCard('dbai', 'success', '✅', result.insights, {
+                        'dbai-datapoints': result.data_points,
+                        'dbai-insights': result.insight_count
+                    });
+                } else {
+                    updateCard('dbai', 'error', '❌', `Database AI Test Failed: ${result.error}`);
+                }
+            } catch (error) {
+                updateCard('dbai', 'error', '❌', `Database AI Error: ${error.message}`);
+            }
+        }
+
+        async function testSmartSearch() {
+            const searchTerm = document.getElementById('searchTerm').value.trim();
+            
+            if (!searchTerm) {
+                updateCard('search', 'warning', '⚠️', 'Please enter a search term first.');
+                return;
+            }
+            
+            updateCard('search', 'loading', '⏳', `Searching for "${searchTerm}" and analyzing results...`);
+            
+            try {
+                const result = await makeTestRequest('test_search_analysis', { 
+                    search_term: searchTerm 
+                });
+                
+                if (result.success) {
+                    updateCard('search', 'success', '✅', result.analysis, {
+                        'search-matches': result.match_count,
+                        'search-analysis': 'Complete'
+                    });
+                } else {
+                    updateCard('search', 'error', '❌', `Search Test Failed: ${result.error}`);
+                }
+            } catch (error) {
+                updateCard('search', 'error', '❌', `Search Test Error: ${error.message}`);
+            }
+        }
+
+        async function testCustomQuery(model) {
+            const query = document.getElementById('customQuery').value.trim();
+            
+            if (!query) {
+                alert('Please enter a custom query first.');
+                return;
+            }
+
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Processing...';
+            button.disabled = true;
+
+            try {
+                const result = await makeTestRequest('test_custom_query', { 
+                    model: model,
+                    query: query 
+                });
+                
+                if (result.success) {
+                    showCustomQueryResponse(model, result.response, result);
+                } else {
+                    alert(`Error with ${model}: ${result.error}`);
+                }
+            } catch (error) {
+                alert(`Network Error: ${error.message}`);
+            } finally {
+                button.textContent = originalText;
+                button.disabled = false;
+            }
+        }
+
+        function showCustomQueryResponse(model, response, fullResult) {
+            // Create or update the response modal
+            let modal = document.getElementById('customResponseModal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'customResponseModal';
+                modal.innerHTML = `
+                    <div class="modal-overlay" onclick="closeCustomResponseModal()">
+                        <div class="modal-content" onclick="event.stopPropagation()">
+                            <div class="modal-header">
+                                <h3 id="modalTitle">AI Response</h3>
+                                <button onclick="closeCustomResponseModal()" class="close-btn">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="modalResponse" class="response-content"></div>
+                                <div id="modalMetrics" class="metrics-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                
+                // Add modal styles
+                const style = document.createElement('style');
+                style.textContent = `
+                    #customResponseModal {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 10000;
+                        display: none;
+                    }
+                    .modal-overlay {
+                        background: rgba(0,0,0,0.7);
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 20px;
+                        box-sizing: border-box;
+                    }
+                    .modal-content {
+                        background: white;
+                        border-radius: 12px;
+                        max-width: 800px;
+                        max-height: 80vh;
+                        width: 100%;
+                        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                        overflow: hidden;
+                    }
+                    .modal-header {
+                        background: #f8f9fa;
+                        padding: 20px;
+                        border-bottom: 1px solid #dee2e6;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    .close-btn {
+                        background: none;
+                        border: none;
+                        font-size: 24px;
+                        cursor: pointer;
+                        color: #6c757d;
+                        padding: 0;
+                        width: 30px;
+                        height: 30px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .close-btn:hover {
+                        color: #dc3545;
+                    }
+                    .modal-body {
+                        padding: 20px;
+                        max-height: 60vh;
+                        overflow-y: auto;
+                    }
+                    .response-content {
+                        font-size: 14px;
+                        line-height: 1.6;
+                        margin-bottom: 20px;
+                    }
+                    .response-content h3, .response-content h4, .response-content h5 {
+                        color: #495057;
+                    }
+                    .response-content ul {
+                        padding-left: 20px;
+                    }
+                    .response-content li {
+                        margin-bottom: 5px;
+                    }
+                    .metrics-content {
+                        background: #f8f9fa;
+                        padding: 15px;
+                        border-radius: 8px;
+                        font-size: 12px;
+                        color: #6c757d;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // Update modal content
+            document.getElementById('modalTitle').textContent = `${model.toUpperCase()} Response`;
+            document.getElementById('modalResponse').innerHTML = renderMarkdown(response);
+            
+            // Add metrics if available
+            let metricsHtml = '';
+            if (fullResult.tokens_used) {
+                metricsHtml += `<strong>Tokens:</strong> ${fullResult.tokens_used} | `;
+            }
+            if (fullResult.model) {
+                metricsHtml += `<strong>Model:</strong> ${fullResult.model} | `;
+            }
+            if (fullResult.provider) {
+                metricsHtml += `<strong>Provider:</strong> ${fullResult.provider}`;
+            }
+            document.getElementById('modalMetrics').innerHTML = metricsHtml;
+            
+            // Show modal
+            modal.style.display = 'block';
+        }
+
+        function closeCustomResponseModal() {
+            const modal = document.getElementById('customResponseModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        async function runAllTests() {
+            document.getElementById('globalLoading').style.display = 'flex';
+            
+            try {
+                await testSecurity();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                await testDatabase();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                await testGrokAPI();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                await testSonomaSkyAPI();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                await testDatabaseAI();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                // Set a default search term for testing
+                document.getElementById('searchTerm').value = 'wifi';
+                await testSmartSearch();
+                
+                // Show summary
+                const successCount = Object.values(testResults).filter(r => r.status === 'success').length;
+                const totalCount = Object.keys(testResults).length;
+                
+                alert(`🎉 All Tests Completed!\n\nSuccessful: ${successCount}/${totalCount}\n\nSystem is ready for production use!`);
+                
+            } catch (error) {
+                alert(`Test Suite Error: ${error.message}`);
+            } finally {
+                document.getElementById('globalLoading').style.display = 'none';
+            }
+        }
+
+        function resetAllTests() {
+            const cards = document.querySelectorAll('.test-card');
+            cards.forEach(card => {
+                card.className = 'test-card';
+                const id = card.id.replace('-card', '');
+                const icon = document.getElementById(`${id}-icon`);
+                const response = document.getElementById(`${id}-response`);
+                
+                if (icon) {
+                    icon.className = 'status-icon loading';
+                    icon.textContent = '⏳';
+                }
+                
+                if (response) {
+                    response.textContent = 'Ready for testing...';
+                }
+                
+                // Reset metrics
+                card.querySelectorAll('.metric-value').forEach(metric => {
+                    metric.textContent = '--';
+                });
+            });
+            
+            testResults = {};
+            document.getElementById('customQuery').value = 'What are the most critical issues that need immediate attention based on our current data?';
+            document.getElementById('searchTerm').value = '';
+        }
+
+        // Initialize
+        window.onload = function() {
+            resetAllTests();
+        };
+    </script>
+</body>
+</html>

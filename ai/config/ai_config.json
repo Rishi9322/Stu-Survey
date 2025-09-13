@@ -1,0 +1,63 @@
+{
+  "sentiment_analysis": {
+    "positive_patterns": [
+      {"words": ["excellent", "outstanding", "amazing", "fantastic"], "weight": 3},
+      {"words": ["good", "great", "helpful", "useful"], "weight": 2},
+      {"words": ["nice", "okay", "fine", "satisfactory"], "weight": 1},
+      {"phrases": ["very good", "well done", "keep it up"], "weight": 2},
+      {"context_patterns": ["love.*teaching", "enjoy.*class", "best.*teacher"], "weight": 3}
+    ],
+    "negative_patterns": [
+      {"words": ["terrible", "awful", "horrible", "disgusting"], "weight": 3},
+      {"words": ["bad", "poor", "disappointing", "useless"], "weight": 2},
+      {"words": ["boring", "confusing", "difficult", "annoying"], "weight": 1},
+      {"phrases": ["waste of time", "don't understand", "too hard"], "weight": 2},
+      {"context_patterns": ["hate.*subject", "worst.*teacher", "never.*learn"], "weight": 3}
+    ],
+    "neutral_indicators": ["maybe", "perhaps", "sometimes", "usually", "generally"],
+    "negation_words": ["not", "never", "hardly", "barely", "seldom"],
+    "intensifiers": ["very", "extremely", "really", "absolutely", "completely"]
+  },
+  "topic_extraction": {
+    "education_topics": {
+      "teaching_quality": ["teaching", "explanation", "clarity", "understanding"],
+      "course_content": ["curriculum", "material", "textbook", "assignment"],
+      "facilities": ["classroom", "equipment", "technology", "resources"],
+      "support": ["help", "guidance", "mentoring", "assistance"],
+      "assessment": ["exam", "test", "grading", "evaluation", "feedback"]
+    },
+    "priority_keywords": [
+      {"keyword": "teacher", "category": "teaching_quality", "priority": 10},
+      {"keyword": "assignment", "category": "course_content", "priority": 8},
+      {"keyword": "classroom", "category": "facilities", "priority": 7},
+      {"keyword": "help", "category": "support", "priority": 9}
+    ]
+  },
+  "insights_rules": {
+    "urgent_triggers": [
+      {"condition": "negative_sentiment > 80%", "action": "immediate_review"},
+      {"condition": "complaint_count > 20 per week", "action": "crisis_management"},
+      {"condition": "teacher_rating < 2.0", "action": "performance_review"}
+    ],
+    "trend_analysis": {
+      "time_periods": ["daily", "weekly", "monthly", "quarterly"],
+      "metrics": ["rating_trends", "complaint_patterns", "topic_frequency"],
+      "prediction_algorithms": ["linear_regression", "moving_average", "seasonal_decomposition"]
+    }
+  },
+  "chatbot_responses": {
+    "greeting": [
+      "Hello! I'm your AI insights assistant. How can I help you analyze the data today?",
+      "Hi there! Ready to dive into some analytics? What would you like to explore?"
+    ],
+    "rating_analysis": [
+      "Based on current data, here's what I found about ratings:",
+      "Let me analyze the rating patterns for you:"
+    ],
+    "recommendation_templates": {
+      "improvement": "Consider implementing {action} to address {issue} mentioned in {count} feedback entries.",
+      "success": "Great job! {metric} shows {improvement}% improvement over the last {period}.",
+      "warning": "Attention needed: {issue} has increased by {percentage}% in recent {timeframe}."
+    }
+  }
+}

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Provider Test Interface</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .model-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #007bff;
+        }
+        .model-card.success {
+            border-left-color: #28a745;
+        }
+        .model-card.error {
+            border-left-color: #dc3545;
+        }
+        .model-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #6c757d;
+        }
+        .status-indicator.online {
+            background: #28a745;
+            animation: pulse 2s infinite;
+        }
+        .status-indicator.offline {
+            background: #dc3545;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .test-query {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .response-area {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            min-height: 100px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+        .test-button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .metrics {
+            display: flex;
+            gap: 15px;
+            margin: 10px 0;
+            font-size: 12px;
+            color: #6c757d;
+        }
+        .loading {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            color: #007bff;
+        }
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🚀 Advanced AI Provider Test Interface</h1>
+        <p>Interactive testing of Grok Compound, DeepSeek R1, and Local Python AI models</p>
+
+        <div class="test-query">
+            <label for="testQuery"><strong>Test Query:</strong></label>
+            <textarea id="testQuery" rows="3" style="width: 100%; margin-top: 5px; padding: 5px;">Analyze this educational feedback: 'The professor explains concepts clearly but the classroom technology often fails during presentations. Students appreciate the teaching style but suggest better equipment maintenance. Overall rating: 4/5.'</textarea>
+        </div>
+
+        <button class="test-button" onclick="testAllModels()">🧪 Test All Models</button>
+
+        <div class="model-grid" id="modelGrid">
+            <!-- Models will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        const models = {
+            'grok-compound': {
+                name: 'Grok Compound',
+                provider: 'Groq',
+                description: 'Advanced reasoning and analysis',
+                features: ['reasoning', 'analysis', 'complex_queries'],
+                limits: '30 RPM, 250 RPD, 70K TPM'
+            },
+            'deepseek-r1': {
+                name: 'DeepSeek R1',
+                provider: 'DeepSeek',
+                description: 'Unlimited advanced AI reasoning',
+                features: ['unlimited', 'reasoning', 'coding', 'analysis'],
+                limits: 'Unlimited'
+            },
+            'local-python': {
+                name: 'Local Python AI',
+                provider: 'Local',
+                description: 'Fast local processing',
+                features: ['fast', 'local', 'privacy'],
+                limits: 'Unlimited'
+            }
+        };
+
+        function createModelCard(modelKey, modelData) {
+            return `
+                <div class="model-card" id="card-${modelKey}">
+                    <div class="model-header">
+                        <div class="status-indicator" id="status-${modelKey}"></div>
+                        <h3>${modelData.name}</h3>
+                    </div>
+                    
+                    <div class="metrics">
+                        <span><strong>Provider:</strong> ${modelData.provider}</span>
+                        <span><strong>Limits:</strong> ${modelData.limits}</span>
+                    </div>
+                    
+                    <p>${modelData.description}</p>
+                    
+                    <div><strong>Features:</strong> ${modelData.features.join(', ')}</div>
+                    
+                    <div class="loading" id="loading-${modelKey}">
+                        <div class="spinner"></div>
+                        <span>Testing model...</span>
+                    </div>
+                    
+                    <div class="response-area" id="response-${modelKey}">
+                        Click "Test All Models" to see response...
+                    </div>
+                    
+                    <div class="metrics" id="metrics-${modelKey}">
+                        <span>Response Time: --</span>
+                        <span>Tokens: --</span>
+                        <span>Status: Ready</span>
+                    </div>
+                    
+                    <button class="test-button" onclick="testSingleModel('${modelKey}')">Test ${modelData.name}</button>
+                </div>
+            `;
+        }
+
+        function initializeInterface() {
+            const grid = document.getElementById('modelGrid');
+            let html = '';
+            
+            for (const [key, data] of Object.entries(models)) {
+                html += createModelCard(key, data);
+            }
+            
+            grid.innerHTML = html;
+        }
+
+        async function testSingleModel(modelKey) {
+            const query = document.getElementById('testQuery').value;
+            const loadingEl = document.getElementById(`loading-${modelKey}`);
+            const responseEl = document.getElementById(`response-${modelKey}`);
+            const metricsEl = document.getElementById(`metrics-${modelKey}`);
+            const statusEl = document.getElementById(`status-${modelKey}`);
+            const cardEl = document.getElementById(`card-${modelKey}`);
+
+            // Show loading
+            loadingEl.style.display = 'flex';
+            responseEl.textContent = 'Testing...';
+            statusEl.className = 'status-indicator';
+            cardEl.className = 'model-card';
+
+            const startTime = Date.now();
+
+            try {
+                const formData = new FormData();
+                formData.append('action', 'test_model');
+                formData.append('model', modelKey);
+                formData.append('query', query);
+
+                const response = await fetch('test_ai_endpoint.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                const responseTime = Date.now() - startTime;
+
+                loadingEl.style.display = 'none';
+
+                if (result.success) {
+                    statusEl.className = 'status-indicator online';
+                    cardEl.className = 'model-card success';
+                    responseEl.textContent = result.response;
+                    metricsEl.innerHTML = `
+                        <span>Response Time: ${responseTime}ms</span>
+                        <span>Tokens: ${result.tokens_used || 'N/A'}</span>
+                        <span>Status: ✅ Online</span>
+                    `;
+                } else {
+                    statusEl.className = 'status-indicator offline';
+                    cardEl.className = 'model-card error';
+                    responseEl.textContent = `Error: ${result.error}`;
+                    metricsEl.innerHTML = `
+                        <span>Response Time: ${responseTime}ms</span>
+                        <span>Tokens: --</span>
+                        <span>Status: ❌ Failed</span>
+                    `;
+                }
+            } catch (error) {
+                const responseTime = Date.now() - startTime;
+                loadingEl.style.display = 'none';
+                statusEl.className = 'status-indicator offline';
+                cardEl.className = 'model-card error';
+                responseEl.textContent = `Network Error: ${error.message}`;
+                metricsEl.innerHTML = `
+                    <span>Response Time: ${responseTime}ms</span>
+                    <span>Tokens: --</span>
+                    <span>Status: ❌ Network Error</span>
+                `;
+            }
+        }
+
+        async function testAllModels() {
+            const modelKeys = Object.keys(models);
+            
+            for (const modelKey of modelKeys) {
+                await testSingleModel(modelKey);
+                // Small delay between requests
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+        }
+
+        // Initialize the interface when page loads
+        window.onload = initializeInterface;
+    </script>
+</body>
+</html>
