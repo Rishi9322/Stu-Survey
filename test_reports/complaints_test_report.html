@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints Module - Test Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .stat-card .label {
+            font-size: 0.9em;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .stat-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card.success .value { color: #28a745; }
+        .stat-card.danger .value { color: #dc3545; }
+        .stat-card.info .value { color: #17a2b8; }
+        .stat-card.primary .value { color: #007bff; }
+        
+        .section {
+            padding: 30px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #e9ecef;
+        }
+        
+        .section-header h2 {
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .badge-blackbox {
+            background: #3498db;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+        
+        .badge-whitebox {
+            background: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+        
+        .test-list {
+            list-style: none;
+        }
+        
+        .test-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            transition: all 0.2s;
+        }
+        
+        .test-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .test-item.failed {
+            border-left-color: #dc3545;
+            background: #fff5f5;
+        }
+        
+        .test-icon {
+            font-size: 1.5em;
+            margin-right: 15px;
+            min-width: 30px;
+        }
+        
+        .test-icon.passed { color: #28a745; }
+        .test-icon.failed { color: #dc3545; }
+        
+        .test-name {
+            flex: 1;
+            font-size: 1em;
+            font-weight: 500;
+        }
+        
+        .test-number {
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+        
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        .status-badge.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-badge.danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: white;
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .back-link:hover {
+            background: #ecf0f1;
+            transform: translateY(-2px);
+        }
+        
+        .description {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .description p {
+            margin-bottom: 8px;
+        }
+        
+        .timestamp {
+            text-align: center;
+            color: #6c757d;
+            padding: 15px;
+            font-size: 0.9em;
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Complaints Module</h1>
+            <div class="subtitle">PHPUnit Test Report - Student Satisfaction Survey System</div>
+        </div>
+        
+        <div class="stats-bar">
+            <div class="stat-card primary">
+                <div class="label">Total Tests</div>
+                <div class="value">20</div>
+            </div>
+            <div class="stat-card success">
+                <div class="label">Passed</div>
+                <div class="value">20</div>
+            </div>
+            <div class="stat-card danger">
+                <div class="label">Failed</div>
+                <div class="value">0</div>
+            </div>
+            <div class="stat-card info">
+                <div class="label">Pass Rate</div>
+                <div class="value">100%</div>
+            </div>
+        </div>
+        
+        <div class="description">
+            <p><strong>Test Execution Details:</strong></p>
+            <p>Time: 00:03.480 | Memory: 8.00 MB</p>
+            <p>PHPUnit 10.5.60 | PHP 8.2.12</p>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <h2>
+                    <span class="badge-blackbox">BLACK BOX</span>
+                    User Perspective Testing
+                </h2><span class="status-badge success">10 / 10 Tests Passed</span>            </div>
+            <ul class="test-list">                <li class="test-item passed">
+                    <span class="test-number">#1</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Submit complaint successfully</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#2</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Submit suggestion</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#3</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">View complaint status</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#4</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Track complaint resolution</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#5</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Filter complaints by type</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#6</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Filter complaints by status</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#7</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Search complaints</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#8</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Complaint priority</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#9</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Pending complaints count display</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#10</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Submit complaint with minimal fields</span>
+                    <span class="status-badge passed">passed</span>
+                </li>            </ul>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <h2>
+                    <span class="badge-whitebox">WHITE BOX</span>
+                    Internal Logic Testing
+                </h2><span class="status-badge success">10 / 10 Tests Passed</span>            </div>
+            <ul class="test-list">                <li class="test-item passed">
+                    <span class="test-number">#1</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Subject validation</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#2</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Description validation</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#3</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Type validation</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#4</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Status workflow</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#5</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">S q l injection prevention</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#6</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Complaint count by status</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#7</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Auto timestamp on creation</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#8</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Resolution notes logic</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#9</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Complaint assignment to admin</span>
+                    <span class="status-badge passed">passed</span>
+                </li>                <li class="test-item passed">
+                    <span class="test-number">#10</span>
+                    <span class="test-icon passed">✓</span>
+                    <span class="test-name">Complaint pagination</span>
+                    <span class="status-badge passed">passed</span>
+                </li>            </ul>
+        </div>
+        
+        <div class="timestamp">Generated on: December 08, 2025 10:10:38        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 Student Satisfaction Survey System | PHPUnit Test Suite</p>
+            <a href="index.html" class="back-link">← Back to All Modules</a>
+        </div>
+    </div>
+</body>
+</html>

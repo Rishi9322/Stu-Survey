@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/config.php';
+require_once __DIR__ . '/../../core/includes/config.php';
 
 /**
  * Training Data Integration System

@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 // Include necessary files
 require_once '../../core/includes/config.php';
-require_once 'includes/functions.php';
+require_once '../../core/includes/functions.php';
 
 echo "<h2>Direct Login Test</h2>";
 

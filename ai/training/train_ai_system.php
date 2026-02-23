@@ -1,6 +1,6 @@
 <?php
-require_once 'includes/config.php';
-require_once 'admin/AIInsightsEngine.php';
+require_once __DIR__ . '/../../core/includes/config.php';
+require_once __DIR__ . '/../engines/AIInsightsEngine.php';
 
 class AITrainingSystem {
     private $ai_engine;

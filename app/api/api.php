@@ -1,8 +1,8 @@
 <?php
 session_start();
 $pageTitle = "API Reference";
-$basePath = "./";
-require_once 'includes/header.php';
+$basePath = "../../";
+require_once '../../core/includes/header.php';
 ?>
 
 <div class="container my-5">
@@ -518,4 +518,4 @@ window.addEventListener('scroll', function() {
 });
 </script>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../../core/includes/footer.php'; ?>

@@ -1,0 +1,115 @@
+# Student Satisfaction Survey System - Custom GitHub Actions Workflow
+# This is a preview of what a custom workflow could look like
+
+name: Student Survey System CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # PHP Backend Testing
+  php-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: [8.1, 8.2]
+        mysql-version: [8.0]
+    
+    services:
+      mysql:
+        image: mysql:${{ matrix.mysql-version }}
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: test_survey_db
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-version }}
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql
+        coverage: xdebug
+    
+    - name: Install Composer dependencies
+      run: composer install --prefer-dist --no-progress
+    
+    - name: Run PHP syntax check
+      run: find . -name "*.php" -exec php -l {} \;
+    
+    - name: Setup test database
+      run: mysql -h127.0.0.1 -uroot -proot test_survey_db < database/final_database_setup.sql
+    
+    - name: Run PHPUnit tests
+      run: vendor/bin/phpunit --coverage-text
+    
+    - name: PHP Code Sniffer
+      run: vendor/bin/phpcs --standard=PSR12 app/ core/ public/
+
+  # Frontend Testing
+  frontend-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install npm dependencies
+      run: npm ci
+    
+    - name: Run JavaScript tests
+      run: npm test
+    
+    - name: Build assets
+      run: npm run build
+
+  # Python AI Components
+  python-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r ai/requirements.txt
+    
+    - name: Test AI components
+      run: python -m pytest ai/tests/
+
+  # Security Scanning
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Run security analysis
+      uses: securecodewarrior/github-action-add-sarif@v1
+      with:
+        sarif-file: security-scan-results.sarif
+
+  # Deployment (optional)
+  deploy:
+    needs: [php-tests, frontend-tests, python-tests]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - name: Deploy to staging
+      run: echo "Deploying to staging server..."
+      # Add your deployment commands here

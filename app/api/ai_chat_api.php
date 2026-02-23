@@ -227,7 +227,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         require_once "../../core/includes/functions.php";
         
         // Include the AIInsightsEngine class
-        require_once "AIInsightsEngine.php";
+        require_once __DIR__ . '/../../ai/engines/AIInsightsEngine.php';
         
         session_start();
         

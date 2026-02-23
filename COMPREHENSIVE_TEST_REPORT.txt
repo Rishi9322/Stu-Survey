@@ -1,0 +1,18 @@
+﻿Ô£ô Test database setup complete
+Ô£ô Test database setup complete
+PHPUnit 10.5.60 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.12
+Configuration: C:\xampp\htdocs\stu\phpunit.xml
+
+................................................................. 65 / 80 ( 81%)
+...............                                                   80 / 80 (100%)
+
+Time: 00:33.924, Memory: 8.00 MB
+
+There was 1 PHPUnit test runner warning:
+
+1) No code coverage driver available
+
+OK, but there were issues!
+Tests: 80, Assertions: 179, PHPUnit Warnings: 1, PHPUnit Deprecations: 1.

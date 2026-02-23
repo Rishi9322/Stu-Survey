@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "project": "Student Satisfaction Survey System",
+    "date": "2025-10-04",
+    "prepared_by": "Software Development Manager"
+  },
+  "product_overview": "A comprehensive web-based survey system targeted at educational institutions, facilitating role-based access for Students, Teachers, and Administrators, enhanced with AI-powered analytics and modern responsive design.",
+  "core_goals": [
+    "Provide secure and robust user authentication and session management for all users.",
+    "Enable role-based access control delivering tailored interfaces for students, teachers, and administrators.",
+    "Leverage AI technologies to offer intelligent survey analytics and interactive chat for querying survey data.",
+    "Offer comprehensive survey management, user management, and reporting capabilities through the admin dashboard.",
+    "Ensure responsive and user-friendly design using Bootstrap 5 that works seamlessly across devices.",
+    "Support data visualization with real-time dashboards displaying interactive charts and statistics."
+  ],
+  "key_features": [
+    "Role-Based Access Control with separate portals for Students, Teachers, and Administrators.",
+    "AI-Powered Analytics integrating Grok and DeepSeek APIs for deep insights on survey results.",
+    "Secure User Authentication with login, registration, and session handling.",
+    "Admin Dashboard providing management of users, surveys, complaints, and system settings.",
+    "Student and Teacher Portals supporting survey taking, creation, analytics viewing, and profile management.",
+    "AI Chat Interface allowing natural language queries against survey data.",
+    "Built-in Markdown Viewer for system documentation and help materials.",
+    "RESTful API endpoints supporting core functionalities like training data and markdown reading.",
+    "Data Visualization with charts, graphs, exportable reports, and real-time statistics display.",
+    "Comprehensive testing suites including unit, integration, and manual tests for reliability."
+  ],
+  "user_flow_summary": [
+    "Users register or login through the public login and registration pages with secure authentication.",
+    "Depending on role, users access their respective dashboards: Admin, Student, or Teacher portals.",
+    "Admins manage users, surveys, complaints, and system settings within the Admin Dashboard.",
+    "Teachers create, edit, and analyze surveys via the Teacher Portal.",
+    "Students participate in surveys, view analytics, and manage their profiles in the Student Portal.",
+    "Users can interact with AI-powered chat interface for querying survey insights in natural language.",
+    "Documentation can be accessed through built-in markdown viewers via public or internal pages.",
+    "APIs provide programmatic access to various system capabilities for integration or extended functionality."
+  ],
+  "validation_criteria": [
+    "User authentication process must securely handle login, registration, and session management without vulnerabilities.",
+    "Role-based access control restricts user operations and UI elements according to user roles (Admin, Teacher, Student).",
+    "AI analytics produce accurate and meaningful insights integrated smoothly into user dashboards.",
+    "Admin dashboard functions must allow full management capabilities with responsive and error-free UI.",
+    "Surveys created by teachers must be saved properly and accessible to students for completion.",
+    "All portals maintain consistency in user experience and visual design with responsive layouts.",
+    "API endpoints respond correctly with expected data formats and handle error conditions gracefully.",
+    "All new features and fixes pass unit, integration, and manual test suites before deployment.",
+    "System documentation is complete, up-to-date, and accessible through markdown viewers in the application."
+  ],
+  "code_summary": {
+    "tech_stack": [
+      "PHP",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "MySQL",
+      "Python"
+    ],
+    "features": [
+      {
+        "name": "User Authentication",
+        "description": "Handles user login, registration, and session management",
+        "files": [
+          "public/login.php",
+          "public/register.php",
+          "core/classes/config/",
+          "core/includes/"
+        ]
+      },
+      {
+        "name": "Admin Dashboard",
+        "description": "Administrative interface for managing users, surveys, and system settings",
+        "files": [
+          "app/admin/dashboard.php",
+          "app/admin/user_management.php",
+          "app/admin/survey_management.php",
+          "app/admin/complaints.php",
+          "app/admin/profile.php"
+        ]
+      },
+      {
+        "name": "Student Portal",
+        "description": "Student interface for taking surveys, viewing analytics, and managing profile",
+        "files": [
+          "app/student/dashboard.php",
+          "app/student/survey.php",
+          "app/student/analytics.php",
+          "app/student/profile.php"
+        ]
+      },
+      {
+        "name": "Teacher Portal",
+        "description": "Teacher interface for creating surveys, viewing analytics, and managing profile",
+        "files": [
+          "app/teacher/dashboard.php",
+          "app/teacher/survey.php",
+          "app/teacher/analytics.php",
+          "app/teacher/profile.php"
+        ]
+      },
+      {
+        "name": "AI Engine",
+        "description": "AI-powered features including chat, insights, and training",
+        "files": [
+          "ai/engines/ai_engine.py",
+          "ai/engines/AdvancedAIProvider.php",
+          "ai/engines/advanced_ai_engine.py",
+          "ai/engines/AIInsightsEngine.php",
+          "app/api/ai_chat_api.php",
+          "app/api/ai_insights.php",
+          "app/api/ai_insights_new.php"
+        ]
+      },
+      {
+        "name": "API Endpoints",
+        "description": "RESTful API endpoints for various functionalities",
+        "files": [
+          "app/api/api.php",
+          "app/api/debug_endpoint.php",
+          "app/api/markdown_reader.php",
+          "app/api/training_endpoint.php"
+        ]
+      },
+      {
+        "name": "Public Pages",
+        "description": "Public-facing pages including homepage, about, contact, etc.",
+        "files": [
+          "public/index.php",
+          "public/about.php",
+          "public/contact.php",
+          "public/help.php",
+          "public/privacy.php",
+          "public/terms.php",
+          "public/enhanced-homepage.php"
+        ]
+      },
+      {
+        "name": "Database Management",
+        "description": "Database schema, migrations, and backup utilities",
+        "files": [
+          "database/backups/",
+          "database/migrations/",
+          "database/sample-data/",
+          "app/admin/check_table_structure.php"
+        ]
+      },
+      {
+        "name": "Testing Suite",
+        "description": "Unit, integration, and manual tests for the application",
+        "files": [
+          "tests/unit/",
+          "tests/integration/",
+          "tests/manual/",
+          "tools/comprehensive_link_checker.php",
+          "tools/navigation_test.php"
+        ]
+      },
+      {
+        "name": "Assets and Styling",
+        "description": "CSS, JavaScript, and image assets for frontend",
+        "files": [
+          "assets/css/style.css",
+          "assets/css/animations.css",
+          "assets/js/script.js",
+          "assets/js/advanced-animations.js",
+          "assets/images/"
+        ]
+      }
+    ]
+  }
+}

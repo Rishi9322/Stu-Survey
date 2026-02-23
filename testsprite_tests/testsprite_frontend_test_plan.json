@@ -1,0 +1,425 @@
+[
+  {
+    "id": "TC001",
+    "title": "User Registration Success",
+    "description": "Verify that a new user can successfully register with valid details and receive appropriate role assignment.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the registration page."
+      },
+      {
+        "type": "action",
+        "description": "Input valid registration details including email, username, password, and select a user role."
+      },
+      {
+        "type": "action",
+        "description": "Submit the registration form."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that the registration completes successfully and the user is redirected to the login page or dashboard appropriate to their role."
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "User Registration with Existing Email",
+    "description": "Verify the system prevents registration using an email address that already exists in the system and displays a clear error message.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the registration page."
+      },
+      {
+        "type": "action",
+        "description": "Input registration details using an email already registered."
+      },
+      {
+        "type": "action",
+        "description": "Submit the registration form."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that registration is blocked and an error message about duplicate email is shown."
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "User Login with Correct Credentials",
+    "description": "Verify successful login for registered users with valid email and password for all roles (Student, Teacher, Admin).",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the login page."
+      },
+      {
+        "type": "action",
+        "description": "Input valid email and password credentials for the selected role."
+      },
+      {
+        "type": "action",
+        "description": "Click the login button."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the user is logged in successfully and redirected to the appropriate dashboard based on their role."
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "User Login with Incorrect Password",
+    "description": "Verify that login fails when a registered email is submitted with an incorrect password and an appropriate error message is displayed.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the login page."
+      },
+      {
+        "type": "action",
+        "description": "Input registered email with an incorrect password."
+      },
+      {
+        "type": "action",
+        "description": "Click the login button."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that login is rejected and a relevant error message is displayed."
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Role-Based Access Control Enforcement",
+    "description": "Ensure that access to features and UI elements are restricted properly based on user roles (Admin, Teacher, Student).",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as Admin and verify access to the Admin Dashboard and all management features."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm access to user management, survey management, complaint handling, and system settings is available."
+      },
+      {
+        "type": "action",
+        "description": "Login as Teacher and verify access only to teacher-specific features such as survey creation, analytics, and profile management."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that admin and student-only features are not accessible or visible."
+      },
+      {
+        "type": "action",
+        "description": "Login as Student and verify access only to survey taking, analytics viewing, and profile management."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that admin and teacher-only features are not accessible or visible."
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Survey Creation by Teacher",
+    "description": "Verify that a teacher can create, save, and edit a survey successfully and that the saved survey is accessible for student participants.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as a teacher."
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the survey creation page."
+      },
+      {
+        "type": "action",
+        "description": "Create a new survey with multiple questions of various types."
+      },
+      {
+        "type": "action",
+        "description": "Save the survey."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the survey is saved properly and appears in the list of available surveys."
+      },
+      {
+        "type": "action",
+        "description": "Login as a student and navigate to the survey participation page."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the newly created survey is listed and available for participation."
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Student Survey Participation Flow",
+    "description": "Verify that a student can open, complete, and submit surveys properly and receive confirmation.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as a student."
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the surveys list and select an available survey."
+      },
+      {
+        "type": "action",
+        "description": "Answer all required questions with valid inputs."
+      },
+      {
+        "type": "action",
+        "description": "Submit the survey."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify submission confirmation appears and the survey result is recorded in the system."
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "AI-Powered Survey Analytics Accuracy",
+    "description": "Check that AI-generated analytics and insights for surveys are accurate, meaningful, and displayed correctly in teacher and student dashboards.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as teacher and open analytics for a completed survey."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that visual charts, AI-generated insights, and summaries are displayed and align with underlying survey data."
+      },
+      {
+        "type": "action",
+        "description": "Login as student and open analytics for surveys participated in."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that accessible analytics and AI insights are available in the student portal."
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "AI Chat Interface Functional Test",
+    "description": "Verify that users can interact with the AI-powered chat interface, submit natural language queries against survey data, and receive meaningful replies.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as any user role."
+      },
+      {
+        "type": "action",
+        "description": "Open the AI chat interface."
+      },
+      {
+        "type": "action",
+        "description": "Enter a variety of natural language questions about survey data."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that the chat responds with correct, relevant and coherent answers or analytics."
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Admin Dashboard User Management",
+    "description": "Confirm that the admin can add, edit, deactivate, and delete user accounts with reflected changes in the system.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as admin."
+      },
+      {
+        "type": "action",
+        "description": "Navigate to user management section."
+      },
+      {
+        "type": "action",
+        "description": "Add a new user with valid details."
+      },
+      {
+        "type": "assertion",
+        "description": "Check the new user appears in the user list."
+      },
+      {
+        "type": "action",
+        "description": "Edit user details."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify changes are saved and reflected."
+      },
+      {
+        "type": "action",
+        "description": "Deactivate and subsequently delete a user."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the user is no longer active and removed from user lists appropriately."
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Data Visualization and Real-time Dashboard Updates",
+    "description": "Validate that charts, graphs, and statistics on dashboards update in real-time and display accurate data visualization across roles.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as admin, teacher, and student (separately)."
+      },
+      {
+        "type": "action",
+        "description": "Navigate to respective dashboards with real-time analytical display."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that interactive charts and stats reflect up-to-date data and respond to user interaction (filters, exports)."
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Session Management and Security",
+    "description": "Ensure that user sessions are securely managed allowing proper timeout, logout, and preventing unauthorized access after logout or session expiration.",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as any user."
+      },
+      {
+        "type": "action",
+        "description": "Remain idle for session timeout period."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the user is logged out automatically after the session expires."
+      },
+      {
+        "type": "action",
+        "description": "Attempt to access protected resources with no active session."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm access is denied and redirected to login."
+      },
+      {
+        "type": "action",
+        "description": "Perform logout manually."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm session is destroyed and subsequent resource access redirects to login."
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "API Endpoint Success Response and Error Handling",
+    "description": "Verify that all RESTful API endpoints respond correctly with expected data formats for valid requests and handle error cases gracefully with proper status codes and messages.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Send valid requests to API endpoints including training data, markdown reading, and AI chat."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm responses contain correctly structured data compliant with API specs."
+      },
+      {
+        "type": "action",
+        "description": "Send invalid or unauthorized requests to the same endpoints."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that responses have appropriate error codes (e.g. 400, 401, 404) and informative error messages."
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Responsive Design Verification Across Devices",
+    "description": "Verify that all portals (Admin, Teacher, Student) and public pages are fully functional and visually consistent in desktop, tablet, and mobile screen sizes using Bootstrap 5 responsive design.",
+    "category": "ui",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the platform on multiple devices with differing screen resolutions (desktop, tablet, mobile)."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that layout, navigation, buttons, forms, and data visualizations adapt appropriately without content overlapping or breaking."
+      },
+      {
+        "type": "action",
+        "description": "Perform common flows (login, survey participation, analytics viewing) on all devices."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm consistent user experience and responsiveness."
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Built-in Markdown Viewer Accessibility and Accuracy",
+    "description": "Verify that system documentation and help materials rendered through the built-in Markdown viewer are accessible on public and internal pages with correct formatting.",
+    "category": "functional",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to documentation and help pages that use the built-in Markdown viewer."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that markdown content is correctly rendered with expected headings, links, formatting, and images."
+      },
+      {
+        "type": "action",
+        "description": "Access markdown content via the respective API."
+      },
+      {
+        "type": "assertion",
+        "description": "Validate response provides the correct raw or rendered markdown content."
+      }
+    ]
+  }
+]

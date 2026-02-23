@@ -60,3 +60,6 @@ dist/
 # Ignore database dumps
 *.sql
 *.dump
+
+#Ignore vscode AI rules
+.github\instructions\codacy.instructions.md

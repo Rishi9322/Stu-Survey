@@ -1,6 +1,6 @@
 <?php
 require_once '../../core/includes/config.php';
-require_once 'AdvancedAIProvider.php';
+require_once __DIR__ . '/../../ai/engines/AdvancedAIProvider.php';
 
 /**
  * Database-C            $stmt = $this->pdo->prepare("SELECT 

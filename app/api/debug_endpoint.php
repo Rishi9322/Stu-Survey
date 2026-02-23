@@ -7,10 +7,10 @@ echo "=== DEBUGGING ENDPOINT ISSUES ===\n";
 
 // Check if all required files exist
 $files_to_check = [
-    '../includes/secure_config.php',
-    '../includes/config.php',
-    'AdvancedAIProvider.php',
-    'DatabaseAI.php'
+    '../../core/includes/secure_config.php',
+    '../../core/includes/config.php',
+    '../../ai/engines/AdvancedAIProvider.php',
+    '../../app/admin/DatabaseAI.php'
 ];
 
 foreach ($files_to_check as $file) {
@@ -45,7 +45,7 @@ try {
 }
 
 try {
-    require_once 'AdvancedAIProvider.php';
+    require_once __DIR__ . '/../../ai/engines/AdvancedAIProvider.php';
     echo "✅ AdvancedAIProvider loaded\n";
     
     $ai = new AdvancedAIProvider();
@@ -56,7 +56,7 @@ try {
 }
 
 try {
-    require_once 'DatabaseAI.php';
+    require_once '../../app/admin/DatabaseAI.php';
     echo "✅ DatabaseAI loaded\n";
 } catch (Exception $e) {
     echo "❌ DatabaseAI error: " . $e->getMessage() . "\n";

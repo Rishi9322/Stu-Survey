@@ -9,8 +9,8 @@ require_once "../../core/includes/config.php";
 require_once "../../core/includes/functions.php";
 
 // Include the AI Insights Engine and Advanced AI Provider
-require_once "AIInsightsEngine.php";
-require_once "AdvancedAIProvider.php";
+require_once __DIR__ . '/../../ai/engines/AIInsightsEngine.php';
+require_once __DIR__ . '/../../ai/engines/AdvancedAIProvider.php';
 
 // Initialize the session
 session_start();

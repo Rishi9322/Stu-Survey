@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/secure_config.php';
+require_once __DIR__ . '/../../core/includes/secure_config.php';
 
 class AdvancedAIProvider {
     private $grok_api_key;

@@ -103,8 +103,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: " . $targetLocation);
             exit; // Ensure script stops here
         } else {
-            // Login failed
+            // Login failed - attempt to provide more debug info in local dev
             $login_err = "Invalid email, password, or role combination.";
+            // If there was a recent mysqli error, surface it to logs for local debugging
+            if (function_exists('mysqli_error')) {
+                $dbErr = mysqli_error($conn);
+                if (!empty($dbErr)) {
+                    error_log("Login DB error: " . $dbErr);
+                    // For local development, also append a non-sensitive hint to the user message
+                    $login_err .= " (server validation error)";
+                }
+            }
         }
     }
 }
@@ -123,7 +132,7 @@ $basePath = "../";
         <div class="alert alert-danger"><?php echo $login_err; ?></div>
     <?php endif; ?>
     
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="needs-validation">
+    <form action="<?php echo htmlspecialchars($_SERVER['SCRIPT_NAME']); ?>" method="post" class="needs-validation">
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" name="email" id="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">

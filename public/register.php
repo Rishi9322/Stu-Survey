@@ -51,11 +51,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $email = trim($_POST["email"]);
                 }
             } else {
-                echo "Oops! Something went wrong. Please try again later.";
+                // More explicit error for debugging during local testing
+                error_log("Error checking email existence: " . mysqli_error($conn));
+                $email_err = "Server error while validating email. Please try again later.";
             }
 
             // Close statement
             mysqli_stmt_close($stmt);
+        } else {
+            error_log("Error preparing email check statement: " . mysqli_error($conn));
+            $email_err = "Server error. Please try again later.";
         }
     }
     

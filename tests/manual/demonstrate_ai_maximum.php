@@ -1,6 +1,6 @@
 <?php
 require_once '../../core/includes/config.php';
-require_once 'admin/AIInsightsEngine.php';
+require_once __DIR__ . '/../../ai/engines/AIInsightsEngine.php';
 
 echo "🚀 DEMONSTRATING AI AT MAXIMUM TRAINED CAPACITY\n";
 echo "================================================\n\n";

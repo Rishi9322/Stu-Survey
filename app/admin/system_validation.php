@@ -75,7 +75,7 @@ echo "\n🤖 AI MODELS STATUS:\n";
 echo "-------------------\n";
 
 try {
-    require_once 'AdvancedAIProvider.php';
+    require_once __DIR__ . '/../../ai/engines/AdvancedAIProvider.php';
     $ai_provider = new AdvancedAIProvider();
     $models = $ai_provider->getAvailableModels();
     
@@ -133,7 +133,7 @@ echo "• Scalable architecture for future enhancements\n";
 
 echo "\n🎯 ACCESS POINTS:\n";
 echo "----------------\n";
-echo "• Main Dashboard: admin/ai_insights.php\n";
+echo "• Main Dashboard: app/api/ai_insights.php\n";
 echo "• Testing Interface: admin/ai_test_interface.html\n";
 echo "• Command Line Test: admin/test_advanced_ai.php\n";
 echo "• API Endpoint: admin/test_ai_endpoint.php\n";

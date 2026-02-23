@@ -1,3 +1,23 @@
+<?php
+// Ensure $basePath is defined and normalized. Pages may set $basePath (e.g. "../").
+// If not set or is a relative path, try to compute a sensible default when the
+// project is served under a subfolder like /stu/public/.
+if (!isset($basePath) || empty($basePath)) {
+    $script = $_SERVER['SCRIPT_NAME'] ?? '';
+    // If the app appears under a folder named 'stu', default to '/stu/public/'
+    if (strpos($script, '/stu/') !== false) {
+        $basePath = '/stu/public/';
+    } else {
+        // fallback to site root
+        $basePath = '/';
+    }
+}
+
+// Normalize the basePath to always end with a single slash and avoid duplicated 'public'
+$basePath = rtrim($basePath, '/') . '/';
+$basePath = str_replace('/public/public/', '/public/', $basePath);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -161,7 +181,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/admin/ai_insights.php" class="nav-link">
+                                    <a href="<?php echo $basePath; ?>app/api/ai_insights.php" class="nav-link">
                                         <i class="fas fa-brain me-1"></i>
                                         AI Insights
                                     </a>
@@ -307,6 +327,21 @@
     </script>
     
     <main>
+        <?php
+        // Local debug bar (enabled only when DEV_DEBUG environment variable is set)
+        $devDebug = getenv('DEV_DEBUG');
+        if ($devDebug === '1') {
+            // Attempt to read a mysqli connection error if available
+            $dbError = '';
+            if (isset($conn) && function_exists('mysqli_error')) {
+                $dbError = mysqli_error($conn);
+            }
+            echo '<div style="position:fixed;right:10px;bottom:10px;z-index:9999;background:#111;color:#fff;padding:10px;border-radius:6px;max-width:480px;font-size:12px;opacity:0.95;">';
+            echo '<strong>DEV DEBUG</strong><br/>';
+            echo '<div style="max-height:120px;overflow:auto;margin-top:6px;">' . htmlspecialchars($dbError) . '</div>';
+            echo '</div>';
+        }
+        ?>
         <?php if (isset($alertMessage) && isset($alertType)): ?>
             <div class="container mt-4">
                 <div class="alert alert-<?php echo $alertType; ?> alert-dismissible fade show" role="alert">

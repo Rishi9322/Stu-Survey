@@ -1,0 +1,11 @@
+# Commands to connect your local repository to GitHub
+# (Replace YOUR_USERNAME and YOUR_REPOSITORY_NAME with actual values)
+
+# Add the remote origin
+git remote add origin https://github.com/Rishi9322/Stu-Survey
+# Push your code to GitHub
+git push -u origin main
+
+# Example:
+# git remote add origin https://github.com/rishipoddarr/student-survey-system.git
+# git push -u origin main

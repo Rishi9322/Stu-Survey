@@ -1,0 +1,434 @@
+﻿Ô£ô Test database setup complete
+PHPUnit 10.5.60 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.12
+Configuration: C:\xampp\htdocs\stu\phpunit.xml
+
+EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 65 / 80 ( 81%)
+EEEEEEEEEEEEEEE                                                   80 / 80 (100%)
+
+Time: 00:00.125, Memory: 8.00 MB
+
+There were 2 PHPUnit test runner warnings:
+
+1) Test results may not be as expected because the XML configuration file did not pass validation:
+
+  Line 8:
+  - Element 'phpunit', attribute 'verbose': The attribute 'verbose' is not allowed.
+  - Element 'phpunit', attribute 'displayDetails': The attribute 'displayDetails' is not allowed.
+
+  Line 20:
+  - Element 'coverage', attribute 'processUncoveredFiles': The attribute 'processUncoveredFiles' is not allowed.
+
+  Line 21:
+  - Element 'include': This element is not expected.
+
+
+2) No code coverage driver available
+
+--
+
+There were 80 errors:
+
+1) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testViewSurveyCompletionRate
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+2) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testViewAverageTeacherRating
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+3) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testFilterAnalyticsByDateRange
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+4) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testRatingDistributionChartData
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+5) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testExportAnalyticsData
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+6) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testCompareTeacherPerformance
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+7) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testViewResponseTrends
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+8) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testPendingIssuesSummary
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+9) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testDepartmentWiseAnalytics
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+10) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testGenerateSummaryStatistics
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+11) Tests\Unit\BlackBox\AuthenticationBlackBoxTest::testValidUserLogin
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+12) Tests\Unit\BlackBox\AuthenticationBlackBoxTest::testLoginWithInvalidPassword
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+13) Tests\Unit\BlackBox\AuthenticationBlackBoxTest::testLoginWithNonExistentUser
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+14) Tests\Unit\BlackBox\AuthenticationBlackBoxTest::testRegisterNewStudentUser
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+15) Tests\Unit\BlackBox\AuthenticationBlackBoxTest::testRegisterWithDuplicateEmail
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+16) Tests\Unit\BlackBox\AuthenticationBlackBoxTest::testUserLogout
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+17) Tests\Unit\BlackBox\AuthenticationBlackBoxTest::testRegisterDifferentUserRoles
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+18) Tests\Unit\BlackBox\AuthenticationBlackBoxTest::testUserCanUpdateProfile
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+19) Tests\Unit\BlackBox\AuthenticationBlackBoxTest::testInactiveUserCannotLogin
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+20) Tests\Unit\BlackBox\AuthenticationBlackBoxTest::testEmailValidationOnRegistration
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+21) Tests\Unit\BlackBox\ComplaintsBlackBoxTest::testSubmitComplaintSuccessfully
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+22) Tests\Unit\BlackBox\ComplaintsBlackBoxTest::testSubmitSuggestion
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+23) Tests\Unit\BlackBox\ComplaintsBlackBoxTest::testViewComplaintStatus
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+24) Tests\Unit\BlackBox\ComplaintsBlackBoxTest::testTrackComplaintResolution
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+25) Tests\Unit\BlackBox\ComplaintsBlackBoxTest::testFilterComplaintsByType
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+26) Tests\Unit\BlackBox\ComplaintsBlackBoxTest::testFilterComplaintsByStatus
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+27) Tests\Unit\BlackBox\ComplaintsBlackBoxTest::testSearchComplaints
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+28) Tests\Unit\BlackBox\ComplaintsBlackBoxTest::testComplaintPriority
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+29) Tests\Unit\BlackBox\ComplaintsBlackBoxTest::testPendingComplaintsCountDisplay
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+30) Tests\Unit\BlackBox\ComplaintsBlackBoxTest::testSubmitComplaintWithMinimalFields
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+31) Tests\Unit\BlackBox\SurveyBlackBoxTest::testLoadSurveySuccessfully
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+32) Tests\Unit\BlackBox\SurveyBlackBoxTest::testSurveyContainsQuestions
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+33) Tests\Unit\BlackBox\SurveyBlackBoxTest::testSubmitSurveyWithValidRatings
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+34) Tests\Unit\BlackBox\SurveyBlackBoxTest::testCannotSubmitSurveyTwice
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+35) Tests\Unit\BlackBox\SurveyBlackBoxTest::testSubmitWithMissingFields
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+36) Tests\Unit\BlackBox\SurveyBlackBoxTest::testViewSurveyResults
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+37) Tests\Unit\BlackBox\SurveyBlackBoxTest::testInactiveSurveyCannotBeAccessed
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+38) Tests\Unit\BlackBox\SurveyBlackBoxTest::testSaveSurveyDraft
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+39) Tests\Unit\BlackBox\SurveyBlackBoxTest::testRateSpecificTeacher
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+40) Tests\Unit\BlackBox\SurveyBlackBoxTest::testGetTeacherAverageRating
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+41) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testAverageRatingCalculation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+42) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testPercentageCalculation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+43) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testAggregationQueryPerformance
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+44) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testResponseCountByRating
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+45) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testDateRangeFiltering
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+46) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testHandlingMissingData
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+47) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testPercentileCalculations
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+48) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testTeacherRanking
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+49) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testCompletionRateCalculation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+50) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testTrendAnalysis
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+51) Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest::testPasswordHashingFunction
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+52) Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest::testPasswordStrengthValidation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+53) Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest::testEmailValidationLogic
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+54) Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest::testRoleBasedAccessControl
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+55) Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest::testJWTTokenGeneration
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+56) Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest::testSessionTimeoutLogic
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+57) Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest::testInputSanitization
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+58) Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest::testPasswordResetTokenGeneration
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+59) Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest::testAccountActivationFlow
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+60) Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest::testRateLimitingOnFailedLogins
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+61) Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest::testSubjectValidation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+62) Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest::testDescriptionValidation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+63) Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest::testTypeValidation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+64) Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest::testStatusWorkflow
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+65) Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest::testSQLInjectionPrevention
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+66) Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest::testComplaintCountByStatus
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+67) Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest::testAutoTimestampOnCreation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+68) Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest::testResolutionNotesLogic
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+69) Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest::testComplaintAssignmentToAdmin
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+70) Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest::testComplaintPagination
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+71) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testRatingValidation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+72) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testAverageRatingCalculation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+73) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testDuplicateSubmissionPrevention
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+74) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testQuestionOrdering
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+75) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testRatingDistributionAnalysis
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+76) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testStudentProgressTracking
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+77) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testTeacherResponseValidation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+78) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testSurveyStatusTransitions
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+79) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testResponseDateTracking
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+80) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testBulkTeacherRatings
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+
+ERRORS!
+Tests: 80, Assertions: 0, Errors: 80, PHPUnit Warnings: 2.

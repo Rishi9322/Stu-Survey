@@ -9,7 +9,7 @@ require_once "../../core/includes/config.php";
 require_once "../../core/includes/functions.php";
 
 // Include the AI Insights Engine
-require_once "AIInsightsEngine.php";
+require_once __DIR__ . '/../../ai/engines/AIInsightsEngine.php';
 
 // Initialize the session
 session_start();

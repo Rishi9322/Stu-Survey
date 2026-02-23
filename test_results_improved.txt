@@ -1,0 +1,145 @@
+﻿Ô£ô Test database setup complete
+Ô£ô Test database setup complete
+PHPUnit 10.5.60 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.12
+Configuration: C:\xampp\htdocs\stu\phpunit.xml
+
+..E...E.....................................EE...E............... 65 / 80 ( 81%)
+..E............                                                   80 / 80 (100%)
+
+Time: 00:30.435, Memory: 10.00 MB
+
+Analytics Black Box (Tests\Unit\BlackBox\AnalyticsBlackBox)
+ Ô£ö View survey completion rate
+ Ô£ö View average teacher rating
+ Ô£ÿ Filter analytics by date range
+   Ôöé
+   Ôöé PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+   Ôöé
+   Ôöé C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php:97
+   Ôöé
+ Ô£ö Rating distribution chart data
+ Ô£ö Export analytics data
+ Ô£ö Compare teacher performance
+ Ô£ÿ View response trends
+   Ôöé
+   Ôöé PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+   Ôöé
+   Ôöé C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php:222
+   Ôöé
+ Ô£ö Pending issues summary
+ Ô£ö Department wise analytics
+ Ô£ö Generate summary statistics
+
+Analytics White Box (Tests\Unit\WhiteBox\AnalyticsWhiteBox)
+ Ô£ö Average rating calculation
+ Ô£ö Percentage calculation
+ Ô£ö Aggregation query performance
+ Ô£ö Response count by rating
+ Ô£ÿ Date range filtering
+   Ôöé
+   Ôöé PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+   Ôöé
+   Ôöé C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php:147
+   Ôöé
+ Ô£ÿ Handling missing data
+   Ôöé
+   Ôöé PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+   Ôöé
+   Ôöé C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php:174
+   Ôöé
+ Ô£ö Percentile calculations
+ Ô£ö Teacher ranking
+ Ô£ö Completion rate calculation
+ Ô£ÿ Trend analysis
+   Ôöé
+   Ôöé PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+   Ôöé
+   Ôöé C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php:318
+   Ôöé
+
+Authentication Black Box (Tests\Unit\BlackBox\AuthenticationBlackBox)
+ Ô£ö Valid user login
+ Ô£ö Login with invalid password
+ Ô£ö Login with non existent user
+ Ô£ö Register new student user
+ Ô£ö Register with duplicate email
+ Ô£ö User logout
+ Ô£ö Register different user roles
+ Ô£ö User can update profile
+ Ô£ö Inactive user cannot login
+ Ô£ö Email validation on registration
+
+Authentication White Box (Tests\Unit\WhiteBox\AuthenticationWhiteBox)
+ Ô£ö Password hashing function
+ Ô£ö Password strength validation
+ Ô£ö Email validation logic
+ Ô£ö Role based access control
+ Ô£ö J w t token generation
+ Ô£ö Session timeout logic
+ Ô£ö Input sanitization
+ Ô£ö Password reset token generation
+ Ô£ö Account activation flow
+ Ô£ö Rate limiting on failed logins
+
+Complaints Black Box (Tests\Unit\BlackBox\ComplaintsBlackBox)
+ Ô£ö Submit complaint successfully
+ Ô£ö Submit suggestion
+ Ô£ö View complaint status
+ Ô£ö Track complaint resolution
+ Ô£ö Filter complaints by type
+ Ô£ö Filter complaints by status
+ Ô£ö Search complaints
+ Ô£ö Complaint priority
+ Ô£ö Pending complaints count display
+ Ô£ö Submit complaint with minimal fields
+
+Complaints White Box (Tests\Unit\WhiteBox\ComplaintsWhiteBox)
+ Ô£ö Subject validation
+ Ô£ö Description validation
+ Ô£ö Type validation
+ Ô£ö Status workflow
+ Ô£ö S q l injection prevention
+ Ô£ö Complaint count by status
+ Ô£ö Auto timestamp on creation
+ Ô£ÿ Resolution notes logic
+   Ôöé
+   Ôöé PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+   Ôöé
+   Ôöé C:\xampp\htdocs\stu\tests\BaseTestCase.php:158
+   Ôöé C:\xampp\htdocs\stu\tests\unit\whitebox\ComplaintsWhiteBoxTest.php:162
+   Ôöé
+ Ô£ö Complaint assignment to admin
+ Ô£ö Complaint pagination
+
+Survey Black Box (Tests\Unit\BlackBox\SurveyBlackBox)
+ Ô£ö Load survey successfully
+ Ô£ö Survey contains questions
+ Ô£ö Submit survey with valid ratings
+ Ô£ö Cannot submit survey twice
+ Ô£ö Submit with missing fields
+ Ô£ö View survey results
+ Ô£ö Inactive survey cannot be accessed
+ Ô£ö Save survey draft
+ Ô£ö Rate specific teacher
+ Ô£ö Get teacher average rating
+
+Survey White Box (Tests\Unit\WhiteBox\SurveyWhiteBox)
+ Ô£ö Rating validation
+ Ô£ö Average rating calculation
+ Ô£ö Duplicate submission prevention
+ Ô£ö Question ordering
+ Ô£ö Rating distribution analysis
+ Ô£ö Student progress tracking
+ Ô£ö Teacher response validation
+ Ô£ö Survey status transitions
+ Ô£ö Response date tracking
+ Ô£ö Bulk teacher ratings
+
+There was 1 PHPUnit test runner warning:
+
+1) No code coverage driver available
+
+ERRORS!
+Tests: 80, Assertions: 171, Errors: 6, PHPUnit Warnings: 1, PHPUnit Deprecations: 1.

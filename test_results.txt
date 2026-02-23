@@ -1,0 +1,183 @@
+﻿Ô£ô Test database setup complete
+Ô£ô Test database setup complete
+PHPUnit 10.5.60 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.12
+Configuration: C:\xampp\htdocs\stu\phpunit.xml
+
+E.EEE.E..EF........F.............E.E..E...EEEE.EEE............... 65 / 80 ( 81%)
+..E.EF.E.E.E.EE                                                   80 / 80 (100%)
+
+Time: 00:21.416, Memory: 10.00 MB
+
+There was 1 PHPUnit test runner warning:
+
+1) No code coverage driver available
+
+--
+
+There were 23 errors:
+
+1) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testViewSurveyCompletionRate
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'test1765055176@example.com' for key 'email'
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:51
+C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php:22
+
+2) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testFilterAnalyticsByDateRange
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+
+C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php:97
+
+3) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testRatingDistributionChartData
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:120
+C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php:125
+
+4) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testExportAnalyticsData
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:120
+C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php:153
+
+5) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testViewResponseTrends
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+
+C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php:222
+
+6) Tests\Unit\BlackBox\AnalyticsBlackBoxTest::testGenerateSummaryStatistics
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'test1765055179@example.com' for key 'email'
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:51
+C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php:305
+
+7) Tests\Unit\BlackBox\SurveyBlackBoxTest::testCannotSubmitSurveyTwice
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'test1765055186@example.com' for key 'email'
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:51
+C:\xampp\htdocs\stu\tests\unit\blackbox\SurveyBlackBoxTest.php:106
+
+8) Tests\Unit\BlackBox\SurveyBlackBoxTest::testViewSurveyResults
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:120
+C:\xampp\htdocs\stu\tests\unit\blackbox\SurveyBlackBoxTest.php:172
+
+9) Tests\Unit\BlackBox\SurveyBlackBoxTest::testRateSpecificTeacher
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'test1765055188@example.com' for key 'email'
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:51
+C:\xampp\htdocs\stu\tests\unit\blackbox\SurveyBlackBoxTest.php:236
+
+10) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testAggregationQueryPerformance
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:120
+C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php:66
+
+11) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testResponseCountByRating
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:120
+C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php:105
+
+12) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testDateRangeFiltering
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+
+C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php:147
+
+13) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testHandlingMissingData
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+
+C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php:174
+
+14) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testTeacherRanking
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'test1765055190@example.com' for key 'email'
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:51
+C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php:225
+
+15) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testCompletionRateCalculation
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'test1765055190@example.com' for key 'email'
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:51
+C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php:266
+
+16) Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest::testTrendAnalysis
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+
+C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php:318
+
+17) Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest::testResolutionNotesLogic
+PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:144
+C:\xampp\htdocs\stu\tests\unit\whitebox\ComplaintsWhiteBoxTest.php:162
+
+18) Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest::testComplaintPagination
+PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''10' OFFSET '0'' at line 3
+
+C:\xampp\htdocs\stu\tests\unit\whitebox\ComplaintsWhiteBoxTest.php:237
+
+19) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testDuplicateSubmissionPrevention
+Error: Call to undefined method Tests\Unit\WhiteBox\SurveyWhiteBoxTest::assertEqual()
+
+C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php:73
+
+20) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testRatingDistributionAnalysis
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE SET NULL)
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:120
+C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php:127
+
+21) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testTeacherResponseValidation
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'test1765055196@example.com' for key 'email'
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:51
+C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php:183
+
+22) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testResponseDateTracking
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`student_satisfaction_survey_test`.`responses`, CONSTRAINT `responses_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `surveys` (`id`) ON DELETE CASCADE)
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:120
+C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php:231
+
+23) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testBulkTeacherRatings
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'test1765055197@example.com' for key 'email'
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:51
+C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php:255
+
+--
+
+There were 3 failures:
+
+1) Tests\Unit\BlackBox\AuthenticationBlackBoxTest::testValidUserLogin
+User not found
+Failed asserting that Array &0 [
+    'id' => 1,
+    'name' => 'Test User',
+    'email' => 'student@test.com',
+    'password' => '$2y$10$BVsHEQbFXek5qjlXVFG.quSUlwx/LBKD0sLeBchZULDBfjdPVbLtq',
+    'role' => 'student',
+    'is_active' => 1,
+    'created_at' => '2025-12-06 22:06:20',
+    'updated_at' => '2025-12-07 02:36:20',
+] is true.
+
+C:\xampp\htdocs\stu\tests\unit\blackbox\AuthenticationBlackBoxTest.php:37
+
+2) Tests\Unit\BlackBox\AuthenticationBlackBoxTest::testEmailValidationOnRegistration
+Failed asserting that 'valid@email.com' is true.
+
+C:\xampp\htdocs\stu\tests\unit\blackbox\AuthenticationBlackBoxTest.php:233
+
+3) Tests\Unit\WhiteBox\SurveyWhiteBoxTest::testRatingValidation
+Decimal should be invalid
+Failed asserting that true is false.
+
+C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php:32
+
+ERRORS!
+Tests: 80, Assertions: 136, Errors: 23, Failures: 3, PHPUnit Warnings: 1, PHPUnit Deprecations: 1.

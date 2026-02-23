@@ -4,10 +4,10 @@ ob_start();
 error_reporting(E_ERROR | E_PARSE);
 ini_set('display_errors', 0);
 
-require_once '../includes/config.php';
-require_once '../includes/secure_config.php';
-require_once 'AdvancedAIProvider.php';
-require_once 'DatabaseAI.php';
+require_once __DIR__ . '/../../core/includes/config.php';
+require_once __DIR__ . '/../../core/includes/secure_config.php';
+require_once __DIR__ . '/../engines/AdvancedAIProvider.php';
+require_once __DIR__ . '/../../app/admin/DatabaseAI.php';
 
 // Clean any buffer and set JSON header
 ob_clean();
