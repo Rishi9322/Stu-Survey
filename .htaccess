@@ -10,10 +10,6 @@ DirectoryIndex index.php index.html
     RewriteEngine On
     RewriteBase /
 
-    # Let InfinityFree ad injection pass through
-    RewriteCond %{QUERY_STRING} ^i=1$ [NC]
-    RewriteRule ^$ public/index.php [QSA,L]
-
     # Don't rewrite real files or directories
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
@@ -21,7 +17,7 @@ DirectoryIndex index.php index.html
     # Don't rewrite requests already inside /public/
     RewriteCond %{REQUEST_URI} !^/public/
 
-    # Route everything else to public/index.php
+    # Route everything (including /?i=1) to public/index.php
     RewriteRule ^(.*)$ public/index.php [QSA,L]
 </IfModule>
 
