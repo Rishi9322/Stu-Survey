@@ -1,0 +1,78 @@
+# ============================================================
+# Student Satisfaction Survey System — Custom .htaccess
+# Place this in your htdocs/ root on InfinityFree
+# ============================================================
+
+Options -Indexes
+DirectoryIndex index.php index.html
+
+# ── URL REWRITING ────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Route all non-file, non-directory requests to index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
+# ── BLOCK SENSITIVE FILES ────────────────────────────────────
+<FilesMatch "^(\.env|composer\.(json|lock)|phpunit.*\.xml|behat\.yml|codeception\.yml|package(-lock)?\.json)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Block access to hidden files (.git, .env, etc.)
+<FilesMatch "^\.">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Block direct access to sensitive directories
+<IfModule mod_rewrite.c>
+    RewriteRule ^(core|database|vendor|ai/config|ai/training|storage|temp|uploads/.*\.php)(/|$) - [F,L]
+</IfModule>
+
+# ── PHP SETTINGS ─────────────────────────────────────────────
+<IfModule mod_php.c>
+    php_value upload_max_filesize 32M
+    php_value post_max_size       32M
+    php_value max_execution_time  120
+    php_value max_input_time      120
+    php_value memory_limit        256M
+    php_flag  display_errors      Off
+    php_flag  log_errors          On
+</IfModule>
+
+# ── SECURITY HEADERS ─────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options           "SAMEORIGIN"
+    Header always set X-Content-Type-Options    "nosniff"
+    Header always set X-XSS-Protection          "1; mode=block"
+    Header always set Referrer-Policy           "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy        "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ── CACHE STATIC ASSETS ──────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css             "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png            "access plus 1 year"
+    ExpiresByType image/jpg            "access plus 1 year"
+    ExpiresByType image/jpeg           "access plus 1 year"
+    ExpiresByType image/gif            "access plus 1 year"
+    ExpiresByType image/svg+xml        "access plus 1 year"
+    ExpiresByType image/webp           "access plus 1 year"
+    ExpiresByType application/x-font-woff2 "access plus 1 year"
+</IfModule>
+
+# ── GZIP COMPRESSION ─────────────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json text/plain
+</IfModule>
+
+# ── CUSTOM ERROR PAGES ───────────────────────────────────────
+ErrorDocument 403 /public/login.php
+ErrorDocument 404 /index.php
