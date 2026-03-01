@@ -11,7 +11,8 @@ class SecureConfig {
             return self::$config;
         }
         
-        $env_file = dirname(__FILE__) . '/../.env';
+        // Look for .env in project root directory
+        $env_file = dirname(__FILE__) . '/../../.env';
         self::$config = [];
         
         // Load from .env file if exists

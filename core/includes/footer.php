@@ -1,4 +1,9 @@
     </main>
+
+    <?php
+    // Root path for assets that live outside /public (e.g., cloned college pages)
+    $collegeBasePath = preg_replace('#/public/?$#', '/', $basePath ?? '/');
+    ?>
     
     <!-- Modern Footer -->
     <footer class="footer-modern">
@@ -36,7 +41,7 @@
                                 <li><a href="<?php echo $basePath; ?>public/index.php">Home</a></li>
                                 <li><a href="<?php echo $basePath; ?>public/login.php">Login</a></li>
                                 <li><a href="<?php echo $basePath; ?>public/register.php">Register</a></li>
-                                <li><a href="#" onclick="alert('Feature coming soon!')">Features</a></li>
+                                <li><a href="<?php echo $basePath; ?>public/features.php">Features</a></li>
                             </ul>
                         </div>
                     </div>
@@ -97,7 +102,7 @@
                             <label for="collegeSelect" class="text-light me-2">Select College:</label>
                             <select id="collegeSelect" class="form-select form-select-sm d-inline-block" style="width: auto;">
                                 <option value="">Choose College</option>
-                                <option value="Clone_tcsc/clone_pages/www.tcsc.edu.in/index.html">TCSC</option>
+                                <option value="<?php echo $collegeBasePath; ?>Clone_tcsc/clone_pages/www.tcsc.edu.in/index.html">TCSC</option>
                             </select>
                         </div>
                     </div>
@@ -137,8 +142,10 @@
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (!href || href === '#') return;
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
@@ -157,6 +164,50 @@
                 }
             });
         }
+        
+        // GLOBAL: Aggressive modal backdrop cleanup for all pages
+        (function() {
+            // Function to remove all stuck modal backdrops
+            function removeAllBackdrops() {
+                document.querySelectorAll('.modal-backdrop').forEach(function(backdrop) {
+                    backdrop.remove();
+                });
+                // Also clean up body classes that might be stuck
+                if (!document.querySelector('.modal.show')) {
+                    document.body.classList.remove('modal-open');
+                    document.body.style.overflow = '';
+                    document.body.style.paddingRight = '';
+                }
+            }
+            
+            // Run immediately on page load
+            removeAllBackdrops();
+            
+            // Run after DOM is fully loaded
+            document.addEventListener('DOMContentLoaded', removeAllBackdrops);
+            
+            // Run after a short delay to catch late-loading elements
+            setTimeout(removeAllBackdrops, 100);
+            setTimeout(removeAllBackdrops, 500);
+            setTimeout(removeAllBackdrops, 1000);
+            
+            // Run after every click (with small delay)
+            document.addEventListener('click', function() {
+                setTimeout(removeAllBackdrops, 50);
+            });
+            
+            // Periodic cleanup every 500ms as safety net
+            setInterval(function() {
+                if (!document.querySelector('.modal.show')) {
+                    removeAllBackdrops();
+                }
+            }, 500);
+            
+            // Clean up when any modal is hidden
+            document.addEventListener('hidden.bs.modal', function() {
+                setTimeout(removeAllBackdrops, 100);
+            });
+        })();
     </script>
 </body>
 </html>

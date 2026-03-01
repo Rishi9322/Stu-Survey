@@ -1,0 +1,147 @@
+STANDALONE REAL TEST RESULTS - RAW DATA
+================================================================================
+Generated: 2026-02-16 10:17:19
+Method: Direct HTTP Testing (cURL)
+Total Tests: 20
+================================================================================
+
+[Admin] Admin Login Page Accessibility
+Status: PASSED
+Duration: 0.041s
+Time: 2026-02-16 10:17:18
+Details: Login page accessible (200 OK) with: login form, username field, password field
+--------------------------------------------------------------------------------
+
+[Admin] Login Form Structure
+Status: PASSED
+Duration: 0.016s
+Time: 2026-02-16 10:17:18
+Details: Form structure complete: 3 input fields, submit button present
+--------------------------------------------------------------------------------
+
+[Admin] Admin Dashboard Access Control
+Status: PASSED
+Duration: 0.047s
+Time: 2026-02-16 10:17:18
+Details: Access control implemented (HTTP 302)
+--------------------------------------------------------------------------------
+
+[Admin] User Management Page
+Status: PASSED
+Duration: 0.058s
+Time: 2026-02-16 10:17:18
+Details: User management protected - authentication required
+--------------------------------------------------------------------------------
+
+[Admin] Admin Reports Access
+Status: WARNING
+Duration: 0.009s
+Time: 2026-02-16 10:17:18
+Details: WARNING: Reports page not found (404) - may not be implemented
+--------------------------------------------------------------------------------
+
+[Student] Student Registration Page
+Status: PASSED
+Duration: 0.059s
+Time: 2026-02-16 10:17:18
+Details: Registration page accessible with: registration form, email field, password field
+--------------------------------------------------------------------------------
+
+[Student] Student Dashboard Protection
+Status: PASSED
+Duration: 0.064s
+Time: 2026-02-16 10:17:19
+Details: ✓ Student dashboard protected - requires authentication
+--------------------------------------------------------------------------------
+
+[Student] Feedback Submission Interface
+Status: WARNING
+Duration: 0.003s
+Time: 2026-02-16 10:17:19
+Details: WARNING: Feedback submission page not found (404)
+--------------------------------------------------------------------------------
+
+[Student] Student Profile Access
+Status: PASSED
+Duration: 0.05s
+Time: 2026-02-16 10:17:19
+Details: Profile page routing functional (HTTP 200)
+--------------------------------------------------------------------------------
+
+[Student] Feedback History View
+Status: WARNING
+Duration: 0.002s
+Time: 2026-02-16 10:17:19
+Details: WARNING: Feedback history page not found - may need creation
+--------------------------------------------------------------------------------
+
+[Teacher] Teacher Dashboard Access
+Status: PASSED
+Duration: 0.051s
+Time: 2026-02-16 10:17:19
+Details: Dashboard routing functional (HTTP 200)
+--------------------------------------------------------------------------------
+
+[Teacher] View Student Feedback
+Status: WARNING
+Duration: 0.002s
+Time: 2026-02-16 10:17:19
+Details: WARNING: Feedback view page not implemented yet
+--------------------------------------------------------------------------------
+
+[Teacher] Teacher Profile Management
+Status: PASSED
+Duration: 0.048s
+Time: 2026-02-16 10:17:19
+Details: Profile page responding (HTTP 200)
+--------------------------------------------------------------------------------
+
+[Teacher] Feedback Analytics
+Status: PASSED
+Duration: 0.039s
+Time: 2026-02-16 10:17:19
+Details: Analytics endpoint functional (HTTP 200)
+--------------------------------------------------------------------------------
+
+[Teacher] Feedback Response Interface
+Status: WARNING
+Duration: 0.006s
+Time: 2026-02-16 10:17:19
+Details: WARNING: Response page not implemented
+--------------------------------------------------------------------------------
+
+[API] API Health Endpoint
+Status: WARNING
+Duration: 0.005s
+Time: 2026-02-16 10:17:19
+Details: WARNING: Health endpoint not implemented (404)
+--------------------------------------------------------------------------------
+
+[API] Feedback API Endpoint
+Status: WARNING
+Duration: 0.005s
+Time: 2026-02-16 10:17:19
+Details: WARNING: Feedback API not found (404)
+--------------------------------------------------------------------------------
+
+[API] User Management API
+Status: WARNING
+Duration: 0.004s
+Time: 2026-02-16 10:17:19
+Details: WARNING: User API endpoint not implemented
+--------------------------------------------------------------------------------
+
+[API] Statistics API
+Status: WARNING
+Duration: 0.004s
+Time: 2026-02-16 10:17:19
+Details: WARNING: Statistics API not implemented
+--------------------------------------------------------------------------------
+
+[API] Data Export API
+Status: WARNING
+Duration: 0.004s
+Time: 2026-02-16 10:17:19
+Details: WARNING: Export API not yet implemented
+--------------------------------------------------------------------------------
+

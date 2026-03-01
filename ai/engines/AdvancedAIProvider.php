@@ -28,14 +28,41 @@ class AdvancedAIProvider {
             'limits' => ['rpm' => 30, 'rpd' => 250, 'tpm' => 70000],
             'features' => ['reasoning', 'analysis', 'complex_queries']
         ],
-        'sonoma-sky' => [
-            'name' => 'Sonoma Sky Alpha',
-            'description' => 'Advanced reasoning via OpenRouter',
+        'mistral-devstral' => [
+            'name' => 'Mistral Devstral',
+            'description' => 'Mistral coding AI via OpenRouter (Free)',
             'provider' => 'openrouter',
             'endpoint' => 'https://openrouter.ai/api/v1/chat/completions',
-            'model' => 'openrouter/sonoma-sky-alpha',
-            'limits' => ['unlimited' => true],
-            'features' => ['unlimited', 'reasoning', 'coding', 'analysis']
+            'model' => 'mistralai/devstral-2512:free',
+            'limits' => ['rpm' => 20, 'rpd' => 200, 'context' => '128K'],
+            'features' => ['free', 'coding', 'reasoning', 'analysis']
+        ],
+        'nvidia-nemotron' => [
+            'name' => 'NVIDIA Nemotron',
+            'description' => 'NVIDIA 30B AI via OpenRouter (Free)',
+            'provider' => 'openrouter',
+            'endpoint' => 'https://openrouter.ai/api/v1/chat/completions',
+            'model' => 'nvidia/nemotron-3-nano-30b-a3b:free',
+            'limits' => ['rpm' => 20, 'rpd' => 200, 'context' => '32K'],
+            'features' => ['free', 'fast', 'analysis']
+        ],
+        'xiaomi-mimo' => [
+            'name' => 'Xiaomi MiMo',
+            'description' => 'Xiaomi flash AI via OpenRouter (Free)',
+            'provider' => 'openrouter',
+            'endpoint' => 'https://openrouter.ai/api/v1/chat/completions',
+            'model' => 'xiaomi/mimo-v2-flash:free',
+            'limits' => ['rpm' => 20, 'rpd' => 200, 'context' => '32K'],
+            'features' => ['free', 'fast', 'multilingual']
+        ],
+        'allen-olmo' => [
+            'name' => 'Allen OLMo Think',
+            'description' => 'Allen AI 32B thinking model (Free)',
+            'provider' => 'openrouter',
+            'endpoint' => 'https://openrouter.ai/api/v1/chat/completions',
+            'model' => 'allenai/olmo-3.1-32b-think:free',
+            'limits' => ['rpm' => 20, 'rpd' => 200, 'context' => '32K'],
+            'features' => ['free', 'reasoning', 'thinking', 'analysis']
         ],
         'local-python' => [
             'name' => 'Local Python AI',
@@ -61,8 +88,17 @@ class AdvancedAIProvider {
                     }
                     return $this->callGrokAPI($prompt, $context);
                     
-                case 'sonoma-sky':
-                    return $this->callOpenRouterAPI($prompt, $context, 'openrouter/sonoma-sky-alpha');
+                case 'mistral-devstral':
+                    return $this->callOpenRouterAPI($prompt, $context, 'mistralai/devstral-2512:free');
+                    
+                case 'nvidia-nemotron':
+                    return $this->callOpenRouterAPI($prompt, $context, 'nvidia/nemotron-3-nano-30b-a3b:free');
+                    
+                case 'xiaomi-mimo':
+                    return $this->callOpenRouterAPI($prompt, $context, 'xiaomi/mimo-v2-flash:free');
+                    
+                case 'allen-olmo':
+                    return $this->callOpenRouterAPI($prompt, $context, 'allenai/olmo-3.1-32b-think:free');
                     
                 case 'local-python':
                 default:
@@ -167,7 +203,7 @@ class AdvancedAIProvider {
             return [
                 'success' => true,
                 'response' => $response['choices'][0]['message']['content'],
-                'model' => 'OpenRouter GPT-4O',
+                'model' => $model,
                 'tokens_used' => $response['usage']['total_tokens'] ?? 0,
                 'provider' => 'openrouter',
                 'reasoning' => $response['choices'][0]['message']['reasoning'] ?? null
@@ -264,49 +300,117 @@ class AdvancedAIProvider {
     }
     
     private function buildSystemPrompt($context) {
-        $prompt = "You are an advanced AI assistant for an educational feedback system. ";
-        $prompt .= "Analyze data and provide insights about student feedback, complaints, and suggestions. ";
+        $prompt = "You are an advanced AI assistant for an educational feedback system called Student Survey System. ";
+        $prompt .= "You have access to real data about student complaints, suggestions, survey ratings, and teacher performance. ";
+        $prompt .= "Analyze this data and provide detailed, actionable insights. Always reference specific data points in your response.\n\n";
         
         if (!empty($context)) {
-            $prompt .= "Context data available:\n";
-            
+            // Add system statistics
             if (isset($context['stats'])) {
                 $stats = $context['stats'];
-                $prompt .= "System Statistics:\n";
+                $prompt .= "=== SYSTEM STATISTICS ===\n";
                 if (isset($stats['complaints'])) {
-                    $prompt .= "- Complaints: {$stats['complaints']['total_complaints']} total, {$stats['complaints']['pending_complaints']} pending\n";
+                    $prompt .= "- Total Complaints: {$stats['complaints']['total_complaints']}, Pending: {$stats['complaints']['pending_complaints']}\n";
                 }
                 if (isset($stats['suggestions'])) {
-                    $prompt .= "- Suggestions: {$stats['suggestions']['total_suggestions']} total, {$stats['suggestions']['pending_suggestions']} pending\n";
+                    $prompt .= "- Total Suggestions: {$stats['suggestions']['total_suggestions']}, Pending: {$stats['suggestions']['pending_suggestions']}\n";
                 }
                 if (isset($stats['users'])) {
                     $prompt .= "- Users: {$stats['users']['total_users']} total ({$stats['users']['students']} students, {$stats['users']['teachers']} teachers)\n";
                 }
+                $prompt .= "\n";
             }
             
+            // Add survey statistics
+            if (isset($context['survey_stats']) && !empty($context['survey_stats'])) {
+                $ss = $context['survey_stats'];
+                $prompt .= "=== SURVEY RATINGS DATA ===\n";
+                $prompt .= "- Average Rating: " . round($ss['avg_rating'] ?? 0, 2) . "/5\n";
+                $prompt .= "- Total Responses: " . ($ss['total_responses'] ?? 0) . "\n";
+                $prompt .= "- Min Rating: " . ($ss['min_rating'] ?? 0) . ", Max Rating: " . ($ss['max_rating'] ?? 0) . "\n";
+                $prompt .= "- Rating Std Dev: " . round($ss['rating_std'] ?? 0, 2) . "\n\n";
+            }
+            
+            // Add teacher statistics  
+            if (isset($context['teacher_stats']) && !empty($context['teacher_stats'])) {
+                $ts = $context['teacher_stats'];
+                $prompt .= "=== TEACHER PERFORMANCE DATA ===\n";
+                $prompt .= "- Average Teacher Rating: " . round($ts['avg_teacher_rating'] ?? 0, 2) . "/5\n";
+                $prompt .= "- Total Teacher Ratings: " . ($ts['total_teacher_ratings'] ?? 0) . "\n";
+                $prompt .= "- Unique Teachers Rated: " . ($ts['unique_teachers'] ?? 0) . "\n\n";
+            }
+            
+            // Add predictive insights
+            if (isset($context['predictive_insights']) && !empty($context['predictive_insights'])) {
+                $pi = $context['predictive_insights'];
+                $prompt .= "=== TREND ANALYSIS ===\n";
+                $prompt .= "- Trend Direction: " . ($pi['trend_direction'] ?? 'unknown') . "\n";
+                $prompt .= "- Confidence: " . ($pi['confidence'] ?? 0) . "%\n\n";
+            }
+            
+            // Add recent complaints with full text
             if (isset($context['recent_complaints']) && !empty($context['recent_complaints'])) {
-                $prompt .= "\nRecent Complaints:\n";
-                foreach (array_slice($context['recent_complaints'], 0, 5) as $complaint) {
-                    $prompt .= "- [{$complaint['priority']}] {$complaint['subject']}: {$complaint['description']}\n";
+                $prompt .= "=== RECENT COMPLAINTS (Full Text) ===\n";
+                $count = 1;
+                foreach (array_slice($context['recent_complaints'], 0, 10) as $complaint) {
+                    $desc = $complaint['description'] ?? '';
+                    if (!empty($desc)) {
+                        $prompt .= "{$count}. [{$complaint['priority']}] {$desc}\n";
+                        $count++;
+                    }
+                }
+                $prompt .= "\n";
+            }
+            
+            // Add complaints sentiment summary
+            if (isset($context['complaints']['sentiment_summary'])) {
+                $ss = $context['complaints']['sentiment_summary'];
+                $prompt .= "Complaint Sentiment: Positive({$ss['positive']}), Negative({$ss['negative']}), Neutral({$ss['neutral']})\n";
+            }
+            
+            // Add complaints top topics
+            if (isset($context['complaints']['topics']['primary_topics'])) {
+                $topics = array_slice(array_keys($context['complaints']['topics']['primary_topics']), 0, 5);
+                if (!empty($topics)) {
+                    $prompt .= "Top Complaint Keywords: " . implode(", ", $topics) . "\n\n";
                 }
             }
             
+            // Add recent suggestions with full text
             if (isset($context['recent_suggestions']) && !empty($context['recent_suggestions'])) {
-                $prompt .= "\nRecent Suggestions:\n";
-                foreach (array_slice($context['recent_suggestions'], 0, 5) as $suggestion) {
-                    $prompt .= "- [{$suggestion['status']}] {$suggestion['subject']}: {$suggestion['description']}\n";
+                $prompt .= "=== RECENT SUGGESTIONS (Full Text) ===\n";
+                $count = 1;
+                foreach (array_slice($context['recent_suggestions'], 0, 10) as $suggestion) {
+                    $desc = $suggestion['description'] ?? '';
+                    if (!empty($desc)) {
+                        $prompt .= "{$count}. [{$suggestion['status']}] {$desc}\n";
+                        $count++;
+                    }
                 }
+                $prompt .= "\n";
             }
             
-            if (isset($context['trending_issues']) && !empty($context['trending_issues'])) {
-                $prompt .= "\nTrending Issues:\n";
-                foreach (array_slice($context['trending_issues'], 0, 3) as $issue) {
-                    $prompt .= "- {$issue['category']}: {$issue['complaint_count']} complaints (Priority: {$issue['avg_priority_score']})\n";
+            // Add suggestions sentiment summary
+            if (isset($context['suggestions']['sentiment_summary'])) {
+                $ss = $context['suggestions']['sentiment_summary'];
+                $prompt .= "Suggestion Sentiment: Positive({$ss['positive']}), Negative({$ss['negative']}), Neutral({$ss['neutral']})\n";
+            }
+            
+            // Add recommendations
+            if (isset($context['recommendations']) && !empty($context['recommendations'])) {
+                $prompt .= "\n=== CURRENT RECOMMENDATIONS ===\n";
+                foreach (array_slice($context['recommendations'], 0, 5) as $rec) {
+                    $prompt .= "- [{$rec['priority_score']}] {$rec['title']}: {$rec['description']}\n";
                 }
+                $prompt .= "\n";
             }
         }
         
-        $prompt .= "\nPlease provide helpful, actionable insights and recommendations.";
+        $prompt .= "\n=== INSTRUCTIONS ===\n";
+        $prompt .= "Based on the above data, provide a comprehensive answer to the user's question. ";
+        $prompt .= "Include specific numbers and data points. Be helpful and actionable. ";
+        $prompt .= "Format your response with clear sections using markdown when appropriate.";
+        
         return $prompt;
     }
     
@@ -344,31 +448,116 @@ class AdvancedAIProvider {
     }
     
     private function simpleLocalFallback($prompt, $context) {
-        // Simple rule-based local analysis as fallback
-        $keywords = ['complaint', 'problem', 'issue', 'broken', 'not working'];
-        $sentiment = 'neutral';
+        // Enhanced local analysis using the AI engine
+        require_once __DIR__ . '/AIInsightsEngine.php';
+        require_once __DIR__ . '/../../core/includes/config.php';
         
-        foreach ($keywords as $keyword) {
-            if (stripos($prompt, $keyword) !== false) {
-                $sentiment = 'negative';
-                break;
+        global $conn;
+        $ai_engine = new AIInsightsEngine($conn);
+        
+        $prompt_lower = strtolower($prompt);
+        $response = "";
+        
+        // Detect query intent and provide relevant insights
+        if (strpos($prompt_lower, 'rating') !== false || strpos($prompt_lower, 'score') !== false) {
+            $insights = $ai_engine->generateInsights();
+            $stats = $insights['survey_stats'] ?? [];
+            $avg = round($stats['avg_rating'] ?? 0, 2);
+            $total = $stats['total_responses'] ?? 0;
+            $response = "📊 **Rating Analysis**: The current average rating is **{$avg}/5** based on {$total} survey responses. ";
+            if ($avg >= 4) {
+                $response .= "This indicates excellent satisfaction levels!";
+            } elseif ($avg >= 3) {
+                $response .= "This shows good satisfaction with room for improvement.";
+            } else {
+                $response .= "This suggests attention is needed to improve satisfaction.";
             }
         }
-        
-        $response = "Local analysis complete. ";
-        if ($sentiment === 'negative') {
-            $response .= "Issue detected in query. This appears to be a concern that should be addressed.";
-        } else {
-            $response .= "Query processed successfully. This appears to be a general inquiry or suggestion.";
+        elseif (strpos($prompt_lower, 'complaint') !== false) {
+            $complaints = $ai_engine->analyzeComplaints();
+            $total = $complaints['total_count'] ?? 0;
+            $negative = $complaints['sentiment_summary']['negative'] ?? 0;
+            $topics = array_slice(array_keys($complaints['topics']['primary_topics'] ?? []), 0, 3);
+            $response = "⚠️ **Complaint Analysis**: Found **{$total} complaints**. ";
+            $response .= "{$negative} have negative sentiment. ";
+            if (!empty($topics)) {
+                $response .= "Top issues: " . implode(", ", $topics) . ". ";
+            }
+            $response .= "Consider addressing the most mentioned topics to improve satisfaction.";
+        }
+        elseif (strpos($prompt_lower, 'suggestion') !== false) {
+            $suggestions = $ai_engine->analyzeSuggestions();
+            $total = $suggestions['total_count'] ?? 0;
+            $positive = $suggestions['sentiment_summary']['positive'] ?? 0;
+            $response = "💡 **Suggestion Analysis**: Received **{$total} suggestions**. ";
+            $response .= "{$positive} have positive sentiment, showing constructive feedback from users.";
+        }
+        elseif (strpos($prompt_lower, 'trend') !== false || strpos($prompt_lower, 'pattern') !== false) {
+            $insights = $ai_engine->generateInsights();
+            $predictive = $insights['predictive_insights'] ?? [];
+            $direction = $predictive['trend_direction'] ?? 'stable';
+            $confidence = $predictive['confidence'] ?? 0;
+            $response = "📈 **Trend Analysis**: Current trend direction is **{$direction}** with {$confidence}% confidence. ";
+            if ($direction === 'improving') {
+                $response .= "Great progress! Continue current practices.";
+            } elseif ($direction === 'declining') {
+                $response .= "Action needed: investigate causes and implement improvements.";
+            } else {
+                $response .= "Maintain current standards and look for improvement opportunities.";
+            }
+        }
+        elseif (strpos($prompt_lower, 'recommendation') !== false || strpos($prompt_lower, 'advice') !== false) {
+            $insights = $ai_engine->generateInsights();
+            $recommendations = $insights['recommendations'] ?? [];
+            $response = "🎯 **Recommendations**: Found **" . count($recommendations) . "** active recommendations:\n\n";
+            foreach (array_slice($recommendations, 0, 3) as $rec) {
+                $response .= "• **{$rec['title']}**: {$rec['description']} (Priority: {$rec['priority_score']})\n";
+            }
+        }
+        elseif (strpos($prompt_lower, 'teacher') !== false || strpos($prompt_lower, 'instructor') !== false) {
+            $insights = $ai_engine->generateInsights();
+            $teacher = $insights['teacher_stats'] ?? [];
+            $avg = round($teacher['avg_teacher_rating'] ?? 0, 2);
+            $total = $teacher['total_teacher_ratings'] ?? 0;
+            $response = "👨‍🏫 **Teacher Analysis**: Average teacher rating is **{$avg}/5** based on {$total} ratings. ";
+            if ($avg >= 4) {
+                $response .= "Excellent teaching quality observed!";
+            } else {
+                $response .= "Consider providing additional training or support.";
+            }
+        }
+        elseif (strpos($prompt_lower, 'summary') !== false || strpos($prompt_lower, 'overview') !== false) {
+            $insights = $ai_engine->generateInsights();
+            $complaints = $insights['complaints']['total_count'] ?? 0;
+            $suggestions = $insights['suggestions']['total_count'] ?? 0;
+            $confidence = $insights['analysis_metadata']['confidence_level'] ?? 0;
+            $response = "📋 **System Overview**:\n\n";
+            $response .= "• Total Complaints: {$complaints}\n";
+            $response .= "• Total Suggestions: {$suggestions}\n";
+            $response .= "• AI Confidence: {$confidence}%\n";
+            $response .= "• Recommendations: " . count($insights['recommendations'] ?? []) . " active\n\n";
+            $response .= "Use specific queries like 'ratings', 'complaints', 'trends' for detailed analysis.";
+        }
+        else {
+            // General response with helpful info
+            $insights = $ai_engine->generateInsights();
+            $response = "🤖 **AI Assistant**: I can help you analyze:\n\n";
+            $response .= "• **Ratings** - Survey satisfaction scores\n";
+            $response .= "• **Complaints** - Issues and concerns\n";
+            $response .= "• **Suggestions** - User recommendations\n";
+            $response .= "• **Trends** - Patterns over time\n";
+            $response .= "• **Teachers** - Instructor performance\n";
+            $response .= "• **Summary** - Overall system overview\n\n";
+            $response .= "Ask about any of these topics for detailed insights!";
         }
         
         return [
             'success' => true,
             'response' => $response,
-            'model' => 'Local Fallback',
+            'model' => 'Local AI Engine',
             'tokens_used' => str_word_count($response),
-            'provider' => 'local-simple',
-            'sentiment' => $sentiment
+            'provider' => 'local-enhanced',
+            'sentiment' => 'neutral'
         ];
     }
     

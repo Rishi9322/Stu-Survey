@@ -107,14 +107,19 @@ $basePath = "../../";
     margin-bottom: 0.5rem;
     position: relative;
     z-index: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
 }
 
 .dashboard-header p {
-    opacity: 0.9;
-    font-size: 1rem;
+    opacity: 1;
+    font-size: 1.1rem;
+    font-weight: 500;
     max-width: 600px;
     position: relative;
     z-index: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
 }
 
 .dashboard-badge {
@@ -132,20 +137,21 @@ $basePath = "../../";
 /* Stats Cards */
 .stats-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
     margin-bottom: 2rem;
 }
 
 .stat-card {
     background: white;
     border-radius: var(--border-radius);
-    padding: 1.5rem;
+    padding: 1.25rem;
     box-shadow: var(--card-shadow);
     transition: all 0.3s ease;
     border: 1px solid var(--gray-light);
     position: relative;
     overflow: hidden;
+    min-width: 0;
 }
 
 .stat-card:hover {
@@ -170,18 +176,32 @@ $basePath = "../../";
 .stat-card:nth-child(6)::before { background: var(--danger-color); }
 
 .stat-card h3 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     color: var(--dark-color);
+    white-space: nowrap;
 }
 
 .stat-card p {
     color: #6c757d;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stat-card small {
+    display: block;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Quick Actions */
@@ -539,7 +559,7 @@ $basePath = "../../";
     }
     
     .stats-container {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
     }
     
     .quick-actions-grid {
@@ -567,11 +587,11 @@ $basePath = "../../";
 
 @media (max-width: 576px) {
     .stats-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
     
     .stat-card h3 {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     
     .dashboard-header h1 {
@@ -647,9 +667,9 @@ $basePath = "../../";
                 <div class="card-body">
                     <div class="quick-actions-grid">
                         <a href="survey_management.php" class="quick-action-btn">
-                            <i class="fas fa-tasks"></i>
-                            <span>Survey Management</span>
-                            <small class="mt-2 text-muted">Create & manage surveys</small>
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Advanced Surveys</span>
+                            <small class="mt-2 text-muted">Create & restart surveys with question sets</small>
                         </a>
                         <a href="user_management.php" class="quick-action-btn">
                             <i class="fas fa-users"></i>
@@ -660,6 +680,21 @@ $basePath = "../../";
                             <i class="fas fa-comment-alt"></i>
                             <span>View Feedback</span>
                             <small class="mt-2 text-muted">Suggestions & complaints</small>
+                        </a>
+                        <a href="#" onclick="createNewSurvey()" class="quick-action-btn">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Quick Survey</span>
+                            <small class="mt-2 text-muted">Create survey instantly</small>
+                        </a>
+                        <a href="#" onclick="viewQuestionBank()" class="quick-action-btn">
+                            <i class="fas fa-database"></i>
+                            <span>Question Bank</span>
+                            <small class="mt-2 text-muted">Browse question library</small>
+                        </a>
+                        <a href="#" onclick="exportAllData()" class="quick-action-btn">
+                            <i class="fas fa-download"></i>
+                            <span>Export Data</span>
+                            <small class="mt-2 text-muted">Download survey reports</small>
                         </a>
                     </div>
                 </div>
@@ -921,7 +956,7 @@ $basePath = "../../";
 </div>
 
 <!-- Load Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../../assets/js/chart.min.js"></script>
 
 <!-- Get real database data for charts (Keep this section as is from original code) -->
 <?php
@@ -1240,7 +1275,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             drawBorder: false
                         },
                         ticks: {
-                            stepSize: 5
+                            maxTicksLimit: 10,
+                            callback: function(value) {
+                                if (Math.floor(value) === value) return value;
+                            }
                         }
                     },
                     x: {
@@ -1499,7 +1537,39 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show success message
         alert('Department performance data exported successfully!');
     };
-});
+    });
+    
+    // Enhanced Survey Management Functions
+    window.createNewSurvey = function() {
+        const title = prompt('Enter survey title:');
+        if (title) {
+            const description = prompt('Enter survey description:');
+            if (description) {
+                window.open('survey_management.php?action=create&title=' + encodeURIComponent(title) + '&desc=' + encodeURIComponent(description), '_blank');
+            }
+        }
+    };
+    
+    window.viewQuestionBank = function() {
+        window.open('survey_management.php?action=question_bank', '_blank');
+    };
+    
+    window.exportAllData = function() {
+        if (confirm('Export all survey data including:\n• Survey responses\n• Analytics reports\n• User feedback\n• Performance metrics\n\nThis may take a few moments. Continue?')) {
+            // Create a temporary link for download
+            const link = document.createElement('a');
+            link.href = 'export_data.php?type=all';
+            link.download = 'survey_data_export_' + new Date().toISOString().split('T')[0] + '.csv';
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            
+            // Simulate download (in real implementation, this would trigger actual export)
+            alert('Export initiated! A comprehensive data export is being prepared.\n\nFeature coming soon - this will include:\n✓ All survey responses\n✓ User analytics\n✓ Performance reports\n✓ Trend analysis');
+            
+            document.body.removeChild(link);
+        }
+    };
+
 </script>
 
 <?php include '../../core/includes/footer.php'; ?>

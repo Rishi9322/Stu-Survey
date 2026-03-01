@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Test Documentation</title>
+        <style>
+            body {
+                text-rendering: optimizeLegibility;
+                font-family: Source SansSerif Pro, Arial, sans-serif;
+                font-variant-ligatures: common-ligatures;
+                font-kerning: normal;
+                margin-left: 2rem;
+                background-color: #fff;
+                color: #000;
+            }
+
+            body > ul > li {
+                font-size: larger;
+            }
+
+            h2 {
+                font-size: larger;
+                text-decoration-line: underline;
+                text-decoration-thickness: 2px;
+                margin: 0;
+                padding: 0.5rem 0;
+            }
+
+            ul {
+                list-style: none;
+                margin: 0 0 2rem;
+                padding: 0 0 0 1rem;
+                text-indent: -1rem;
+            }
+
+            .success:before {
+                color: #4e9a06;
+                content: '✓';
+                padding-right: 0.5rem;
+            }
+
+            .defect {
+                color: #a40000;
+            }
+
+            .defect:before {
+                color: #a40000;
+                content: '✗';
+                padding-right: 0.5rem;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Analytics Black Box (Tests\Unit\BlackBox\AnalyticsBlackBox)</h2>
+        <ul>
+            <li class="success">View survey completion rate</li>
+            <li class="success">View average teacher rating</li>
+            <li class="success">Filter analytics by date range</li>
+            <li class="success">Rating distribution chart data</li>
+            <li class="success">Export analytics data</li>
+            <li class="success">Compare teacher performance</li>
+            <li class="success">View response trends</li>
+            <li class="success">Pending issues summary</li>
+            <li class="success">Department wise analytics</li>
+            <li class="success">Generate summary statistics</li>
+        </ul>
+        <h2>Analytics White Box (Tests\Unit\WhiteBox\AnalyticsWhiteBox)</h2>
+        <ul>
+            <li class="success">Average rating calculation</li>
+            <li class="success">Percentage calculation</li>
+            <li class="success">Aggregation query performance</li>
+            <li class="success">Response count by rating</li>
+            <li class="success">Date range filtering</li>
+            <li class="success">Handling missing data</li>
+            <li class="success">Percentile calculations</li>
+            <li class="success">Teacher ranking</li>
+            <li class="success">Completion rate calculation</li>
+            <li class="success">Trend analysis</li>
+        </ul>
+        <h2>Authentication Black Box (Tests\Unit\BlackBox\AuthenticationBlackBox)</h2>
+        <ul>
+            <li class="success">Valid user login</li>
+            <li class="success">Login with invalid password</li>
+            <li class="success">Login with non existent user</li>
+            <li class="success">Register new student user</li>
+            <li class="success">Register with duplicate email</li>
+            <li class="success">User logout</li>
+            <li class="success">Register different user roles</li>
+            <li class="success">User can update profile</li>
+            <li class="success">Inactive user cannot login</li>
+            <li class="success">Email validation on registration</li>
+        </ul>
+        <h2>Authentication White Box (Tests\Unit\WhiteBox\AuthenticationWhiteBox)</h2>
+        <ul>
+            <li class="success">Password hashing function</li>
+            <li class="success">Password strength validation</li>
+            <li class="success">Email validation logic</li>
+            <li class="success">Role based access control</li>
+            <li class="success">J w t token generation</li>
+            <li class="success">Session timeout logic</li>
+            <li class="success">Input sanitization</li>
+            <li class="success">Password reset token generation</li>
+            <li class="success">Account activation flow</li>
+            <li class="success">Rate limiting on failed logins</li>
+        </ul>
+        <h2>Complaints Black Box (Tests\Unit\BlackBox\ComplaintsBlackBox)</h2>
+        <ul>
+            <li class="success">Submit complaint successfully</li>
+            <li class="success">Submit suggestion</li>
+            <li class="success">View complaint status</li>
+            <li class="success">Track complaint resolution</li>
+            <li class="success">Filter complaints by type</li>
+            <li class="success">Filter complaints by status</li>
+            <li class="success">Search complaints</li>
+            <li class="success">Complaint priority</li>
+            <li class="success">Pending complaints count display</li>
+            <li class="success">Submit complaint with minimal fields</li>
+        </ul>
+        <h2>Complaints White Box (Tests\Unit\WhiteBox\ComplaintsWhiteBox)</h2>
+        <ul>
+            <li class="success">Subject validation</li>
+            <li class="success">Description validation</li>
+            <li class="success">Type validation</li>
+            <li class="success">Status workflow</li>
+            <li class="success">S q l injection prevention</li>
+            <li class="success">Complaint count by status</li>
+            <li class="success">Auto timestamp on creation</li>
+            <li class="success">Resolution notes logic</li>
+            <li class="success">Complaint assignment to admin</li>
+            <li class="success">Complaint pagination</li>
+        </ul>
+        <h2>Demo Failures Black Box (Tests\Unit\BlackBox\DemoFailuresBlackBox)</h2>
+        <ul>
+            <li class="success">Valid login pass</li>
+            <li class="defect">Invalid password fail</li>
+            <li class="success">User registration pass</li>
+            <li class="defect">Email validation fail</li>
+            <li class="success">Session creation pass</li>
+            <li class="defect">Password strength fail</li>
+            <li class="success">User logout pass</li>
+            <li class="defect">Role validation fail</li>
+            <li class="success">Profile update pass</li>
+            <li class="defect">Account activation fail</li>
+        </ul>
+        <h2>Demo Failures White Box (Tests\Unit\WhiteBox\DemoFailuresWhiteBox)</h2>
+        <ul>
+            <li class="success">Hash generation pass</li>
+            <li class="defect">Null handling fail</li>
+            <li class="success">Array manipulation pass</li>
+            <li class="defect">Type checking fail</li>
+            <li class="success">String operations pass</li>
+            <li class="defect">Boundary condition fail</li>
+            <li class="success">Boolean logic pass</li>
+            <li class="defect">Regex match fail</li>
+            <li class="success">Exception handling pass</li>
+            <li class="defect">Empty array fail</li>
+        </ul>
+        <h2>Survey Black Box (Tests\Unit\BlackBox\SurveyBlackBox)</h2>
+        <ul>
+            <li class="success">Load survey successfully</li>
+            <li class="success">Survey contains questions</li>
+            <li class="success">Submit survey with valid ratings</li>
+            <li class="success">Cannot submit survey twice</li>
+            <li class="success">Submit with missing fields</li>
+            <li class="success">View survey results</li>
+            <li class="success">Inactive survey cannot be accessed</li>
+            <li class="success">Save survey draft</li>
+            <li class="success">Rate specific teacher</li>
+            <li class="success">Get teacher average rating</li>
+        </ul>
+        <h2>Survey White Box (Tests\Unit\WhiteBox\SurveyWhiteBox)</h2>
+        <ul>
+            <li class="success">Rating validation</li>
+            <li class="success">Average rating calculation</li>
+            <li class="success">Duplicate submission prevention</li>
+            <li class="success">Question ordering</li>
+            <li class="success">Rating distribution analysis</li>
+            <li class="success">Student progress tracking</li>
+            <li class="success">Teacher response validation</li>
+            <li class="success">Survey status transitions</li>
+            <li class="success">Response date tracking</li>
+            <li class="success">Bulk teacher ratings</li>
+        </ul>
+    </body>
+</html>

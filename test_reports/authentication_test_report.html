@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authentication Module - Test Report</title>
+    <title>Authentication Module - Enhanced Test Report</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 20px;
             color: #333;
@@ -20,7 +16,7 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
             border-radius: 12px;
@@ -29,16 +25,15 @@
         }
         
         .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: linear-gradient(135deg, #3498db 0%, #2084c7 100%);
             color: white;
-            padding: 30px;
+            padding: 40px;
             text-align: center;
         }
         
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
-            font-weight: 700;
         }
         
         .header .subtitle {
@@ -52,7 +47,6 @@
             gap: 20px;
             padding: 30px;
             background: #f8f9fa;
-            border-bottom: 2px solid #e9ecef;
         }
         
         .stat-card {
@@ -61,20 +55,6 @@
             border-radius: 8px;
             text-align: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        
-        .stat-card .label {
-            font-size: 0.9em;
-            color: #6c757d;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
         }
         
         .stat-card .value {
@@ -83,10 +63,15 @@
             margin-bottom: 5px;
         }
         
+        .stat-card .label {
+            font-size: 0.9em;
+            color: #6c757d;
+            text-transform: uppercase;
+        }
+        
         .stat-card.success .value { color: #28a745; }
-        .stat-card.danger .value { color: #dc3545; }
-        .stat-card.info .value { color: #17a2b8; }
         .stat-card.primary .value { color: #007bff; }
+        .stat-card.info .value { color: #17a2b8; }
         
         .section {
             padding: 30px;
@@ -96,7 +81,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 3px solid #e9ecef;
         }
@@ -113,7 +98,7 @@
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
-            font-size: 0.7em;
+            font-size: 0.6em;
             font-weight: 600;
         }
         
@@ -122,71 +107,138 @@
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
-            font-size: 0.7em;
+            font-size: 0.6em;
             font-weight: 600;
         }
         
-        .test-list {
-            list-style: none;
-        }
-        
-        .test-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            margin-bottom: 10px;
+        .test-card {
             background: #f8f9fa;
             border-radius: 8px;
-            border-left: 4px solid #28a745;
-            transition: all 0.2s;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #28a745;
+            transition: all 0.3s;
         }
         
-        .test-item:hover {
-            background: #e9ecef;
-            transform: translateX(5px);
-        }
-        
-        .test-item.failed {
-            border-left-color: #dc3545;
+        .test-card.failed {
             background: #fff5f5;
+            border-left-color: #dc3545;
         }
         
-        .test-icon {
-            font-size: 1.5em;
-            margin-right: 15px;
-            min-width: 30px;
+        .test-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
         }
         
-        .test-icon.passed { color: #28a745; }
-        .test-icon.failed { color: #dc3545; }
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
         
-        .test-name {
+        .test-title {
             flex: 1;
-            font-size: 1em;
+        }
+        
+        .test-title h3 {
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .test-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        
+        .test-meta span {
+            background: white;
+            padding: 3px 10px;
+            border-radius: 4px;
             font-weight: 500;
         }
         
-        .test-number {
-            color: #6c757d;
-            font-size: 0.9em;
-            margin-right: 10px;
-        }
-        
         .status-badge {
-            padding: 5px 12px;
-            border-radius: 12px;
-            font-size: 0.85em;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-weight: 600;
+            font-size: 0.9em;
         }
         
-        .status-badge.success {
+        .status-badge.passed {
             background: #d4edda;
             color: #155724;
         }
         
-        .status-badge.danger {
+        .status-badge.failed {
             background: #f8d7da;
             color: #721c24;
+        }
+        
+        .error-message {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+            color: #856404;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        
+        .test-details {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .detail-row {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            border-left: 3px solid #e9ecef;
+        }
+        
+        .detail-row strong {
+            display: inline-block;
+            min-width: 120px;
+            color: #495057;
+        }
+        
+        .detail-row.input { border-left-color: #17a2b8; }
+        .detail-row.expected { border-left-color: #28a745; }
+        .detail-row.validates { border-left-color: #ffc107; }
+        
+        .validates-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+        
+        .validates-tag {
+            background: #fff3cd;
+            color: #856404;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        
+        .testable-unit-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .testable-unit-box strong {
+            color: #3498db;
+            font-size: 0.9em;
         }
         
         .footer {
@@ -198,39 +250,17 @@
         
         .back-link {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 15px;
             padding: 10px 20px;
             background: white;
             color: #2c3e50;
             text-decoration: none;
             border-radius: 5px;
             font-weight: 600;
-            transition: all 0.2s;
         }
         
         .back-link:hover {
             background: #ecf0f1;
-            transform: translateY(-2px);
-        }
-        
-        .description {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
-        }
-        
-        .description p {
-            margin-bottom: 8px;
-        }
-        
-        .timestamp {
-            text-align: center;
-            color: #6c757d;
-            padding: 15px;
-            font-size: 0.9em;
-            background: #f8f9fa;
         }
     </style>
 </head>
@@ -238,156 +268,39 @@
     <div class="container">
         <div class="header">
             <h1>Authentication Module</h1>
-            <div class="subtitle">PHPUnit Test Report - Student Satisfaction Survey System</div>
+            <div class="subtitle">Enhanced Test Report with Test Cases and Testable Units</div>
         </div>
         
         <div class="stats-bar">
             <div class="stat-card primary">
-                <div class="label">Total Tests</div>
                 <div class="value">20</div>
+                <div class="label">Total Tests</div>
             </div>
             <div class="stat-card success">
-                <div class="label">Passed</div>
                 <div class="value">20</div>
-            </div>
-            <div class="stat-card danger">
-                <div class="label">Failed</div>
-                <div class="value">0</div>
+                <div class="label">Passed</div>
             </div>
             <div class="stat-card info">
-                <div class="label">Pass Rate</div>
                 <div class="value">100%</div>
+                <div class="label">Pass Rate</div>
             </div>
         </div>
         
-        <div class="description">
-            <p><strong>Test Execution Details:</strong></p>
-            <p>Time: 00:05.281 | Memory: 8.00 MB</p>
-            <p>PHPUnit 10.5.60 | PHP 8.2.12</p>
+        <div class="section">
+            <div class="section-header">
+                <h2><span class="badge-blackbox">BLACK BOX</span> User Perspective Testing</h2>
+            </div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Valid user login</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-001</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Email: student@test.com, Password: password123</div><div class="detail-row expected"><strong>Expected:</strong> User successfully authenticated and session created</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Login form submission</span><span class="validates-tag">Credential verification</span><span class="validates-tag">Session management</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> User Login Function</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Login with invalid password</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-002</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Email: student@test.com, Password: wrongpassword</div><div class="detail-row expected"><strong>Expected:</strong> Login rejected with &quot;Invalid credentials&quot; error</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Password verification</span><span class="validates-tag">Error message display</span><span class="validates-tag">Failed login handling</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Authentication Error Handling</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Login with non existent user</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-003</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Email: nonexistent@test.com</div><div class="detail-row expected"><strong>Expected:</strong> Login rejected with &quot;User not found&quot; error</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Database user lookup</span><span class="validates-tag">Error handling for missing accounts</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> User Existence Check</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Register new student user</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-004</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Name: John Doe, Email: john@test.com, Password: secure123, Role: student</div><div class="detail-row expected"><strong>Expected:</strong> New user account created in database</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Registration form processing</span><span class="validates-tag">Data insertion</span><span class="validates-tag">Password hashing</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> User Registration Process</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Register with duplicate email</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-005</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Email: existing@test.com (already in database)</div><div class="detail-row expected"><strong>Expected:</strong> Registration rejected with &quot;Email already exists&quot; error</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Duplicate email detection</span><span class="validates-tag">Database constraint enforcement</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Email Uniqueness Validation</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ User logout</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-006</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Active user session</div><div class="detail-row expected"><strong>Expected:</strong> Session destroyed, user redirected to login</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Session destruction</span><span class="validates-tag">Logout redirect</span><span class="validates-tag">Security cleanup</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Session Termination</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Register different user roles</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-007</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Users with roles: student, teacher, admin</div><div class="detail-row expected"><strong>Expected:</strong> Each user assigned correct role</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Role field population</span><span class="validates-tag">Multiple role support</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Role Assignment System</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ User can update profile</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-008</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Updated name: &quot;Jane Smith&quot;, Email: jane@test.com</div><div class="detail-row expected"><strong>Expected:</strong> User profile updated in database</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Profile edit form</span><span class="validates-tag">UPDATE query execution</span><span class="validates-tag">Data validation</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Profile Update Function</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Inactive user cannot login</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-009</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> User with status: inactive</div><div class="detail-row expected"><strong>Expected:</strong> Login rejected with &quot;Account inactive&quot; error</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Account status validation</span><span class="validates-tag">Access control</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Account Status Check</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Email validation on registration</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-010</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Email: invalid-email-format</div><div class="detail-row expected"><strong>Expected:</strong> Registration rejected with &quot;Invalid email&quot; error</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Email format validation</span><span class="validates-tag">Input sanitization</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Email Format Validator</div></div></div>
         </div>
         
         <div class="section">
             <div class="section-header">
-                <h2>
-                    <span class="badge-blackbox">BLACK BOX</span>
-                    User Perspective Testing
-                </h2><span class="status-badge success">10 / 10 Tests Passed</span>            </div>
-            <ul class="test-list">                <li class="test-item passed">
-                    <span class="test-number">#1</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Valid user login</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#2</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Login with invalid password</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#3</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Login with non existent user</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#4</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Register new student user</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#5</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Register with duplicate email</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#6</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">User logout</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#7</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Register different user roles</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#8</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">User can update profile</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#9</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Inactive user cannot login</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#10</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Email validation on registration</span>
-                    <span class="status-badge passed">passed</span>
-                </li>            </ul>
+                <h2><span class="badge-whitebox">WHITE BOX</span> Internal Logic Testing</h2>
+            </div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Password hashing function</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-W001</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Plain text password</div><div class="detail-row expected"><strong>Expected:</strong> BCrypt hash with cost factor 12</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">BCrypt algorithm usage</span><span class="validates-tag">Hash length (60 chars)</span><span class="validates-tag">Cost parameter</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> password_hash() implementation</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Password strength validation</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-W002</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Passwords: weak123, Strong@Pass123</div><div class="detail-row expected"><strong>Expected:</strong> Weak password rejected, strong password accepted</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Minimum length check</span><span class="validates-tag">Special character requirement</span><span class="validates-tag">Complexity rules</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> validatePasswordStrength() function</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Email validation logic</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-W003</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Various email formats</div><div class="detail-row expected"><strong>Expected:</strong> Valid emails pass, invalid emails rejected</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">PHP email filter</span><span class="validates-tag">RFC compliance</span><span class="validates-tag">Edge case handling</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> filter_var(FILTER_VALIDATE_EMAIL)</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Role based access control</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-W004</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> User role compared to required role</div><div class="detail-row expected"><strong>Expected:</strong> Access granted or denied based on role</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Role comparison logic</span><span class="validates-tag">Permission hierarchy</span><span class="validates-tag">Access denial</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> checkUserRole() function</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ J w t token generation</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-W005</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> User ID and role payload</div><div class="detail-row expected"><strong>Expected:</strong> Valid JWT token with signature</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Token structure</span><span class="validates-tag">Signature generation</span><span class="validates-tag">Expiration time</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> generateJWT() function</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Session timeout logic</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-W006</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Last activity timestamp</div><div class="detail-row expected"><strong>Expected:</strong> Session expired after 30 minutes inactivity</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Timeout calculation</span><span class="validates-tag">Time comparison</span><span class="validates-tag">Session invalidation</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> checkSessionTimeout() function</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Input sanitization</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-W007</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Input with HTML/SQL characters</div><div class="detail-row expected"><strong>Expected:</strong> Dangerous characters escaped/removed</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">XSS prevention</span><span class="validates-tag">SQL injection prevention</span><span class="validates-tag">Data cleaning</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> sanitizeInput() function</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Password reset token generation</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-W008</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> User email</div><div class="detail-row expected"><strong>Expected:</strong> Unique cryptographic token generated</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Token randomness</span><span class="validates-tag">Token uniqueness</span><span class="validates-tag">Expiration time</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> generateResetToken() function</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Account activation flow</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-W009</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Activation token</div><div class="detail-row expected"><strong>Expected:</strong> Account status changed to active</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Token validation</span><span class="validates-tag">Status update</span><span class="validates-tag">Token expiration check</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> activateAccount() function</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Rate limiting on failed logins</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-AUTH-W010</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> IP address with failed attempts</div><div class="detail-row expected"><strong>Expected:</strong> Account locked after 5 failed attempts</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Attempt counting</span><span class="validates-tag">Lockout threshold</span><span class="validates-tag">Brute force prevention</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> checkLoginAttempts() function</div></div></div>
         </div>
-        
-        <div class="section">
-            <div class="section-header">
-                <h2>
-                    <span class="badge-whitebox">WHITE BOX</span>
-                    Internal Logic Testing
-                </h2><span class="status-badge success">10 / 10 Tests Passed</span>            </div>
-            <ul class="test-list">                <li class="test-item passed">
-                    <span class="test-number">#1</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Password hashing function</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#2</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Password strength validation</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#3</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Email validation logic</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#4</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Role based access control</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#5</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">J w t token generation</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#6</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Session timeout logic</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#7</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Input sanitization</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#8</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Password reset token generation</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#9</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Account activation flow</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#10</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Rate limiting on failed logins</span>
-                    <span class="status-badge passed">passed</span>
-                </li>            </ul>
-        </div>
-        
-        <div class="timestamp">Generated on: December 08, 2025 10:10:09        </div>
         
         <div class="footer">
-            <p>&copy; 2025 Student Satisfaction Survey System | PHPUnit Test Suite</p>
+            <p>Generated on: December 08, 2025 10:27:30</p>
+            <p>&copy; 2025 Student Satisfaction Survey System | PHPUnit 10.5.60</p>
             <a href="index.html" class="back-link">← Back to All Modules</a>
         </div>
     </div>

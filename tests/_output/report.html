@@ -1,0 +1,3821 @@
+<html>
+ <head>
+	<title>Test results</title>
+	<meta charset='utf-8'>
+	<link href='https://fonts.googleapis.com/css?family=Varela+Round&v2' rel='stylesheet' type='text/css'>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+	 <style>
+		 .layout {
+		 margin: 0 auto;
+		 max-width: 1000px;
+
+		 }
+		 body { font-family: arial, serif; margin: 0; padding: 0; background: #ecf0f1; font-size: 20px; }
+		 h1,h2,h3 { font-family: arial, serif; color: #7f8c8d; }
+		 h1 { font-size: 2.5em; }
+		 h2 { font-size: 1.3em; }
+         h3 { font-size: 1em; color: #84BBDD; margin: 0.5em 0; }
+
+		 table { border: none; margin: 0; padding: 0; font-size: 0.9em;}
+		 .scenarioStepsTable .stepName { padding: 5px; }
+
+		 .scenarioStepsTable td {
+            background: #fff;
+		 }
+
+         .quiet {
+             color: #333;
+             font-size: 0.8em;
+         }
+
+         .screenshot {
+             max-height: 400px;
+             overflow-y: scroll;
+             display: block;
+         }
+         .screenshot img {
+             zoom: 0.5;
+         }
+
+         @media (max-width: 1200px) {
+           #toolbar-filter {
+             display: none !important;
+           }
+         }
+
+         .scenarioStepsTable .nostyle {
+             background: none;
+             border: none;
+         }
+
+		 p {
+		    cursor: pointer;
+		 }
+
+         .scenarioRow>td>p {
+             padding: 5px;
+         }
+
+         .scenarioStepsTable .failedStep {
+             padding: 10px;
+             background: #ecf0f1;
+             border: 2px solid #e74c3c;
+             border-radius: 0px;
+             color:  #e74c3c;
+         }
+
+         .scenarioStepsTable .error {
+             background:  #999;
+             padding: 10px;
+             color: #fff;
+             border-radius: 0px;
+         }
+
+         .scenarioStepsTable .error a {
+             color: #eef;
+         }
+
+         .scenarioStepsTable.substeps td {
+             background: #bdc3c7;
+         }
+
+		 .header { font-size: large; font-weight: bold; }
+		 p.scenarioSuccess {
+    		 background: rgb(157,213,58); /* Old browsers */
+		 }
+
+
+		 .scenario { color: black; }
+		 p.scenarioFailed, p.scenarioError { color: black;
+		   background: #e74c3c
+		 }
+
+		 table.scenarioFailed tr:last-child { font-weight: bold; }
+
+		 td.scenarioSuccess { color: green }
+		 td.scenarioFailed { color: red }
+		 .scenarioSkipped { color: teal; }
+		 .scenarioIncomplete { color: gray; }
+		 .scenarioUseless { color: orange; }
+		 .scenarioStepsTable { margin-left: 10px; display: none; color: #333; }
+
+		 #stepContainerSummary {
+		 background: white;
+		 -webkit-border-radius: 5px;
+		 -moz-border-radius: 5px;
+		 border-radius: 5px;
+		 padding: 20px;
+		 }
+
+         .toggle {
+             background: rgba(255,255,255,0.5);
+             border-radius: 10px;
+             display: inline-block;
+             width: 20px;
+             height: 20px;
+             text-align: center;
+             margin: auto;
+             color: #666
+         }
+
+		 ul#toolbar-filter {
+            display: block;
+            position: fixed;
+            top: 20px;
+            left: 0px;
+            padding: 0px;
+		 }
+		 ul#toolbar-filter li {
+		    list-style: none;
+		    text-align: center;
+			padding: 20px;
+			background-color: #3498db;
+		 }
+		 ul#toolbar-filter li a, ul#toolbar-filter li a:hover, ul#toolbar-filter li a:visited {
+		    color: #34495e;
+		    text-decoration: none;
+		 }
+		 ul#toolbar-filter li.disabled {
+			background-color: #bdc3c7;
+		 }
+	 </style>
+
+  <script type="text/javascript">
+  var showAll = true;
+  function showHide(nodeId, linkObj)
+  {
+    var subObj = document.getElementById('stepContainer' + nodeId);
+    var toggle = linkObj.childNodes[0];
+    if (toggle.innerHTML != '-') {
+      toggle.innerHTML = '-';
+      subObj.style.display='block';
+      subObj.style.width = '100%';
+    } else {
+      toggle.innerHTML = '+';
+      subObj.style.display='none';
+    }
+  }
+
+  function showAllScenarios() {
+    var toolbar = document.getElementById('toolbar-filter');
+    for (var i = 0; i < toolbar.children.length; i++) {
+      toolbar.children[i].className = '';
+    }
+
+    var trs = document.getElementsByTagName('tr');
+    for(var z = 0; z < trs.length; z++) {
+      trs[z].style.display = '';
+    }
+    showAll = true;
+  }
+
+  function toggleScenarios(name, linkObj) {
+    var links = document.getElementById('toolbar-filter').children;
+    var rows = document.getElementsByClassName('scenarioRow');
+    if (showAll) {
+        for (var i = 0; i < links.length; i++) {
+            links[i].className = 'disabled';
+        }
+
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].style.display = 'none';
+        }
+
+    }
+    showAll = false;
+
+    if (linkObj.className == '') {
+        linkObj.className = 'disabled';
+        for (var i = 0; i < rows.length; i++) {
+          if (rows[i].classList.contains(name)) {
+                rows[i].style.display = 'none';
+          }
+        }
+        return;
+    }
+    if (linkObj.className == 'disabled') {
+        linkObj.className = '';
+        for (var i = 0; i < rows.length; i++) {
+          if (rows[i].classList.contains(name)) {
+                rows[i].style.display = 'table-row';
+          }
+        }
+        return;
+    }
+
+  }
+  </script>
+ </head>
+
+ <body>
+   <ul id="toolbar-filter">
+     <li> <a href="#" title="Show all" onClick="showAllScenarios()">◯</a></li>
+     <li> <a href="#" title="Successful" onClick="toggleScenarios('scenarioSuccess', this.parentElement)"><strong>✔</strong> 10</a></li>
+     <li> <a href="#" title="Failed" onClick="toggleScenarios('scenarioFailed', this.parentElement)"><strong>✗</strong> 10</a></li>
+     <li> <a href="#" title="Skipped" onClick="toggleScenarios('scenarioSkipped', this.parentElement)"><strong>S</strong> 0</a></li>
+     <li> <a href="#" title="Incomplete" onClick="toggleScenarios('scenarioIncomplete', this.parentElement)"><strong>I</strong> 0</a></li>
+     <li> <a href="#" title="Useless" onClick="toggleScenarios('scenarioUseless', this.parentElement)"><strong>U</strong> 0</a></li>
+   </ul>
+ <div class="layout">
+ <h1>Codeception Results <small><span style="color: #e74c3c">FAILED</span> (00:01.109)</small></h1>
+
+
+
+	 <table border="0" style="width: 100%;">
+		<tr>
+ <td>
+     <h3>Tests.acceptance Tests</h3>
+ </td>
+</tr>   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('1', this)">
+          <span class="quiet">RegistrationCest &raquo;</span> Verify registration page loads correctly <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer1">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('2', this)">
+          <span class="quiet">RegistrationCest &raquo;</span> Register a new student account <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer2">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('3', this)">
+          <span class="quiet">RegistrationCest &raquo;</span> Verify registration fails with existing email <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer3">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('4', this)">
+          <span class="quiet">RegistrationCest &raquo;</span> Verify registration fails with mismatched passwords <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer4">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('5', this)">
+          <span class="quiet">RegistrationCest &raquo;</span> Verify registration fails with invalid email <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer5">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('6', this)">
+          <span class="quiet">RegistrationCest &raquo;</span> Verify registration requires strong password <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer6">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('7', this)">
+          <span class="quiet">RegistrationCest &raquo;</span> Verify teacher registration shows additional fields <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer7">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('8', this)">
+          <span class="quiet">RegistrationCest &raquo;</span> Test client-side form validation <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer8">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+<tr>
+ <td>
+     <h3>Tests.functional Tests</h3>
+ </td>
+</tr>   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('9', this)">
+          <span class="quiet">ApiCest &raquo;</span> Test API health check endpoint <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer9">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('10', this)">
+          <span class="quiet">ApiCest &raquo;</span> Test getting feedback list from API <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer10">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('11', this)">
+          <span class="quiet">ApiCest &raquo;</span> Create feedback via API <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer11">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('12', this)">
+          <span class="quiet">ApiCest &raquo;</span> Get specific feedback by ID <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer12">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('13', this)">
+          <span class="quiet">ApiCest &raquo;</span> Update feedback via API <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer13">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('14', this)">
+          <span class="quiet">ApiCest &raquo;</span> Delete feedback via API <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer14">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('15', this)">
+          <span class="quiet">ApiCest &raquo;</span> Verify protected endpoints require authentication <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer15">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('16', this)">
+          <span class="quiet">ApiCest &raquo;</span> Verify API returns 404 for non-existent resources <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer16">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('17', this)">
+          <span class="quiet">FeedbackCest &raquo;</span> Verify feedback page loads for logged-in student <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer17">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\FeedbackCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('18', this)">
+          <span class="quiet">FeedbackCest &raquo;</span> Submit basic feedback as a student <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer18">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\FeedbackCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('19', this)">
+          <span class="quiet">FeedbackCest &raquo;</span> Submit anonymous feedback <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer19">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\FeedbackCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('20', this)">
+          <span class="quiet">FeedbackCest &raquo;</span> View my feedback history <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer20">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\FeedbackCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('21', this)">
+          <span class="quiet">FeedbackCest &raquo;</span> Ensure empty feedback cannot be submitted <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer21">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\FeedbackCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('22', this)">
+          <span class="quiet">FeedbackCest &raquo;</span> Verify feedback page requires authentication <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer22">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\FeedbackCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('23', this)">
+          <span class="quiet">LoginCest &raquo;</span> Verify login page loads correctly <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer23">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\LoginCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('24', this)">
+          <span class="quiet">LoginCest &raquo;</span> Test successful student login <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer24">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\LoginCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('25', this)">
+          <span class="quiet">LoginCest &raquo;</span> Test successful teacher login <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer25">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\LoginCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('26', this)">
+          <span class="quiet">LoginCest &raquo;</span> Test failed login with wrong password <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer26">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\LoginCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('27', this)">
+          <span class="quiet">LoginCest &raquo;</span> Test login fails with empty fields <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer27">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\LoginCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('28', this)">
+          <span class="quiet">LoginCest &raquo;</span> Test login fails with nonexistent user <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer28">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\LoginCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('29', this)">
+          <span class="quiet">LoginCest &raquo;</span> Test logout functionality <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer29">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Functional\LoginCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+<tr>
+ <td>
+     <h3>Tests.unit Tests</h3>
+ </td>
+</tr>   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('30', this)">
+          <span class="quiet">UserCest &raquo;</span> Test user object creation <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer30">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Unit\UserCest'. Failed to create instance of 'Tests\Support\UnitTester'. Class "Tests\Support\UnitTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('31', this)">
+          <span class="quiet">UserCest &raquo;</span> Test email validation logic <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer31">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Unit\UserCest'. Failed to create instance of 'Tests\Support\UnitTester'. Class "Tests\Support\UnitTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('32', this)">
+          <span class="quiet">UserCest &raquo;</span> Test password hashing functionality <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer32">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Unit\UserCest'. Failed to create instance of 'Tests\Support\UnitTester'. Class "Tests\Support\UnitTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('33', this)">
+          <span class="quiet">UserCest &raquo;</span> Test user role assignment <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer33">
+
+
+
+         <tr >
+    <td class="error">
+        Failed to inject dependencies in instance of 'Tests\Unit\UserCest'. Failed to create instance of 'Tests\Support\UnitTester'. Class "Tests\Support\UnitTester" does not exist
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('34', this)">
+          <span class="quiet">AnalyticsBlackBoxTest &raquo;</span> View survey completion rate <span style="color: #34495e; font-size: 70%;">0.02s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer34">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('35', this)">
+          <span class="quiet">AnalyticsBlackBoxTest &raquo;</span> View average teacher rating <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer35">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('36', this)">
+          <span class="quiet">AnalyticsBlackBoxTest &raquo;</span> Filter analytics by date range <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer36">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('37', this)">
+          <span class="quiet">AnalyticsBlackBoxTest &raquo;</span> Rating distribution chart data <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer37">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('38', this)">
+          <span class="quiet">AnalyticsBlackBoxTest &raquo;</span> Export analytics data <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer38">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('39', this)">
+          <span class="quiet">AnalyticsBlackBoxTest &raquo;</span> Compare teacher performance <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer39">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('40', this)">
+          <span class="quiet">AnalyticsBlackBoxTest &raquo;</span> View response trends <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer40">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('41', this)">
+          <span class="quiet">AnalyticsBlackBoxTest &raquo;</span> Pending issues summary <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer41">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('42', this)">
+          <span class="quiet">AnalyticsBlackBoxTest &raquo;</span> Department wise analytics <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer42">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('43', this)">
+          <span class="quiet">AnalyticsBlackBoxTest &raquo;</span> Generate summary statistics <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer43">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('44', this)">
+          <span class="quiet">AuthenticationBlackBoxTest &raquo;</span> Valid user login <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer44">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('45', this)">
+          <span class="quiet">AuthenticationBlackBoxTest &raquo;</span> Login with invalid password <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer45">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('46', this)">
+          <span class="quiet">AuthenticationBlackBoxTest &raquo;</span> Login with non existent user <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer46">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('47', this)">
+          <span class="quiet">AuthenticationBlackBoxTest &raquo;</span> Register new student user <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer47">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('48', this)">
+          <span class="quiet">AuthenticationBlackBoxTest &raquo;</span> Register with duplicate email <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer48">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('49', this)">
+          <span class="quiet">AuthenticationBlackBoxTest &raquo;</span> User logout <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer49">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('50', this)">
+          <span class="quiet">AuthenticationBlackBoxTest &raquo;</span> Register different user roles <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer50">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('51', this)">
+          <span class="quiet">AuthenticationBlackBoxTest &raquo;</span> User can update profile <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer51">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('52', this)">
+          <span class="quiet">AuthenticationBlackBoxTest &raquo;</span> Inactive user cannot login <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer52">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('53', this)">
+          <span class="quiet">AuthenticationBlackBoxTest &raquo;</span> Email validation on registration <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer53">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('54', this)">
+          <span class="quiet">ComplaintsBlackBoxTest &raquo;</span> Submit complaint successfully <span style="color: #34495e; font-size: 70%;">0.01s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer54">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('55', this)">
+          <span class="quiet">ComplaintsBlackBoxTest &raquo;</span> Submit suggestion <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer55">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('56', this)">
+          <span class="quiet">ComplaintsBlackBoxTest &raquo;</span> View complaint status <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer56">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('57', this)">
+          <span class="quiet">ComplaintsBlackBoxTest &raquo;</span> Track complaint resolution <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer57">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('58', this)">
+          <span class="quiet">ComplaintsBlackBoxTest &raquo;</span> Filter complaints by type <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer58">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('59', this)">
+          <span class="quiet">ComplaintsBlackBoxTest &raquo;</span> Filter complaints by status <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer59">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('60', this)">
+          <span class="quiet">ComplaintsBlackBoxTest &raquo;</span> Search complaints <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer60">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('61', this)">
+          <span class="quiet">ComplaintsBlackBoxTest &raquo;</span> Complaint priority <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer61">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('62', this)">
+          <span class="quiet">ComplaintsBlackBoxTest &raquo;</span> Pending complaints count display <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer62">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('63', this)">
+          <span class="quiet">ComplaintsBlackBoxTest &raquo;</span> Submit complaint with minimal fields <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer63">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('64', this)">
+          <span class="quiet">DemoFailuresBlackBoxTest &raquo;</span> Valid login pass <span style="color: #34495e; font-size: 70%;">0.01s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer64">
+
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('65', this)">
+          <span class="quiet">DemoFailuresBlackBoxTest &raquo;</span> Invalid password fail <span style="color: #34495e; font-size: 70%;">0.01s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer65">
+
+
+
+         <tr >
+    <td class="error">
+        Password validation failed - expected error but got success<br />
+Failed asserting that two strings are equal.
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('66', this)">
+          <span class="quiet">DemoFailuresBlackBoxTest &raquo;</span> User registration pass <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer66">
+
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('67', this)">
+          <span class="quiet">DemoFailuresBlackBoxTest &raquo;</span> Email validation fail <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer67">
+
+
+
+         <tr >
+    <td class="error">
+        Email should contain @ symbol<br />
+Failed asserting that 'invalid-email' [ASCII](length: 13) contains "@" [ASCII](length: 1).
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('68', this)">
+          <span class="quiet">DemoFailuresBlackBoxTest &raquo;</span> Session creation pass <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer68">
+
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('69', this)">
+          <span class="quiet">DemoFailuresBlackBoxTest &raquo;</span> Password strength fail <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer69">
+
+
+
+         <tr >
+    <td class="error">
+        Password must be longer than 8 characters<br />
+Failed asserting that 3 is greater than 8.
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('70', this)">
+          <span class="quiet">DemoFailuresBlackBoxTest &raquo;</span> User logout pass <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer70">
+
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('71', this)">
+          <span class="quiet">DemoFailuresBlackBoxTest &raquo;</span> Role validation fail <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer71">
+
+
+
+         <tr >
+    <td class="error">
+        Role must be valid<br />
+Failed asserting that an array contains 'guest'.
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('72', this)">
+          <span class="quiet">DemoFailuresBlackBoxTest &raquo;</span> Profile update pass <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer72">
+
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('73', this)">
+          <span class="quiet">DemoFailuresBlackBoxTest &raquo;</span> Account activation fail <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer73">
+
+
+
+         <tr >
+    <td class="error">
+        Account should be activated<br />
+Failed asserting that two strings are equal.
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('74', this)">
+          <span class="quiet">SurveyBlackBoxTest &raquo;</span> Load survey successfully <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer74">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('75', this)">
+          <span class="quiet">SurveyBlackBoxTest &raquo;</span> Survey contains questions <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer75">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('76', this)">
+          <span class="quiet">SurveyBlackBoxTest &raquo;</span> Submit survey with valid ratings <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer76">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('77', this)">
+          <span class="quiet">SurveyBlackBoxTest &raquo;</span> Cannot submit survey twice <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer77">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('78', this)">
+          <span class="quiet">SurveyBlackBoxTest &raquo;</span> Submit with missing fields <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer78">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('79', this)">
+          <span class="quiet">SurveyBlackBoxTest &raquo;</span> View survey results <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer79">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('80', this)">
+          <span class="quiet">SurveyBlackBoxTest &raquo;</span> Inactive survey cannot be accessed <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer80">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('81', this)">
+          <span class="quiet">SurveyBlackBoxTest &raquo;</span> Save survey draft <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer81">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('82', this)">
+          <span class="quiet">SurveyBlackBoxTest &raquo;</span> Rate specific teacher <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer82">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('83', this)">
+          <span class="quiet">SurveyBlackBoxTest &raquo;</span> Get teacher average rating <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer83">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('84', this)">
+          <span class="quiet">AnalyticsWhiteBoxTest &raquo;</span> Average rating calculation <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer84">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('85', this)">
+          <span class="quiet">AnalyticsWhiteBoxTest &raquo;</span> Percentage calculation <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer85">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('86', this)">
+          <span class="quiet">AnalyticsWhiteBoxTest &raquo;</span> Aggregation query performance <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer86">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('87', this)">
+          <span class="quiet">AnalyticsWhiteBoxTest &raquo;</span> Response count by rating <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer87">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('88', this)">
+          <span class="quiet">AnalyticsWhiteBoxTest &raquo;</span> Date range filtering <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer88">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('89', this)">
+          <span class="quiet">AnalyticsWhiteBoxTest &raquo;</span> Handling missing data <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer89">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('90', this)">
+          <span class="quiet">AnalyticsWhiteBoxTest &raquo;</span> Percentile calculations <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer90">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('91', this)">
+          <span class="quiet">AnalyticsWhiteBoxTest &raquo;</span> Teacher ranking <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer91">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('92', this)">
+          <span class="quiet">AnalyticsWhiteBoxTest &raquo;</span> Completion rate calculation <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer92">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('93', this)">
+          <span class="quiet">AnalyticsWhiteBoxTest &raquo;</span> Trend analysis <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer93">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('94', this)">
+          <span class="quiet">AuthenticationWhiteBoxTest &raquo;</span> Password hashing function <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer94">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('95', this)">
+          <span class="quiet">AuthenticationWhiteBoxTest &raquo;</span> Password strength validation <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer95">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('96', this)">
+          <span class="quiet">AuthenticationWhiteBoxTest &raquo;</span> Email validation logic <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer96">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('97', this)">
+          <span class="quiet">AuthenticationWhiteBoxTest &raquo;</span> Role based access control <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer97">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('98', this)">
+          <span class="quiet">AuthenticationWhiteBoxTest &raquo;</span> Jwt token generation <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer98">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('99', this)">
+          <span class="quiet">AuthenticationWhiteBoxTest &raquo;</span> Session timeout logic <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer99">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('100', this)">
+          <span class="quiet">AuthenticationWhiteBoxTest &raquo;</span> Input sanitization <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer100">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('101', this)">
+          <span class="quiet">AuthenticationWhiteBoxTest &raquo;</span> Password reset token generation <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer101">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('102', this)">
+          <span class="quiet">AuthenticationWhiteBoxTest &raquo;</span> Account activation flow <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer102">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('103', this)">
+          <span class="quiet">AuthenticationWhiteBoxTest &raquo;</span> Rate limiting on failed logins <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer103">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('104', this)">
+          <span class="quiet">ComplaintsWhiteBoxTest &raquo;</span> Subject validation <span style="color: #34495e; font-size: 70%;">0.01s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer104">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('105', this)">
+          <span class="quiet">ComplaintsWhiteBoxTest &raquo;</span> Description validation <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer105">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('106', this)">
+          <span class="quiet">ComplaintsWhiteBoxTest &raquo;</span> Type validation <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer106">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('107', this)">
+          <span class="quiet">ComplaintsWhiteBoxTest &raquo;</span> Status workflow <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer107">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('108', this)">
+          <span class="quiet">ComplaintsWhiteBoxTest &raquo;</span> Sql injection prevention <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer108">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('109', this)">
+          <span class="quiet">ComplaintsWhiteBoxTest &raquo;</span> Complaint count by status <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer109">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('110', this)">
+          <span class="quiet">ComplaintsWhiteBoxTest &raquo;</span> Auto timestamp on creation <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer110">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('111', this)">
+          <span class="quiet">ComplaintsWhiteBoxTest &raquo;</span> Resolution notes logic <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer111">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('112', this)">
+          <span class="quiet">ComplaintsWhiteBoxTest &raquo;</span> Complaint assignment to admin <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer112">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('113', this)">
+          <span class="quiet">ComplaintsWhiteBoxTest &raquo;</span> Complaint pagination <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer113">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('114', this)">
+          <span class="quiet">DemoFailuresWhiteBoxTest &raquo;</span> Hash generation pass <span style="color: #34495e; font-size: 70%;">0.1s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer114">
+
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('115', this)">
+          <span class="quiet">DemoFailuresWhiteBoxTest &raquo;</span> Null handling fail <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer115">
+
+
+
+         <tr >
+    <td class="error">
+        Value should not be null but it is<br />
+Failed asserting that null is not null.
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('116', this)">
+          <span class="quiet">DemoFailuresWhiteBoxTest &raquo;</span> Array manipulation pass <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer116">
+
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('117', this)">
+          <span class="quiet">DemoFailuresWhiteBoxTest &raquo;</span> Type checking fail <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer117">
+
+
+
+         <tr >
+    <td class="error">
+        Expected integer but got string<br />
+Failed asserting that '123' is of type int.
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('118', this)">
+          <span class="quiet">DemoFailuresWhiteBoxTest &raquo;</span> String operations pass <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer118">
+
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('119', this)">
+          <span class="quiet">DemoFailuresWhiteBoxTest &raquo;</span> Boundary condition fail <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer119">
+
+
+
+         <tr >
+    <td class="error">
+        Age cannot exceed 120 years<br />
+Failed asserting that 150 is less than 120.
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('120', this)">
+          <span class="quiet">DemoFailuresWhiteBoxTest &raquo;</span> Boolean logic pass <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer120">
+
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('121', this)">
+          <span class="quiet">DemoFailuresWhiteBoxTest &raquo;</span> Regex match fail <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer121">
+
+
+
+         <tr >
+    <td class="error">
+        Email format invalid<br />
+Failed asserting that 'test@example' matches PCRE pattern "/^[\w\-\.]+@[\w\-]+\.\w+$/".
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <p class="scenarioSuccess" onclick="showHide('122', this)">
+          <span class="quiet">DemoFailuresWhiteBoxTest &raquo;</span> Exception handling pass <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioSuccess">
+    <td>
+     <table border="0" width="100%" class="scenarioSuccess scenarioStepsTable" id="stepContainer122">
+
+
+
+         
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('123', this)">
+          <span class="quiet">DemoFailuresWhiteBoxTest &raquo;</span> Empty array fail <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer123">
+
+
+
+         <tr >
+    <td class="error">
+        Data array should not be empty<br />
+Failed asserting that an array is not empty.
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('124', this)">
+          <span class="quiet">SurveyWhiteBoxTest &raquo;</span> Rating validation <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer124">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('125', this)">
+          <span class="quiet">SurveyWhiteBoxTest &raquo;</span> Average rating calculation <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer125">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('126', this)">
+          <span class="quiet">SurveyWhiteBoxTest &raquo;</span> Duplicate submission prevention <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer126">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('127', this)">
+          <span class="quiet">SurveyWhiteBoxTest &raquo;</span> Question ordering <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer127">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('128', this)">
+          <span class="quiet">SurveyWhiteBoxTest &raquo;</span> Rating distribution analysis <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer128">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('129', this)">
+          <span class="quiet">SurveyWhiteBoxTest &raquo;</span> Student progress tracking <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer129">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('130', this)">
+          <span class="quiet">SurveyWhiteBoxTest &raquo;</span> Teacher response validation <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer130">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('131', this)">
+          <span class="quiet">SurveyWhiteBoxTest &raquo;</span> Survey status transitions <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer131">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('132', this)">
+          <span class="quiet">SurveyWhiteBoxTest &raquo;</span> Response date tracking <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer132">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <p class="scenarioFailed" onclick="showHide('133', this)">
+          <span class="quiet">SurveyWhiteBoxTest &raquo;</span> Bulk teacher ratings <span style="color: #34495e; font-size: 70%;">0s</span></p>
+    </td>
+   </tr>
+   <tr class="scenarioRow scenarioFailed">
+    <td>
+     <table border="0" width="100%" class="scenarioFailed scenarioStepsTable" id="stepContainer133">
+
+
+
+         <tr >
+    <td class="error">
+        Class "Tests\TestDatabase" not found
+    </td>
+</tr>
+
+         
+         
+     </table>
+
+
+    </td>
+   </tr>
+
+
+
+   <tr>
+    <td>
+	    <h2>Summary</h2>
+     <div id="stepContainerSummary">
+      <table border="0">
+       <tr>
+        <td width="250" class="scenarioSuccess">Successful scenarios:</td>
+        <td class="scenarioSuccessValue"><strong>10</strong></td>
+       </tr>
+       <tr>
+        <td class="scenarioFailed">Failed scenarios:</td>
+        <td class="scenarioFailedValue"><strong>10</strong></td>
+       </tr>
+       <tr>
+        <td class="scenarioSkipped">Skipped scenarios:</td>
+        <td class="scenarioSkippedValue"><strong>0</strong></td>
+       </tr>
+       <tr>
+        <td class="scenarioIncomplete">Incomplete scenarios:</td>
+        <td class="scenarioIncompleteValue"><strong>0</strong></td>
+       </tr>
+       <tr>
+        <td class="scenarioUseless">Useless scenarios:</td>
+        <td class="scenarioUselessValue"><strong>0</strong></td>
+       </tr>
+      </table>
+     </div>
+    </td>
+   </tr>
+  </table>
+ </div>
+ </body>
+</html>

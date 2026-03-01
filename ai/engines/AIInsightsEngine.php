@@ -37,7 +37,7 @@ class AIInsightsEngine {
     }
     
     private function loadConfig() {
-        $config_file = __DIR__ . '/ai_config.json';
+        $config_file = __DIR__ . '/../config/ai_config.json';
         if (file_exists($config_file)) {
             $this->config = json_decode(file_get_contents($config_file), true);
         } else {
@@ -386,9 +386,11 @@ class AIInsightsEngine {
         $distribution = ['positive' => 0, 'negative' => 0, 'neutral' => 0];
         
         foreach ($texts as $text) {
-            $sentiment = $this->analyzeSentiment([$text]);
-            $sentiment_type = $sentiment['sentiment'] ?? 'neutral';
-            $distribution[$sentiment_type]++;
+            $result = $this->basicSentimentAnalysis([$text]);
+            if (isset($result['details'][0]['sentiment'])) {
+                $sentiment_type = $result['details'][0]['sentiment'];
+                $distribution[$sentiment_type]++;
+            }
         }
         
         return $distribution;

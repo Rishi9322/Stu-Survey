@@ -1,0 +1,212 @@
+{
+    "total": 19,
+    "passed": 19,
+    "failed": 0,
+    "pass_rate": 100,
+    "tests": [
+        {
+            "test_name": "Homepage Load",
+            "url": "http:\/\/localhost\/stu\/",
+            "http_code": 200,
+            "load_time": 0.05,
+            "content_type": "text\/html; charset=UTF-8",
+            "passed": true,
+            "error": "",
+            "expected": "",
+            "response_size": 28523,
+            "type": "Page Load"
+        },
+        {
+            "test_name": "Index Page Load",
+            "url": "http:\/\/localhost\/stu\/index.php",
+            "http_code": 200,
+            "load_time": 0.012,
+            "content_type": "text\/html; charset=UTF-8",
+            "passed": true,
+            "error": "",
+            "expected": "",
+            "response_size": 28523,
+            "type": "Page Load"
+        },
+        {
+            "test_name": "Public Homepage Load",
+            "url": "http:\/\/localhost\/stu\/public\/index.php",
+            "http_code": 200,
+            "load_time": 0.006,
+            "content_type": "text\/html; charset=UTF-8",
+            "passed": true,
+            "error": "",
+            "expected": "",
+            "response_size": 28523,
+            "type": "Page Load"
+        },
+        {
+            "test_name": "Login Page Load",
+            "url": "http:\/\/localhost\/stu\/public\/login.php",
+            "http_code": 200,
+            "load_time": 0.063,
+            "content_type": "text\/html; charset=UTF-8",
+            "passed": true,
+            "error": "",
+            "expected": "",
+            "response_size": 18941,
+            "type": "Page Load"
+        },
+        {
+            "test_name": "Registration Page Load",
+            "url": "http:\/\/localhost\/stu\/public\/register.php",
+            "http_code": 200,
+            "load_time": 0.081,
+            "content_type": "text\/html; charset=UTF-8",
+            "passed": true,
+            "error": "",
+            "expected": "",
+            "response_size": 22076,
+            "type": "Page Load"
+        },
+        {
+            "test_name": "About Page Load",
+            "url": "http:\/\/localhost\/stu\/public\/about.php",
+            "http_code": 200,
+            "load_time": 0.01,
+            "content_type": "text\/html; charset=UTF-8",
+            "passed": true,
+            "error": "",
+            "expected": "",
+            "response_size": 26091,
+            "type": "Page Load"
+        },
+        {
+            "test_name": "Contact Page Load",
+            "url": "http:\/\/localhost\/stu\/public\/contact.php",
+            "http_code": 200,
+            "load_time": 0.01,
+            "content_type": "text\/html; charset=UTF-8",
+            "passed": true,
+            "error": "",
+            "expected": "",
+            "response_size": 30330,
+            "type": "Page Load"
+        },
+        {
+            "test_name": "Help Page Load",
+            "url": "http:\/\/localhost\/stu\/public\/help.php",
+            "http_code": 200,
+            "load_time": 0.018,
+            "content_type": "text\/html; charset=UTF-8",
+            "passed": true,
+            "error": "",
+            "expected": "",
+            "response_size": 32734,
+            "type": "Page Load"
+        },
+        {
+            "test_name": "Privacy Policy Page Load",
+            "url": "http:\/\/localhost\/stu\/public\/privacy.php",
+            "http_code": 200,
+            "load_time": 0.025,
+            "content_type": "text\/html; charset=UTF-8",
+            "passed": true,
+            "error": "",
+            "expected": "",
+            "response_size": 24907,
+            "type": "Page Load"
+        },
+        {
+            "test_name": "Terms Page Load",
+            "url": "http:\/\/localhost\/stu\/public\/terms.php",
+            "http_code": 200,
+            "load_time": 0.017,
+            "content_type": "text\/html; charset=UTF-8",
+            "passed": true,
+            "error": "",
+            "expected": "",
+            "response_size": 27602,
+            "type": "Page Load"
+        },
+        {
+            "test_name": "Login Form Elements",
+            "url": "http:\/\/localhost\/stu\/public\/login.php",
+            "http_code": 200,
+            "passed": true,
+            "has_form": true,
+            "has_inputs": true,
+            "has_buttons": true,
+            "type": "Form Elements"
+        },
+        {
+            "test_name": "Registration Form Elements",
+            "url": "http:\/\/localhost\/stu\/public\/register.php",
+            "http_code": 200,
+            "passed": true,
+            "has_form": true,
+            "has_inputs": true,
+            "has_buttons": true,
+            "type": "Form Elements"
+        },
+        {
+            "test_name": "Contact Form Elements",
+            "url": "http:\/\/localhost\/stu\/public\/contact.php",
+            "http_code": 200,
+            "passed": true,
+            "has_form": true,
+            "has_inputs": true,
+            "has_buttons": true,
+            "type": "Form Elements"
+        },
+        {
+            "test_name": "Root Responsive",
+            "url": "http:\/\/localhost\/stu\/",
+            "passed": true,
+            "has_viewport": true,
+            "has_media_query": true,
+            "has_responsive_classes": true,
+            "type": "Responsive Design"
+        },
+        {
+            "test_name": "Index Responsive",
+            "url": "http:\/\/localhost\/stu\/index.php",
+            "passed": true,
+            "has_viewport": true,
+            "has_media_query": true,
+            "has_responsive_classes": true,
+            "type": "Responsive Design"
+        },
+        {
+            "test_name": "Login Page Responsive",
+            "url": "http:\/\/localhost\/stu\/public\/login.php",
+            "passed": true,
+            "has_viewport": true,
+            "has_media_query": true,
+            "has_responsive_classes": true,
+            "type": "Responsive Design"
+        },
+        {
+            "test_name": "Root Assets",
+            "url": "http:\/\/localhost\/stu\/",
+            "passed": true,
+            "has_css": true,
+            "has_js": true,
+            "has_images": false,
+            "type": "Assets Loading"
+        },
+        {
+            "test_name": "Index Assets",
+            "url": "http:\/\/localhost\/stu\/index.php",
+            "passed": true,
+            "has_css": true,
+            "has_js": true,
+            "has_images": false,
+            "type": "Assets Loading"
+        },
+        {
+            "test_name": "Login Page Assets",
+            "url": "http:\/\/localhost\/stu\/public\/login.php",
+            "passed": true,
+            "has_css": true,
+            "has_js": true,
+            "has_images": false,
+            "type": "Assets Loading"
+        }
+    ]
+}

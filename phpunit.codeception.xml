@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="tests/_bootstrap.php"
+         colors="true">
+    <testsuites>
+        <testsuite name="Unit Tests">
+            <directory>tests/unit</directory>
+            <exclude>tests/unit/blackbox</exclude>
+            <exclude>tests/unit/whitebox</exclude>
+        </testsuite>
+        <testsuite name="Functional Tests">
+            <directory>tests/functional</directory>
+        </testsuite>
+        <testsuite name="Acceptance Tests">
+            <directory>tests/acceptance</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="DB_HOST" value="localhost"/>
+        <env name="DB_NAME" value="student_feedback"/>
+        <env name="DB_USER" value="root"/>
+        <env name="DB_PASS" value=""/>
+        <env name="BASE_URL" value="http://localhost/stu/public"/>
+    </php>
+</phpunit>

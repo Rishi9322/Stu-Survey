@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics Module - Test Report</title>
+    <title>Analytics Module - Enhanced Test Report</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 20px;
             color: #333;
@@ -20,7 +16,7 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
             border-radius: 12px;
@@ -29,16 +25,15 @@
         }
         
         .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: linear-gradient(135deg, #9b59b6 0%, #8745a2 100%);
             color: white;
-            padding: 30px;
+            padding: 40px;
             text-align: center;
         }
         
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
-            font-weight: 700;
         }
         
         .header .subtitle {
@@ -52,7 +47,6 @@
             gap: 20px;
             padding: 30px;
             background: #f8f9fa;
-            border-bottom: 2px solid #e9ecef;
         }
         
         .stat-card {
@@ -61,20 +55,6 @@
             border-radius: 8px;
             text-align: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        
-        .stat-card .label {
-            font-size: 0.9em;
-            color: #6c757d;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
         }
         
         .stat-card .value {
@@ -83,10 +63,15 @@
             margin-bottom: 5px;
         }
         
+        .stat-card .label {
+            font-size: 0.9em;
+            color: #6c757d;
+            text-transform: uppercase;
+        }
+        
         .stat-card.success .value { color: #28a745; }
-        .stat-card.danger .value { color: #dc3545; }
-        .stat-card.info .value { color: #17a2b8; }
         .stat-card.primary .value { color: #007bff; }
+        .stat-card.info .value { color: #17a2b8; }
         
         .section {
             padding: 30px;
@@ -96,7 +81,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 3px solid #e9ecef;
         }
@@ -113,7 +98,7 @@
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
-            font-size: 0.7em;
+            font-size: 0.6em;
             font-weight: 600;
         }
         
@@ -122,71 +107,138 @@
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
-            font-size: 0.7em;
+            font-size: 0.6em;
             font-weight: 600;
         }
         
-        .test-list {
-            list-style: none;
-        }
-        
-        .test-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            margin-bottom: 10px;
+        .test-card {
             background: #f8f9fa;
             border-radius: 8px;
-            border-left: 4px solid #28a745;
-            transition: all 0.2s;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #28a745;
+            transition: all 0.3s;
         }
         
-        .test-item:hover {
-            background: #e9ecef;
-            transform: translateX(5px);
-        }
-        
-        .test-item.failed {
-            border-left-color: #dc3545;
+        .test-card.failed {
             background: #fff5f5;
+            border-left-color: #dc3545;
         }
         
-        .test-icon {
-            font-size: 1.5em;
-            margin-right: 15px;
-            min-width: 30px;
+        .test-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
         }
         
-        .test-icon.passed { color: #28a745; }
-        .test-icon.failed { color: #dc3545; }
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
         
-        .test-name {
+        .test-title {
             flex: 1;
-            font-size: 1em;
+        }
+        
+        .test-title h3 {
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .test-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        
+        .test-meta span {
+            background: white;
+            padding: 3px 10px;
+            border-radius: 4px;
             font-weight: 500;
         }
         
-        .test-number {
-            color: #6c757d;
-            font-size: 0.9em;
-            margin-right: 10px;
-        }
-        
         .status-badge {
-            padding: 5px 12px;
-            border-radius: 12px;
-            font-size: 0.85em;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-weight: 600;
+            font-size: 0.9em;
         }
         
-        .status-badge.success {
+        .status-badge.passed {
             background: #d4edda;
             color: #155724;
         }
         
-        .status-badge.danger {
+        .status-badge.failed {
             background: #f8d7da;
             color: #721c24;
+        }
+        
+        .error-message {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+            color: #856404;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        
+        .test-details {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .detail-row {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            border-left: 3px solid #e9ecef;
+        }
+        
+        .detail-row strong {
+            display: inline-block;
+            min-width: 120px;
+            color: #495057;
+        }
+        
+        .detail-row.input { border-left-color: #17a2b8; }
+        .detail-row.expected { border-left-color: #28a745; }
+        .detail-row.validates { border-left-color: #ffc107; }
+        
+        .validates-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+        
+        .validates-tag {
+            background: #fff3cd;
+            color: #856404;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        
+        .testable-unit-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border-left: 4px solid #9b59b6;
+        }
+        
+        .testable-unit-box strong {
+            color: #9b59b6;
+            font-size: 0.9em;
         }
         
         .footer {
@@ -198,39 +250,17 @@
         
         .back-link {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 15px;
             padding: 10px 20px;
             background: white;
             color: #2c3e50;
             text-decoration: none;
             border-radius: 5px;
             font-weight: 600;
-            transition: all 0.2s;
         }
         
         .back-link:hover {
             background: #ecf0f1;
-            transform: translateY(-2px);
-        }
-        
-        .description {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
-        }
-        
-        .description p {
-            margin-bottom: 8px;
-        }
-        
-        .timestamp {
-            text-align: center;
-            color: #6c757d;
-            padding: 15px;
-            font-size: 0.9em;
-            background: #f8f9fa;
         }
     </style>
 </head>
@@ -238,156 +268,39 @@
     <div class="container">
         <div class="header">
             <h1>Analytics Module</h1>
-            <div class="subtitle">PHPUnit Test Report - Student Satisfaction Survey System</div>
+            <div class="subtitle">Enhanced Test Report with Test Cases and Testable Units</div>
         </div>
         
         <div class="stats-bar">
             <div class="stat-card primary">
-                <div class="label">Total Tests</div>
                 <div class="value">20</div>
+                <div class="label">Total Tests</div>
             </div>
             <div class="stat-card success">
-                <div class="label">Passed</div>
                 <div class="value">20</div>
-            </div>
-            <div class="stat-card danger">
-                <div class="label">Failed</div>
-                <div class="value">0</div>
+                <div class="label">Passed</div>
             </div>
             <div class="stat-card info">
-                <div class="label">Pass Rate</div>
                 <div class="value">100%</div>
+                <div class="label">Pass Rate</div>
             </div>
         </div>
         
-        <div class="description">
-            <p><strong>Test Execution Details:</strong></p>
-            <p>Time: 00:09.313 | Memory: 8.00 MB</p>
-            <p>PHPUnit 10.5.60 | PHP 8.2.12</p>
+        <div class="section">
+            <div class="section-header">
+                <h2><span class="badge-blackbox">BLACK BOX</span> User Perspective Testing</h2>
+            </div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ View survey completion rate</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-001</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Survey responses</div><div class="detail-row expected"><strong>Expected:</strong> Completion % displayed</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Percentage calculation</span><span class="validates-tag">Chart display</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Completion Dashboard</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ View average teacher rating</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-002</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Teacher ratings</div><div class="detail-row expected"><strong>Expected:</strong> Average shown</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Average display</span><span class="validates-tag">Teacher data</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Teacher Analytics</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Filter analytics by date range</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-003</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Start and end dates</div><div class="detail-row expected"><strong>Expected:</strong> Filtered data</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Date filtering</span><span class="validates-tag">BETWEEN query</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Date Filter</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Rating distribution chart data</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-004</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Survey ratings</div><div class="detail-row expected"><strong>Expected:</strong> Chart with distribution</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Data grouping</span><span class="validates-tag">Chart rendering</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Distribution Chart</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Export analytics data</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-005</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Analytics data</div><div class="detail-row expected"><strong>Expected:</strong> CSV file generated</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Export logic</span><span class="validates-tag">File generation</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Export Function</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Compare teacher performance</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-006</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Multiple teachers</div><div class="detail-row expected"><strong>Expected:</strong> Side-by-side comparison</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Multi-teacher query</span><span class="validates-tag">Comparison display</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Comparison View</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ View response trends</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-007</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Time period</div><div class="detail-row expected"><strong>Expected:</strong> Trend chart</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Time-series data</span><span class="validates-tag">Trend visualization</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Trend Analysis</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Pending issues summary</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-008</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Pending complaints</div><div class="detail-row expected"><strong>Expected:</strong> Summary count</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Status counting</span><span class="validates-tag">Dashboard metrics</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Issues Dashboard</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Department wise analytics</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-009</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Department filter</div><div class="detail-row expected"><strong>Expected:</strong> Department analytics</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">GROUP BY department</span><span class="validates-tag">Filtering</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Department View</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Generate summary statistics</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-010</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> All data</div><div class="detail-row expected"><strong>Expected:</strong> Summary report</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Multiple aggregations</span><span class="validates-tag">Report generation</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Statistics Generator</div></div></div>
         </div>
         
         <div class="section">
             <div class="section-header">
-                <h2>
-                    <span class="badge-blackbox">BLACK BOX</span>
-                    User Perspective Testing
-                </h2><span class="status-badge success">10 / 10 Tests Passed</span>            </div>
-            <ul class="test-list">                <li class="test-item passed">
-                    <span class="test-number">#1</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">View survey completion rate</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#2</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">View average teacher rating</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#3</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Filter analytics by date range</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#4</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Rating distribution chart data</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#5</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Export analytics data</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#6</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Compare teacher performance</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#7</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">View response trends</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#8</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Pending issues summary</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#9</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Department wise analytics</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#10</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Generate summary statistics</span>
-                    <span class="status-badge passed">passed</span>
-                </li>            </ul>
+                <h2><span class="badge-whitebox">WHITE BOX</span> Internal Logic Testing</h2>
+            </div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Average rating calculation</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-W001</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Rating values</div><div class="detail-row expected"><strong>Expected:</strong> Correct average</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">SQL AVG</span><span class="validates-tag">Precision</span><span class="validates-tag">Rounding</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> AVG() function</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Percentage calculation</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-W002</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Part and total</div><div class="detail-row expected"><strong>Expected:</strong> Accurate percentage</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Division</span><span class="validates-tag">Multiplication by 100</span><span class="validates-tag">Rounding</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> calculatePercentage()</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Aggregation query performance</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-W003</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Large dataset</div><div class="detail-row expected"><strong>Expected:</strong> Query under 100ms</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Index usage</span><span class="validates-tag">Query optimization</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Complex query</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Response count by rating</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-W004</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Ratings 1-5</div><div class="detail-row expected"><strong>Expected:</strong> Count per rating</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">GROUP BY</span><span class="validates-tag">COUNT function</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> COUNT with GROUP BY</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Date range filtering</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-W005</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Date range</div><div class="detail-row expected"><strong>Expected:</strong> Filtered records</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Date comparison</span><span class="validates-tag">BETWEEN operator</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> BETWEEN clause</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Handling missing data</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-W006</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Data with NULLs</div><div class="detail-row expected"><strong>Expected:</strong> NULLs excluded</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">COALESCE</span><span class="validates-tag">IS NOT NULL</span><span class="validates-tag">Default values</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> NULL handling</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Percentile calculations</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-W007</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Dataset</div><div class="detail-row expected"><strong>Expected:</strong> 50th percentile (median)</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Percentile formula</span><span class="validates-tag">Ordering</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> PERCENTILE function</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Teacher ranking</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-W008</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Teacher ratings</div><div class="detail-row expected"><strong>Expected:</strong> Top 10 teachers</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Sorting</span><span class="validates-tag">LIMIT clause</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> ORDER BY with LIMIT</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Completion rate calculation</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-W009</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Completed/Total</div><div class="detail-row expected"><strong>Expected:</strong> Accurate rate</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Division safety</span><span class="validates-tag">Zero handling</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> rate formula</div></div></div><div class="test-card"><div class="test-header"><div class="test-title"><h3>✓ Trend analysis</h3><div class="test-meta"><span><strong>Test Case:</strong> TC-ANAL-W010</span><span><strong>Status:</strong> PASSED</span></div></div><span class="status-badge passed">PASSED</span></div><div class="test-details"><div class="detail-row input"><strong>Input:</strong> Time-series data</div><div class="detail-row expected"><strong>Expected:</strong> Trend calculation</div><div class="detail-row validates"><strong>Validates:</strong><div class="validates-list"><span class="validates-tag">Window functions</span><span class="validates-tag">Date grouping</span></div></div><div class="testable-unit-box"><strong>Testable Unit:</strong> Moving average</div></div></div>
         </div>
-        
-        <div class="section">
-            <div class="section-header">
-                <h2>
-                    <span class="badge-whitebox">WHITE BOX</span>
-                    Internal Logic Testing
-                </h2><span class="status-badge success">10 / 10 Tests Passed</span>            </div>
-            <ul class="test-list">                <li class="test-item passed">
-                    <span class="test-number">#1</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Average rating calculation</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#2</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Percentage calculation</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#3</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Aggregation query performance</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#4</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Response count by rating</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#5</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Date range filtering</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#6</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Handling missing data</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#7</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Percentile calculations</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#8</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Teacher ranking</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#9</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Completion rate calculation</span>
-                    <span class="status-badge passed">passed</span>
-                </li>                <li class="test-item passed">
-                    <span class="test-number">#10</span>
-                    <span class="test-icon passed">✓</span>
-                    <span class="test-name">Trend analysis</span>
-                    <span class="status-badge passed">passed</span>
-                </li>            </ul>
-        </div>
-        
-        <div class="timestamp">Generated on: December 08, 2025 10:11:02        </div>
         
         <div class="footer">
-            <p>&copy; 2025 Student Satisfaction Survey System | PHPUnit Test Suite</p>
+            <p>Generated on: December 08, 2025 10:28:18</p>
+            <p>&copy; 2025 Student Satisfaction Survey System | PHPUnit 10.5.60</p>
             <a href="index.html" class="back-link">← Back to All Modules</a>
         </div>
     </div>

@@ -1,0 +1,908 @@
+{
+	"info": {
+		"_postman_id": "stu-survey-api-2025",
+		"name": "Student Survey System API",
+		"description": "Complete API collection for Student Satisfaction Survey System. Includes authentication, surveys, analytics, complaints, and AI features.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "student-survey-system"
+	},
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{auth_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login - Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has token\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('token');",
+									"    pm.environment.set('auth_token', jsonData.token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"student@test.com\",\n    \"password\": \"password123\",\n    \"role\": \"student\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/public/login.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"public",
+								"login.php"
+							]
+						},
+						"description": "Login as a student user"
+					},
+					"response": []
+				},
+				{
+					"name": "Login - Teacher",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"teacher@test.com\",\n    \"password\": \"password123\",\n    \"role\": \"teacher\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/public/login.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"public",
+								"login.php"
+							]
+						},
+						"description": "Login as a teacher user"
+					},
+					"response": []
+				},
+				{
+					"name": "Login - Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@test.com\",\n    \"password\": \"password123\",\n    \"role\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/public/login.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"public",
+								"login.php"
+							]
+						},
+						"description": "Login as an admin user"
+					},
+					"response": []
+				},
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"newuser@test.com\",\n    \"password\": \"password123\",\n    \"role\": \"student\",\n    \"department\": \"Computer Science\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/public/register.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"public",
+								"register.php"
+							]
+						},
+						"description": "Register a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/public/logout.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"public",
+								"logout.php"
+							]
+						},
+						"description": "Logout current user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Surveys",
+			"item": [
+				{
+					"name": "Get All Surveys",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/student/survey.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"student",
+								"survey.php"
+							]
+						},
+						"description": "Get list of all available surveys"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Survey by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/student/survey.php?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"student",
+								"survey.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Get specific survey details"
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Survey Response",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"survey_id\": 1,\n    \"responses\": [\n        {\"question_id\": 1, \"rating\": 5},\n        {\"question_id\": 2, \"rating\": 4},\n        {\"question_id\": 3, \"rating\": 5}\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/app/student/survey.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"student",
+								"survey.php"
+							]
+						},
+						"description": "Submit survey responses"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Survey (Teacher)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Course Satisfaction Survey\",\n    \"description\": \"Please rate your experience\",\n    \"department\": \"Computer Science\",\n    \"questions\": [\n        {\"text\": \"How satisfied are you with the course?\", \"type\": \"rating\"},\n        {\"text\": \"Would you recommend this course?\", \"type\": \"rating\"}\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/app/teacher/survey.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"teacher",
+								"survey.php"
+							]
+						},
+						"description": "Create a new survey (teacher only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Survey",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"survey_id\": 1,\n    \"title\": \"Updated Survey Title\",\n    \"description\": \"Updated description\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/app/teacher/survey.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"teacher",
+								"survey.php"
+							]
+						},
+						"description": "Update existing survey"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Survey",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/teacher/survey.php?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"teacher",
+								"survey.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Delete a survey"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Analytics",
+			"item": [
+				{
+					"name": "Get Dashboard Stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/student/analytics.php?action=dashboard",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"student",
+								"analytics.php"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "dashboard"
+								}
+							]
+						},
+						"description": "Get dashboard statistics"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Survey Analytics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/teacher/analytics.php?survey_id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"teacher",
+								"analytics.php"
+							],
+							"query": [
+								{
+									"key": "survey_id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Get analytics for specific survey"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Department Analytics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/teacher/analytics.php?department=Computer Science",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"teacher",
+								"analytics.php"
+							],
+							"query": [
+								{
+									"key": "department",
+									"value": "Computer Science"
+								}
+							]
+						},
+						"description": "Get analytics by department"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Teacher Ratings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/teacher/analytics.php?action=ratings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"teacher",
+								"analytics.php"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "ratings"
+								}
+							]
+						},
+						"description": "Get teacher ratings"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Complaints",
+			"item": [
+				{
+					"name": "Get All Complaints",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/admin/complaints.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"admin",
+								"complaints.php"
+							]
+						},
+						"description": "Get all complaints (admin)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Complaints",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/student/complaints.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"student",
+								"complaints.php"
+							]
+						},
+						"description": "Get user's complaints"
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Complaint",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Library Access Issue\",\n    \"description\": \"Unable to access library resources after 8 PM\",\n    \"category\": \"facilities\",\n    \"priority\": \"medium\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/app/student/complaints.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"student",
+								"complaints.php"
+							]
+						},
+						"description": "Submit a new complaint"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Complaint Status",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"complaint_id\": 1,\n    \"status\": \"resolved\",\n    \"resolution_notes\": \"Issue has been fixed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/app/admin/complaints.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"admin",
+								"complaints.php"
+							]
+						},
+						"description": "Update complaint status (admin)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Complaint",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/admin/complaints.php?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"admin",
+								"complaints.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Delete a complaint (admin)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Management",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/admin/user_management.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"admin",
+								"user_management.php"
+							]
+						},
+						"description": "Get all users (admin)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/admin/user_management.php?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"admin",
+								"user_management.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Get specific user details"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Jane Smith\",\n    \"email\": \"jane@test.com\",\n    \"password\": \"password123\",\n    \"role\": \"teacher\",\n    \"department\": \"Mathematics\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/app/admin/user_management.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"admin",
+								"user_management.php"
+							]
+						},
+						"description": "Create new user (admin)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"name\": \"Updated Name\",\n    \"email\": \"updated@test.com\",\n    \"role\": \"teacher\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/app/admin/user_management.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"admin",
+								"user_management.php"
+							]
+						},
+						"description": "Update user details (admin)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/admin/user_management.php?id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"admin",
+								"user_management.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Delete user (admin)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AI Features",
+			"item": [
+				{
+					"name": "AI Chat",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"What are the key insights from recent surveys?\",\n    \"context\": \"analytics\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/app/api/ai_chat_api.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"api",
+								"ai_chat_api.php"
+							]
+						},
+						"description": "Send message to AI chat"
+					},
+					"response": []
+				},
+				{
+					"name": "Get AI Insights",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/api/ai_insights.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"api",
+								"ai_insights.php"
+							]
+						},
+						"description": "Get AI-generated insights"
+					},
+					"response": []
+				},
+				{
+					"name": "Get AI Insights (New)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"survey_id\": 1,\n    \"analysis_type\": \"sentiment\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/app/api/ai_insights_new.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"api",
+								"ai_insights_new.php"
+							]
+						},
+						"description": "Get advanced AI insights"
+					},
+					"response": []
+				},
+				{
+					"name": "Training Endpoint",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"train\",\n    \"data_source\": \"surveys\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/app/api/training_endpoint.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"api",
+								"training_endpoint.php"
+							]
+						},
+						"description": "AI training endpoint"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Utility",
+			"item": [
+				{
+					"name": "Debug Endpoint",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/api/debug_endpoint.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"api",
+								"debug_endpoint.php"
+							]
+						},
+						"description": "Debug endpoint for testing"
+					},
+					"response": []
+				},
+				{
+					"name": "Markdown Reader",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/app/api/markdown_reader.php?file=README.md",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"app",
+								"api",
+								"markdown_reader.php"
+							],
+							"query": [
+								{
+									"key": "file",
+									"value": "README.md"
+								}
+							]
+						},
+						"description": "Read markdown files"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost/stu",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,12 @@
+row_type,username,email,role,dob,division,roll_no,course,department,subjects,experience,question_id,rating,teacher_email,comment,subject,description,status
+USER,john_doe,john@example.com,student,2000-05-15,"Computer Science A",CS001,"B.Tech CS",,,,,,,,,,
+USER,jane_smith,jane@example.com,student,2001-03-20,"Electronics B",EC045,"B.Tech EC",,,,,,,,,,
+USER,prof_wilson,wilson@example.com,teacher,1980-01-15,,,,"Computer Science","Programming,Data Structures",10,,,,,,,
+USER,admin_user,admin2@example.com,admin,1990-06-01,,,,,,,,,,,,,
+SURVEY,,john@example.com,,,,,,,,,1,4,,,,,
+SURVEY,,john@example.com,,,,,,,,,2,5,,,,,
+SURVEY,,jane@example.com,,,,,,,,,1,3,,,,,
+REVIEW,,john@example.com,,,,,,,,,,5,wilson@example.com,"Excellent teacher!",,,
+REVIEW,,jane@example.com,,,,,,,,,,4,wilson@example.com,"Very helpful",,,
+COMPLAINT,,john@example.com,,,,,,,,,,,,,"Broken AC","The AC in room 301 is not working properly.",pending
+SUGGESTION,,jane@example.com,,,,,,,,,,,,,"More Lab Hours","Please extend lab hours during weekends.",pending

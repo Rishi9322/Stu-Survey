@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postman API Testing Guide - Student Survey System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 30px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        .section h3 {
+            color: #764ba2;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .stat-card h3 {
+            color: white;
+            font-size: 2.5em;
+            margin: 10px 0;
+        }
+        .stat-card p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .code-block {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        .step {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #764ba2;
+        }
+        .step strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .endpoint-list {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .endpoint-item {
+            background: white;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border-left: 4px solid #667eea;
+            display: flex;
+            align-items: center;
+        }
+        .method {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 0.9em;
+        }
+        .method-get { background: #61affe; color: white; }
+        .method-post { background: #49cc90; color: white; }
+        .method-put { background: #fca130; color: white; }
+        .method-delete { background: #f93e3e; color: white; }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .table tr:hover {
+            background: #f5f5f5;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .badge-auth { background: #667eea; color: white; }
+        .badge-survey { background: #49cc90; color: white; }
+        .badge-analytics { background: #fca130; color: white; }
+        .badge-complaint { background: #f93e3e; color: white; }
+        .badge-user { background: #764ba2; color: white; }
+        .badge-ai { background: #00bcd4; color: white; }
+        .badge-utility { background: #9e9e9e; color: white; }
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📬 Postman API Testing Guide</h1>
+            <p>Complete API Collection for Student Survey System</p>
+        </div>
+        
+        <div class="content">
+            <!-- Overview Section -->
+            <div class="section">
+                <h2>📊 Collection Overview</h2>
+                <div class="stats">
+                    <div class="stat-card">
+                        <p>Total Endpoints</p>
+                        <h3>35</h3>
+                    </div>
+                    <div class="stat-card">
+                        <p>API Categories</p>
+                        <h3>7</h3>
+                    </div>
+                    <div class="stat-card">
+                        <p>Test Scripts</p>
+                        <h3>12+</h3>
+                    </div>
+                    <div class="stat-card">
+                        <p>HTTP Methods</p>
+                        <h3>5</h3>
+                    </div>
+                </div>
+                
+                <div class="success">
+                    <strong>✅ Collection Created Successfully</strong>
+                    <p>The Postman collection has been generated with comprehensive API endpoints covering all system modules.</p>
+                </div>
+            </div>
+
+            <!-- Installation Section -->
+            <div class="section">
+                <h2>🚀 How to Import & Use</h2>
+                
+                <div class="step">
+                    <strong>Step 1: Open Postman</strong>
+                    Launch Postman application or visit <a href="https://web.postman.co" target="_blank">web.postman.co</a>
+                </div>
+                
+                <div class="step">
+                    <strong>Step 2: Import Collection</strong>
+                    Click "Import" button → Select file → Choose:<br>
+                    <code>phpmd_reports/api_reports/Student_Survey_System_API.postman_collection.json</code>
+                </div>
+                
+                <div class="step">
+                    <strong>Step 3: Configure Environment</strong>
+                    Set the base URL variable:
+                    <div class="code-block">base_url = http://localhost/stu</div>
+                    Or update to your server URL
+                </div>
+                
+                <div class="step">
+                    <strong>Step 4: Authenticate</strong>
+                    Run "Login - Student/Teacher/Admin" request first to get authentication token
+                </div>
+                
+                <div class="step">
+                    <strong>Step 5: Start Testing</strong>
+                    Execute requests in order, auth token will be automatically set
+                </div>
+            </div>
+
+            <!-- API Categories Section -->
+            <div class="section">
+                <h2>📂 API Categories</h2>
+                
+                <h3>1. Authentication <span class="badge badge-auth">5 Endpoints</span></h3>
+                <div class="endpoint-list">
+                    <div class="endpoint-item">
+                        <span class="method method-post">POST</span>
+                        <span>/public/login.php - Login (Student/Teacher/Admin)</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-post">POST</span>
+                        <span>/public/register.php - Register User</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-post">POST</span>
+                        <span>/public/logout.php - Logout</span>
+                    </div>
+                </div>
+
+                <h3>2. Surveys <span class="badge badge-survey">6 Endpoints</span></h3>
+                <div class="endpoint-list">
+                    <div class="endpoint-item">
+                        <span class="method method-get">GET</span>
+                        <span>/app/student/survey.php - Get All Surveys</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-get">GET</span>
+                        <span>/app/student/survey.php?id=1 - Get Survey by ID</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-post">POST</span>
+                        <span>/app/student/survey.php - Submit Survey Response</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-post">POST</span>
+                        <span>/app/teacher/survey.php - Create Survey</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-put">PUT</span>
+                        <span>/app/teacher/survey.php - Update Survey</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-delete">DELETE</span>
+                        <span>/app/teacher/survey.php?id=1 - Delete Survey</span>
+                    </div>
+                </div>
+
+                <h3>3. Analytics <span class="badge badge-analytics">4 Endpoints</span></h3>
+                <div class="endpoint-list">
+                    <div class="endpoint-item">
+                        <span class="method method-get">GET</span>
+                        <span>/app/student/analytics.php - Dashboard Stats</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-get">GET</span>
+                        <span>/app/teacher/analytics.php - Survey Analytics</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-get">GET</span>
+                        <span>/app/teacher/analytics.php - Department Analytics</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-get">GET</span>
+                        <span>/app/teacher/analytics.php - Teacher Ratings</span>
+                    </div>
+                </div>
+
+                <h3>4. Complaints <span class="badge badge-complaint">5 Endpoints</span></h3>
+                <div class="endpoint-list">
+                    <div class="endpoint-item">
+                        <span class="method method-get">GET</span>
+                        <span>/app/admin/complaints.php - Get All Complaints</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-get">GET</span>
+                        <span>/app/student/complaints.php - Get My Complaints</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-post">POST</span>
+                        <span>/app/student/complaints.php - Submit Complaint</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-put">PUT</span>
+                        <span>/app/admin/complaints.php - Update Status</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-delete">DELETE</span>
+                        <span>/app/admin/complaints.php?id=1 - Delete Complaint</span>
+                    </div>
+                </div>
+
+                <h3>5. User Management <span class="badge badge-user">5 Endpoints</span></h3>
+                <div class="endpoint-list">
+                    <div class="endpoint-item">
+                        <span class="method method-get">GET</span>
+                        <span>/app/admin/user_management.php - Get All Users</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-get">GET</span>
+                        <span>/app/admin/user_management.php?id=1 - Get User by ID</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-post">POST</span>
+                        <span>/app/admin/user_management.php - Create User</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-put">PUT</span>
+                        <span>/app/admin/user_management.php - Update User</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-delete">DELETE</span>
+                        <span>/app/admin/user_management.php?id=1 - Delete User</span>
+                    </div>
+                </div>
+
+                <h3>6. AI Features <span class="badge badge-ai">4 Endpoints</span></h3>
+                <div class="endpoint-list">
+                    <div class="endpoint-item">
+                        <span class="method method-post">POST</span>
+                        <span>/app/api/ai_chat_api.php - AI Chat</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-get">GET</span>
+                        <span>/app/api/ai_insights.php - Get AI Insights</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-post">POST</span>
+                        <span>/app/api/ai_insights_new.php - Advanced Insights</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-post">POST</span>
+                        <span>/app/api/training_endpoint.php - AI Training</span>
+                    </div>
+                </div>
+
+                <h3>7. Utility <span class="badge badge-utility">2 Endpoints</span></h3>
+                <div class="endpoint-list">
+                    <div class="endpoint-item">
+                        <span class="method method-get">GET</span>
+                        <span>/app/api/debug_endpoint.php - Debug Endpoint</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <span class="method method-get">GET</span>
+                        <span>/app/api/markdown_reader.php - Markdown Reader</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Environment Variables -->
+            <div class="section">
+                <h2>🔧 Environment Variables</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Variable Name</th>
+                            <th>Default Value</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>base_url</code></td>
+                            <td>http://localhost/stu</td>
+                            <td>Base URL for all API requests</td>
+                        </tr>
+                        <tr>
+                            <td><code>auth_token</code></td>
+                            <td>(empty)</td>
+                            <td>JWT token - automatically set after login</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Testing Workflow -->
+            <div class="section">
+                <h2>🧪 Testing Workflow</h2>
+                
+                <h3>Recommended Testing Order:</h3>
+                <ol style="line-height: 2; margin-left: 20px;">
+                    <li><strong>Authentication:</strong> Start with login to get auth token</li>
+                    <li><strong>User Management:</strong> Test CRUD operations for users (admin only)</li>
+                    <li><strong>Surveys:</strong> Create, read, update, delete surveys</li>
+                    <li><strong>Survey Responses:</strong> Submit survey responses as student</li>
+                    <li><strong>Analytics:</strong> View analytics and statistics</li>
+                    <li><strong>Complaints:</strong> Submit and manage complaints</li>
+                    <li><strong>AI Features:</strong> Test AI chat and insights</li>
+                    <li><strong>Utility:</strong> Test debug and markdown endpoints</li>
+                </ol>
+
+                <div class="note">
+                    <strong>⚠️ Important Notes:</strong>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Ensure Apache server is running on port 80</li>
+                        <li>Database must be properly configured</li>
+                        <li>Always authenticate before testing protected endpoints</li>
+                        <li>Admin endpoints require admin role authentication</li>
+                        <li>Test data will be inserted into the database</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Test Scripts -->
+            <div class="section">
+                <h2>✅ Automated Test Scripts</h2>
+                <p>The collection includes automated test scripts that verify:</p>
+                
+                <ul style="line-height: 2; margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Status Codes:</strong> Validates HTTP response codes (200, 201, 400, 401, etc.)</li>
+                    <li><strong>Response Structure:</strong> Checks for required fields in JSON responses</li>
+                    <li><strong>Authentication:</strong> Automatically extracts and stores auth tokens</li>
+                    <li><strong>Data Validation:</strong> Ensures response data matches expected format</li>
+                    <li><strong>Error Handling:</strong> Tests error responses and messages</li>
+                </ul>
+
+                <div class="code-block">
+// Example Test Script (included in Login request)
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Response has token", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData).to.have.property('token');
+    pm.environment.set('auth_token', jsonData.token);
+});
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="section">
+                <h2>📝 Collection Summary</h2>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Endpoints</th>
+                            <th>Methods</th>
+                            <th>Authentication Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge badge-auth">Authentication</span></td>
+                            <td>5</td>
+                            <td>POST</td>
+                            <td>No (for login/register)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-survey">Surveys</span></td>
+                            <td>6</td>
+                            <td>GET, POST, PUT, DELETE</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-analytics">Analytics</span></td>
+                            <td>4</td>
+                            <td>GET</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-complaint">Complaints</span></td>
+                            <td>5</td>
+                            <td>GET, POST, PUT, DELETE</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-user">User Management</span></td>
+                            <td>5</td>
+                            <td>GET, POST, PUT, DELETE</td>
+                            <td>Yes (Admin only)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-ai">AI Features</span></td>
+                            <td>4</td>
+                            <td>GET, POST</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-utility">Utility</span></td>
+                            <td>2</td>
+                            <td>GET</td>
+                            <td>Varies</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Footer -->
+            <div class="section">
+                <div class="success">
+                    <h3 style="margin-bottom: 10px;">✅ Ready to Test!</h3>
+                    <p>Your Postman collection is ready to use. Import it and start testing all 35 API endpoints.</p>
+                    <p style="margin-top: 10px;"><strong>Collection File:</strong> phpmd_reports/api_reports/Student_Survey_System_API.postman_collection.json</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

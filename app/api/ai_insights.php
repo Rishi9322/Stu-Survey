@@ -48,12 +48,47 @@ if (isset($_POST['action'])) {
         $question = $_POST['question'] ?? '';
         $selected_model = $_POST['model'] ?? 'grok-compound';
         
-        // Get current data context
+        // Get comprehensive data context for AI models
+        $complaints_data = $ai_engine->analyzeComplaints();
+        $suggestions_data = $ai_engine->analyzeSuggestions();
+        $full_insights = $ai_engine->generateInsights();
+        
         $data_context = [
-            'complaints' => $ai_engine->analyzeComplaints(),
-            'suggestions' => $ai_engine->analyzeSuggestions(),
-            'historical' => [], // Add historical data if available
-            'sentiment' => []   // Add sentiment data if available
+            'complaints' => $complaints_data,
+            'suggestions' => $suggestions_data,
+            'survey_stats' => $full_insights['survey_stats'] ?? [],
+            'teacher_stats' => $full_insights['teacher_stats'] ?? [],
+            'predictive_insights' => $full_insights['predictive_insights'] ?? [],
+            'recommendations' => $full_insights['recommendations'] ?? [],
+            'recent_complaints' => array_map(function($c) {
+                return [
+                    'priority' => 'medium',
+                    'subject' => 'Complaint',
+                    'description' => $c['message'] ?? ''
+                ];
+            }, array_slice($complaints_data['complaints'] ?? [], 0, 10)),
+            'recent_suggestions' => array_map(function($s) {
+                return [
+                    'status' => 'active',
+                    'subject' => 'Suggestion',
+                    'description' => $s['message'] ?? ''
+                ];
+            }, array_slice($suggestions_data['suggestions'] ?? [], 0, 10)),
+            'stats' => [
+                'complaints' => [
+                    'total_complaints' => $complaints_data['total_count'] ?? 0,
+                    'pending_complaints' => $complaints_data['total_count'] ?? 0
+                ],
+                'suggestions' => [
+                    'total_suggestions' => $suggestions_data['total_count'] ?? 0,
+                    'pending_suggestions' => $suggestions_data['total_count'] ?? 0
+                ],
+                'users' => [
+                    'total_users' => $full_insights['survey_stats']['unique_users'] ?? 0,
+                    'students' => $full_insights['survey_stats']['unique_users'] ?? 0,
+                    'teachers' => $full_insights['teacher_stats']['unique_teachers'] ?? 0
+                ]
+            ]
         ];
         
         $result = $advanced_ai->answerCustomQuery($question, $selected_model, $data_context);
@@ -79,58 +114,11 @@ $ai_insights = $ai_engine->generateInsights();
                     </h1>
                     <p class="text-muted">Advanced AI-powered analysis with predictive insights and intelligent recommendations</p>
                 </div>
-                <div class="text-end d-flex align-items-center gap-3">
-                    <!-- AI Model Selector -->
-                    <div class="d-flex align-items-center">
-                        <label for="ai-model-select" class="form-label me-2 mb-0 fw-bold">AI Model:</label>
-                        <select id="ai-model-select" class="form-select form-select-sm" style="min-width: 200px;">
-                            <?php foreach ($available_models as $key => $model): ?>
-                                <option value="<?php echo $key; ?>" <?php echo $key === 'grok-compound' ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($model['name']); ?>
-                                    <?php if (isset($model['limits']['unlimited'])): ?>
-                                        <span class="text-success">• Unlimited</span>
-                                    <?php else: ?>
-                                        <span class="text-warning">• Limited</span>
-                                    <?php endif; ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    
+                <div class="text-end">
                     <div class="badge bg-success fs-6">
                         <i class="fas fa-check-circle me-1"></i>
                         AI Engine v2.0 Active
                     </div>
-                </div>
-            </div>
-            
-            <!-- Model Information Panel -->
-            <div class="row mb-4">
-                <div class="col-12">
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body py-2">
-                            <div class="row align-items-center">
-                                <div class="col-md-8">
-                                    <div id="model-info" class="d-flex align-items-center">
-                                        <i class="fas fa-robot me-2 text-primary"></i>
-                                        <span id="model-description">Advanced reasoning and analysis</span>
-                                        <div id="model-features" class="ms-3">
-                                            <span class="badge bg-primary me-1">reasoning</span>
-                                            <span class="badge bg-info me-1">analysis</span>
-                                            <span class="badge bg-warning text-dark">complex_queries</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 text-end">
-                                    <div id="model-limits" class="small text-muted">
-                                        30 RPM • 250 RPD • 70K TPM
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
                     <br>
                     <small class="text-muted">
                         <i class="fas fa-clock me-1"></i>
@@ -138,6 +126,54 @@ $ai_insights = $ai_engine->generateInsights();
                     </small>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- AI Model Selector Card -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <div class="card-body py-3">
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-robot fa-2x text-white me-3"></i>
+                                <div>
+                                    <label for="ai-model-select" class="form-label mb-0 text-white fw-bold">Select AI Model</label>
+                                    <small class="text-white-50 d-block">Choose the AI engine for analysis</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <select id="ai-model-select" class="form-select form-select-lg">
+                                <?php foreach ($available_models as $key => $model): ?>
+                                    <option value="<?php echo $key; ?>" <?php echo $key === 'grok-compound' ? 'selected' : ''; ?>>
+                                        <?php echo htmlspecialchars($model['name']); ?>
+                                        <?php if (isset($model['limits']['unlimited'])): ?>
+                                            (Unlimited)
+                                        <?php endif; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="model-info" class="text-white">
+                                <div class="d-flex align-items-center mb-1">
+                                    <span id="ai-model-badge" class="badge bg-light text-dark me-2">Grok Compound</span>
+                                    <span id="model-limits" class="small text-white-50">30 RPM • 250 RPD</span>
+                                </div>
+                                <div id="model-features">
+                                    <span class="badge bg-white bg-opacity-25 me-1">reasoning</span>
+                                    <span class="badge bg-white bg-opacity-25 me-1">analysis</span>
+                                    <span class="badge bg-white bg-opacity-25">complex_queries</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
         </div>
     </div>
 
@@ -562,8 +598,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const sendButton = document.getElementById('send-chat');
     const chatMessages = document.getElementById('chat-messages');
     const modelSelect = document.getElementById('ai-model-select');
-    const modelInfo = document.getElementById('model-info');
-    const modelDescription = document.getElementById('model-description');
     const modelFeatures = document.getElementById('model-features');
     const modelLimits = document.getElementById('model-limits');
     const modelBadge = document.getElementById('ai-model-badge');
@@ -573,34 +607,43 @@ document.addEventListener('DOMContentLoaded', function() {
     const modelData = <?php echo json_encode($available_models); ?>;
 
     // Update model info when selection changes
-    modelSelect.addEventListener('change', function() {
-        const selectedModel = this.value;
+    function updateModelInfo() {
+        const selectedModel = modelSelect.value;
         const model = modelData[selectedModel];
         
         if (model) {
-            modelDescription.textContent = model.description;
-            modelBadge.textContent = model.name;
-            currentAIModel.textContent = model.name + ' AI';
+            if (modelBadge) modelBadge.textContent = model.name;
+            if (currentAIModel) currentAIModel.textContent = model.name + ' AI';
             
             // Update features
-            modelFeatures.innerHTML = '';
-            if (model.features) {
-                model.features.forEach(feature => {
-                    const badge = document.createElement('span');
-                    badge.className = 'badge bg-primary me-1';
-                    badge.textContent = feature;
-                    modelFeatures.appendChild(badge);
-                });
+            if (modelFeatures) {
+                modelFeatures.innerHTML = '';
+                if (model.features) {
+                    model.features.forEach(feature => {
+                        const badge = document.createElement('span');
+                        badge.className = 'badge bg-white bg-opacity-25 me-1';
+                        badge.textContent = feature;
+                        modelFeatures.appendChild(badge);
+                    });
+                }
             }
             
             // Update limits
-            if (model.limits && model.limits.unlimited) {
-                modelLimits.textContent = 'Unlimited Usage';
-            } else if (model.limits) {
-                modelLimits.textContent = `${model.limits.rpm || 0} RPM • ${model.limits.rpd || 0} RPD • ${model.limits.tpm || 0} TPM`;
+            if (modelLimits) {
+                if (model.limits && model.limits.unlimited) {
+                    modelLimits.textContent = '✓ Unlimited Usage';
+                } else if (model.limits) {
+                    modelLimits.textContent = `${model.limits.rpm || 0} RPM • ${model.limits.rpd || 0} RPD`;
+                }
             }
         }
-    });
+    }
+
+    // Initialize on load
+    updateModelInfo();
+    
+    // Update on change
+    modelSelect.addEventListener('change', updateModelInfo);
 
     function renderMarkdown(text) {
         if (!text) return '';

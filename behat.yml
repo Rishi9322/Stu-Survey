@@ -1,0 +1,17 @@
+default:
+    suites:
+        default:
+            paths:
+                - '%paths.base%/features'
+            contexts:
+                - FeatureContext:
+                    base_url: 'http://localhost/stu/public'
+                    db_host: 'localhost'
+                    db_name: 'student_feedback'
+                    db_user: 'root'
+                    db_pass: ''
+    formatters:
+        pretty:
+            verbose: true
+            paths: false
+            snippets: false

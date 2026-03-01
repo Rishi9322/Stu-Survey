@@ -1,7 +1,7 @@
 // Modern JavaScript for EduSurvey Pro
 
 // Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     initializeModernFeatures();
     initializeAnimations();
     initializeFormHandlers();
@@ -26,13 +26,25 @@ function initializeModernFeatures() {
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+
+            // Only process valid hrefs that are not just '#'
+            if (!href || href === '#') {
+                return;
+            }
+
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+
+            try {
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            } catch (error) {
+                console.error('Invalid selector:', href, error);
             }
         });
     });
@@ -40,14 +52,14 @@ function initializeModernFeatures() {
     // Mobile menu toggle
     const navbarToggler = document.querySelector('.navbar-toggler');
     const navbarCollapse = document.querySelector('.navbar-collapse');
-    
+
     if (navbarToggler && navbarCollapse) {
-        navbarToggler.addEventListener('click', function() {
+        navbarToggler.addEventListener('click', function () {
             navbarCollapse.classList.toggle('show');
         });
 
         // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!navbarToggler.contains(e.target) && !navbarCollapse.contains(e.target)) {
                 navbarCollapse.classList.remove('show');
             }
@@ -56,11 +68,11 @@ function initializeModernFeatures() {
 
     // Enhanced button interactions
     document.querySelectorAll('.btn').forEach(button => {
-        button.addEventListener('mouseenter', function() {
+        button.addEventListener('mouseenter', function () {
             this.style.transform = 'translateY(-2px)';
         });
-        
-        button.addEventListener('mouseleave', function() {
+
+        button.addEventListener('mouseleave', function () {
             this.style.transform = 'translateY(0)';
         });
     });
@@ -120,26 +132,26 @@ function initializeFormHandlers() {
     // Role selection in login and registration forms
     const roleOptions = document.querySelectorAll('.role-option');
     const additionalFields = document.querySelectorAll('.additional-fields');
-    
+
     if (roleOptions.length > 0) {
         roleOptions.forEach(option => {
-            option.addEventListener('click', function() {
+            option.addEventListener('click', function () {
                 // Remove active class from all options
                 roleOptions.forEach(opt => opt.classList.remove('active'));
-                
+
                 // Add active class to clicked option
                 this.classList.add('active');
-                
+
                 // Set the hidden input value
                 const roleInput = document.getElementById('role');
                 if (roleInput) {
                     roleInput.value = this.getAttribute('data-role');
                 }
-                
+
                 // Hide all additional fields
                 if (additionalFields && additionalFields.length > 0) {
                     additionalFields.forEach(field => field.classList.remove('active'));
-                    
+
                     // Show the relevant additional fields
                     const role = this.getAttribute('data-role');
                     if (role !== 'admin') {
@@ -152,22 +164,22 @@ function initializeFormHandlers() {
             });
         });
     }
-    
+
     // Enhanced form validation
     const forms = document.querySelectorAll('.needs-validation');
-    
+
     if (forms.length > 0) {
         Array.from(forms).forEach(form => {
             form.addEventListener('submit', event => {
                 if (!form.checkValidity()) {
                     event.preventDefault();
                     event.stopPropagation();
-                    
+
                     // Add shake animation to invalid form
                     form.classList.add('shake');
                     setTimeout(() => form.classList.remove('shake'), 500);
                 }
-                
+
                 form.classList.add('was-validated');
             }, false);
         });
@@ -175,11 +187,11 @@ function initializeFormHandlers() {
 
     // Real-time form validation
     document.querySelectorAll('.form-control').forEach(input => {
-        input.addEventListener('blur', function() {
+        input.addEventListener('blur', function () {
             validateField(this);
         });
-        
-        input.addEventListener('input', function() {
+
+        input.addEventListener('input', function () {
             if (this.classList.contains('is-invalid')) {
                 validateField(this);
             }
@@ -188,11 +200,11 @@ function initializeFormHandlers() {
 
     // Survey form submit confirmation
     const surveyForm = document.getElementById('survey-form');
-    
+
     if (surveyForm) {
-        surveyForm.addEventListener('submit', function(event) {
+        surveyForm.addEventListener('submit', function (event) {
             const confirmed = confirm('Are you sure you want to submit this survey? You won\'t be able to change your answers later.');
-            
+
             if (!confirmed) {
                 event.preventDefault();
             } else {
@@ -208,10 +220,10 @@ function initializeFormHandlers() {
 
     // Password visibility toggle
     document.querySelectorAll('.password-toggle').forEach(toggle => {
-        toggle.addEventListener('click', function() {
+        toggle.addEventListener('click', function () {
             const input = this.previousElementSibling;
             const icon = this.querySelector('i');
-            
+
             if (input.type === 'password') {
                 input.type = 'text';
                 icon.classList.replace('fa-eye', 'fa-eye-slash');
@@ -264,7 +276,7 @@ function validateField(field) {
 
     // Apply validation result
     field.classList.add(isValid ? 'is-valid' : 'is-invalid');
-    
+
     // Update feedback message
     const feedback = field.parentNode.querySelector('.invalid-feedback');
     if (feedback && !isValid) {
@@ -277,13 +289,13 @@ function validateField(field) {
 // Counter animation
 function animateCounters() {
     const counters = document.querySelectorAll('.stat-number');
-    
+
     counters.forEach(counter => {
         const target = parseInt(counter.textContent.replace(/[^\d]/g, ''));
         const duration = 2000; // 2 seconds
         const step = target / (duration / 16); // 60fps
         let current = 0;
-        
+
         const updateCounter = () => {
             current += step;
             if (current < target) {
@@ -293,7 +305,7 @@ function animateCounters() {
                 counter.textContent = target.toLocaleString() + (counter.textContent.includes('%') ? '%' : '') + (counter.textContent.includes('+') ? '+' : '');
             }
         };
-        
+
         // Start animation when element is visible
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -303,7 +315,7 @@ function animateCounters() {
                 }
             });
         });
-        
+
         observer.observe(counter);
     });
 }
@@ -376,10 +388,11 @@ function initializeAnimations() {
 
 // Form handlers initialization
 function initializeFormHandlers() {
-    // Enhanced form validation
-    const forms = document.querySelectorAll('form');
+    // Enhanced form validation — only for forms that opt-in via 'needs-validation' class
+    // Skip forms that have their own validation (e.g., importForm)
+    const forms = document.querySelectorAll('form.needs-validation');
     forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             if (!validateForm(this)) {
                 e.preventDefault();
                 return false;
@@ -392,7 +405,7 @@ function initializeFormHandlers() {
 function validateForm(form) {
     let isValid = true;
     const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
-    
+
     inputs.forEach(input => {
         if (!validateField(input)) {
             isValid = false;
@@ -441,7 +454,7 @@ function initializeDataTables() {
     }
 
     // Initialize all tables with data-table class
-    $('.data-table').each(function() {
+    $('.data-table').each(function () {
         $(this).DataTable({
             responsive: true,
             pageLength: 25,
@@ -454,30 +467,30 @@ function initializeDataTables() {
 function sortTable(table, column, asc = true) {
     const tbody = table.querySelector('tbody');
     if (!tbody) return;
-    
+
     const rows = Array.from(tbody.querySelectorAll('tr'));
-    
+
     // Sort the rows
     const sortedRows = rows.sort((a, b) => {
         const aCol = a.querySelectorAll('td')[column].textContent.trim();
         const bCol = b.querySelectorAll('td')[column].textContent.trim();
-        
+
         // Check if the columns contain numbers
         const aNum = parseFloat(aCol);
         const bNum = parseFloat(bCol);
-        
+
         if (!isNaN(aNum) && !isNaN(bNum)) {
             return asc ? aNum - bNum : bNum - aNum;
         } else {
             return asc ? aCol.localeCompare(bCol) : bCol.localeCompare(aCol);
         }
     });
-    
+
     // Remove existing rows
     while (tbody.firstChild) {
         tbody.removeChild(tbody.firstChild);
     }
-    
+
     // Add sorted rows
     tbody.append(...sortedRows);
 }
@@ -488,14 +501,14 @@ function initializeCharts() {
     if (typeof Chart === 'undefined' || !document.querySelector('.chart-container')) {
         return;
     }
-    
+
     // Rating distribution chart
     const ratingChartElement = document.getElementById('rating-distribution-chart');
-    
+
     if (ratingChartElement) {
         const ratingLabels = ['Bad', 'Neutral', 'Good'];
         const ratingData = JSON.parse(ratingChartElement.getAttribute('data-ratings'));
-        
+
         new Chart(ratingChartElement, {
             type: 'pie',
             data: {
@@ -517,13 +530,13 @@ function initializeCharts() {
             }
         });
     }
-    
+
     // Survey completion chart
     const completionChartElement = document.getElementById('survey-completion-chart');
-    
+
     if (completionChartElement) {
         const completionData = JSON.parse(completionChartElement.getAttribute('data-completion'));
-        
+
         new Chart(completionChartElement, {
             type: 'bar',
             data: {
@@ -557,13 +570,13 @@ function initializeCharts() {
             }
         });
     }
-    
+
     // Teacher ratings chart
     const teacherRatingChartElement = document.getElementById('teacher-ratings-chart');
-    
+
     if (teacherRatingChartElement) {
         const teacherData = JSON.parse(teacherRatingChartElement.getAttribute('data-teachers'));
-        
+
         new Chart(teacherRatingChartElement, {
             type: 'horizontalBar',
             data: {
@@ -588,7 +601,7 @@ function initializeCharts() {
                         ticks: {
                             beginAtZero: true,
                             max: 3,
-                            callback: function(value) {
+                            callback: function (value) {
                                 if (value === 0) return 'Bad';
                                 if (value === 1) return 'Neutral';
                                 if (value === 2) return 'Good';
@@ -608,10 +621,10 @@ function exportTableToCSV(tableId, filename) {
     const table = document.getElementById(tableId);
     let csv = [];
     const rows = table.querySelectorAll('tr');
-    
+
     for (let i = 0; i < rows.length; i++) {
         const row = [], cols = rows[i].querySelectorAll('td, th');
-        
+
         for (let j = 0; j < cols.length; j++) {
             // Replace commas with semicolons to avoid CSV conflicts
             let text = cols[j].innerText.replace(/,/g, ';');
@@ -621,23 +634,23 @@ function exportTableToCSV(tableId, filename) {
             }
             row.push(text);
         }
-        
+
         csv.push(row.join(','));
     }
-    
+
     // Download CSV file
     downloadCSV(csv.join('\n'), filename);
 }
 
 // Function to download CSV
 function downloadCSV(csv, filename) {
-    const csvFile = new Blob([csv], {type: 'text/csv'});
+    const csvFile = new Blob([csv], { type: 'text/csv' });
     const downloadLink = document.createElement('a');
-    
+
     downloadLink.download = filename;
     downloadLink.href = window.URL.createObjectURL(csvFile);
     downloadLink.style.display = 'none';
-    
+
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
@@ -647,7 +660,7 @@ function downloadCSV(csv, filename) {
 function togglePasswordVisibility(inputId, toggleButtonId) {
     const passwordInput = document.getElementById(inputId);
     const toggleButton = document.getElementById(toggleButtonId);
-    
+
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
         toggleButton.innerHTML = '<i class="fas fa-eye-slash"></i>';
@@ -662,10 +675,10 @@ function addFormField(containerId, fieldTemplate) {
     const container = document.getElementById(containerId);
     const fieldCount = container.getElementsByClassName('dynamic-field').length;
     const newField = document.createElement('div');
-    
+
     newField.className = 'dynamic-field form-group';
     newField.innerHTML = fieldTemplate.replace(/\{index\}/g, fieldCount);
-    
+
     container.appendChild(newField);
 }
 
@@ -680,11 +693,11 @@ function filterTable(inputId, tableId) {
     const filter = input.value.toUpperCase();
     const table = document.getElementById(tableId);
     const rows = table.getElementsByTagName('tr');
-    
+
     for (let i = 1; i < rows.length; i++) {
         let visible = false;
         const cells = rows[i].getElementsByTagName('td');
-        
+
         for (let j = 0; j < cells.length; j++) {
             const cell = cells[j];
             if (cell) {
@@ -695,7 +708,7 @@ function filterTable(inputId, tableId) {
                 }
             }
         }
-        
+
         rows[i].style.display = visible ? '' : 'none';
     }
 }
@@ -703,15 +716,15 @@ function filterTable(inputId, tableId) {
 // Function to preview image before upload
 function previewImage(input, previewId) {
     const preview = document.getElementById(previewId);
-    
+
     if (input.files && input.files[0]) {
         const reader = new FileReader();
-        
-        reader.onload = function(e) {
+
+        reader.onload = function (e) {
             preview.src = e.target.result;
             preview.style.display = 'block';
         };
-        
+
         reader.readAsDataURL(input.files[0]);
     }
 }

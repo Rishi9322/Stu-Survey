@@ -1,0 +1,150 @@
+C:\xampp\htdocs\stu\app\admin\DatabaseAI.php:16               CamelCasePropertyName    The property $ai_provider is not named in camelCase.
+C:\xampp\htdocs\stu\app\admin\DatabaseAI.php:23               MissingImport            Missing class import via use statement (line '23', column '34').
+C:\xampp\htdocs\stu\app\admin\DatabaseAI.php:152              CamelCaseVariableName    The variable $enhanced_query is not named in camelCase.
+C:\xampp\htdocs\stu\app\admin\DatabaseAI.php:178              CamelCaseParameterName   The parameter $search_term is not named in camelCase.
+C:\xampp\htdocs\stu\app\admin\DatabaseAI.php:189              CamelCaseVariableName    The variable $search_pattern is not named in camelCase.
+C:\xampp\htdocs\stu\app\admin\DatabaseAI.php:189              CamelCaseVariableName    The variable $search_term is not named in camelCase.
+C:\xampp\htdocs\stu\app\admin\DatabaseAI.php:191              CamelCaseVariableName    The variable $search_results is not named in camelCase.
+C:\xampp\htdocs\stu\app\admin\complaints.php:754              ElseExpression           The method displayComplaintsTableModern uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\app\admin\survey_management.php:341       IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '350', column '9').
+C:\xampp\htdocs\stu\app\admin\survey_management.php:341       CamelCaseParameterName   The parameter $question_id is not named in camelCase.
+C:\xampp\htdocs\stu\app\admin\survey_management.php:351       CamelCaseVariableName    The variable $question_id is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:10                CamelCasePropertyName    The property $ai_engine is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:14                CamelCaseParameterName   The parameter $ai_engine is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:16                CamelCaseVariableName    The variable $ai_engine is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:19                CyclomaticComplexity     The method processQuery() has a Cyclomatic Complexity of 12. The configured cyclomatic complexity threshold is 10.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:19                NPathComplexity          The method processQuery() has an NPath complexity of 648. The configured NPath complexity threshold is 200.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:63                CamelCaseVariableName    The variable $positive_percentage is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:77                CamelCaseVariableName    The variable $negative_pct is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:79                CamelCaseVariableName    The variable $top_topic is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:93                CamelCaseVariableName    The variable $positive_pct is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:119               CamelCaseVariableName    The variable $recent_avg is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:120               CamelCaseVariableName    The variable $prev_avg is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:145               CamelCaseVariableName    The variable $urgent_count is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:145               ShortVariable            Avoid variables with short names like $r. Configured minimum length is 3.
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:50          Superglobals             handleFileUpload accesses the super-global variable $_FILES.
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:50          Superglobals             handleFileUpload accesses the super-global variable $_FILES.
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:52          MissingImport            Missing class import via use statement (line '52', column '19').
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:59          Superglobals             handleSheetsImport accesses the super-global variable $_POST.
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:60          CamelCaseVariableName    The variable $sheets_url is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:63          MissingImport            Missing class import via use statement (line '63', column '19').
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:78          UnusedFormalParameter    Avoid unused parameters such as '$integrator'.
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:101         Superglobals             handleExportData accesses the super-global variable $_POST.
+C:\xampp\htdocs\stu\core\functions\survey_management.php:11   IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '13', column '9').
+C:\xampp\htdocs\stu\core\functions\survey_management.php:26   IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '53', column '9').
+C:\xampp\htdocs\stu\core\functions\survey_management.php:72   IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '74', column '9').
+C:\xampp\htdocs\stu\core\functions\survey_management.php:98   MissingImport            Missing class import via use statement (line '98', column '33').
+C:\xampp\htdocs\stu\core\functions\survey_management.php:102  MissingImport            Missing class import via use statement (line '102', column '38').
+C:\xampp\htdocs\stu\core\functions\survey_management.php:141  IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '143', column '9').
+C:\xampp\htdocs\stu\core\functions\survey_management.php:156  IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '164', column '9').
+C:\xampp\htdocs\stu\core\functions\survey_management.php:200  IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '212', column '9').
+C:\xampp\htdocs\stu\core\functions\survey_management.php:225  IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '227', column '9').
+C:\xampp\htdocs\stu\core\functions\survey_management.php:250  IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '252', column '9').
+C:\xampp\htdocs\stu\core\functions\survey_management.php:279  IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '288', column '9').
+C:\xampp\htdocs\stu\core\functions\survey_management.php:305  IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '332', column '9').
+C:\xampp\htdocs\stu\core\functions\survey_management.php:350  IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '383', column '9').
+C:\xampp\htdocs\stu\core\functions\survey_management.php:406  IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '419', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:3             Superglobals             startSecureSession accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:3             Superglobals             startSecureSession accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:3             Superglobals             startSecureSession accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:3             Superglobals             startSecureSession accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:10            CamelCaseVariableName    The variable $session_name is not named in camelCase.
+C:\xampp\htdocs\stu\core\includes\functions.php:44            IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '56', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:44            Superglobals             loginUser accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:44            Superglobals             loginUser accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:44            Superglobals             loginUser accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:44            Superglobals             loginUser accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:44            Superglobals             loginUser accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:44            Superglobals             loginUser accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:44            Superglobals             loginUser accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:68            UndefinedVariable        Avoid using undefined variables such as '$username' which will lead to PHP notices.
+C:\xampp\htdocs\stu\core\includes\functions.php:68            UndefinedVariable        Avoid using undefined variables such as '$db_email' which will lead to PHP notices.
+C:\xampp\htdocs\stu\core\includes\functions.php:68            UndefinedVariable        Avoid using undefined variables such as '$hashed_password' which will lead to PHP notices.
+C:\xampp\htdocs\stu\core\includes\functions.php:68            UndefinedVariable        Avoid using undefined variables such as '$user_role' which will lead to PHP notices.
+C:\xampp\htdocs\stu\core\includes\functions.php:68            CamelCaseVariableName    The variable $db_email is not named in camelCase.
+C:\xampp\htdocs\stu\core\includes\functions.php:68            CamelCaseVariableName    The variable $hashed_password is not named in camelCase.
+C:\xampp\htdocs\stu\core\includes\functions.php:68            CamelCaseVariableName    The variable $user_role is not named in camelCase.
+C:\xampp\htdocs\stu\core\includes\functions.php:68            ShortVariable            Avoid variables with short names like $id. Configured minimum length is 3.
+C:\xampp\htdocs\stu\core\includes\functions.php:72            UndefinedVariable        Avoid using undefined variables such as '$username' which will lead to PHP notices.
+C:\xampp\htdocs\stu\core\includes\functions.php:72            UndefinedVariable        Avoid using undefined variables such as '$user_role' which will lead to PHP notices.
+C:\xampp\htdocs\stu\core\includes\functions.php:75            UndefinedVariable        Avoid using undefined variables such as '$user_role' which will lead to PHP notices.
+C:\xampp\htdocs\stu\core\includes\functions.php:76            UndefinedVariable        Avoid using undefined variables such as '$user_role' which will lead to PHP notices.
+C:\xampp\htdocs\stu\core\includes\functions.php:82            UndefinedVariable        Avoid using undefined variables such as '$hashed_password' which will lead to PHP notices.
+C:\xampp\htdocs\stu\core\includes\functions.php:89            UndefinedVariable        Avoid using undefined variables such as '$username' which will lead to PHP notices.
+C:\xampp\htdocs\stu\core\includes\functions.php:90            UndefinedVariable        Avoid using undefined variables such as '$db_email' which will lead to PHP notices.
+C:\xampp\htdocs\stu\core\includes\functions.php:91            UndefinedVariable        Avoid using undefined variables such as '$user_role' which will lead to PHP notices.
+C:\xampp\htdocs\stu\core\includes\functions.php:97            UndefinedVariable        Avoid using undefined variables such as '$username' which will lead to PHP notices.
+C:\xampp\htdocs\stu\core\includes\functions.php:97            UndefinedVariable        Avoid using undefined variables such as '$user_role' which will lead to PHP notices.
+C:\xampp\htdocs\stu\core\includes\functions.php:98            DevelopmentCodeFragment  The function loginUser() calls the typical debug function print_r() which is mostly only used during development.
+C:\xampp\htdocs\stu\core\includes\functions.php:107           ElseExpression           The method loginUser uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:112           ElseExpression           The method loginUser uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:116           ElseExpression           The method loginUser uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:129           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '133', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:135           CamelCaseVariableName    The variable $hashed_password is not named in camelCase.
+C:\xampp\htdocs\stu\core\includes\functions.php:143           CamelCaseVariableName    The variable $user_id is not named in camelCase.
+C:\xampp\htdocs\stu\core\includes\functions.php:149           ElseExpression           The method registerUser uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:161           Superglobals             isLoggedIn accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:161           Superglobals             isLoggedIn accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:161           Superglobals             isLoggedIn accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:161           Superglobals             isLoggedIn accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:161           Superglobals             isLoggedIn accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:174           DevelopmentCodeFragment  The function isLoggedIn() calls the typical debug function print_r() which is mostly only used during development.
+C:\xampp\htdocs\stu\core\includes\functions.php:180           Superglobals             hasRole accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:180           Superglobals             hasRole accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:196           Superglobals             redirectToDashboard accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:196           Superglobals             redirectToDashboard accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:196           Superglobals             redirectToDashboard accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:196           Superglobals             redirectToDashboard accesses the super-global variable $_SERVER.
+C:\xampp\htdocs\stu\core\includes\functions.php:196           Superglobals             redirectToDashboard accesses the super-global variable $_SESSION.
+C:\xampp\htdocs\stu\core\includes\functions.php:208           ExitExpression           The function redirectToDashboard() contains an exit expression.
+C:\xampp\htdocs\stu\core\includes\functions.php:215           CamelCaseVariableName    The variable $current_path is not named in camelCase.
+C:\xampp\htdocs\stu\core\includes\functions.php:218           CamelCaseVariableName    The variable $is_in_subdirectory is not named in camelCase.
+C:\xampp\htdocs\stu\core\includes\functions.php:222           CamelCaseVariableName    The variable $base_path is not named in camelCase.
+C:\xampp\htdocs\stu\core\includes\functions.php:246           ExitExpression           The function redirectToDashboard() contains an exit expression.
+C:\xampp\htdocs\stu\core\includes\functions.php:258           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '275', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:258           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '281', column '17').
+C:\xampp\htdocs\stu\core\includes\functions.php:271           ElseExpression           The method getUserProfileData uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:293           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '297', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:293           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '302', column '17').
+C:\xampp\htdocs\stu\core\includes\functions.php:293           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '315', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:293           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '320', column '17').
+C:\xampp\htdocs\stu\core\includes\functions.php:331           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '336', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:354           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '362', column '17').
+C:\xampp\htdocs\stu\core\includes\functions.php:366           MissingImport            Missing class import via use statement (line '366', column '31').
+C:\xampp\htdocs\stu\core\includes\functions.php:370           ElseExpression           The method submitSurveyResponses uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:371           MissingImport            Missing class import via use statement (line '371', column '27').
+C:\xampp\htdocs\stu\core\includes\functions.php:387           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '390', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:396           ElseExpression           The method submitFeedback uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:426           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '461', column '20').
+C:\xampp\htdocs\stu\core\includes\functions.php:426           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '471', column '20').
+C:\xampp\htdocs\stu\core\includes\functions.php:426           CyclomaticComplexity     The function getSurveyStatistics() has a Cyclomatic Complexity of 11. The configured cyclomatic complexity threshold is 10.
+C:\xampp\htdocs\stu\core\includes\functions.php:546           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '558', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:546           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '564', column '17').
+C:\xampp\htdocs\stu\core\includes\functions.php:546           CyclomaticComplexity     The function validateAccessCode() has a Cyclomatic Complexity of 10. The configured cyclomatic complexity threshold is 10.
+C:\xampp\htdocs\stu\core\includes\functions.php:590           ElseExpression           The method validateAccessCode uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:608           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '614', column '13').
+C:\xampp\htdocs\stu\core\includes\functions.php:608           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '624', column '13').
+C:\xampp\htdocs\stu\core\includes\functions.php:617           MissingImport            Missing class import via use statement (line '617', column '27').
+C:\xampp\htdocs\stu\core\includes\functions.php:627           MissingImport            Missing class import via use statement (line '627', column '27').
+C:\xampp\htdocs\stu\core\includes\functions.php:662           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '671', column '13').
+C:\xampp\htdocs\stu\core\includes\functions.php:662           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '690', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:683           ElseExpression           The method generateAccessCode uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:697           ElseExpression           The method generateAccessCode uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:738           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '743', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:748           ElseExpression           The method toggleAccessCode uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:752           ElseExpression           The method toggleAccessCode uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:765           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '770', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:775           ElseExpression           The method deleteAccessCode uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:779           ElseExpression           The method deleteAccessCode uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:795           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '813', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:830           ElseExpression           The method submitAnonymousFeedback uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:835           ElseExpression           The method submitAnonymousFeedback uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\core\includes\functions.php:851           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '866', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:881           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '885', column '20').
+C:\xampp\htdocs\stu\core\includes\functions.php:898           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '903', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:924           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '927', column '9').
+C:\xampp\htdocs\stu\core\includes\functions.php:952           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '956', column '20').
+C:\xampp\htdocs\stu\core\includes\functions.php:970           IfStatementAssignment    Avoid assigning values to variables in if clauses and the like (line '994', column '9').
+C:\xampp\htdocs\stu\core\includes\secure_config.php:9         CyclomaticComplexity     The method load() has a Cyclomatic Complexity of 10. The configured cyclomatic complexity threshold is 10.
+C:\xampp\htdocs\stu\core\includes\secure_config.php:15        CamelCaseVariableName    The variable $env_file is not named in camelCase.
+C:\xampp\htdocs\stu\core\includes\secure_config.php:45        CamelCaseVariableName    The variable $env_keys is not named in camelCase.

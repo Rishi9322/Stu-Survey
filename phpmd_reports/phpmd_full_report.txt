@@ -1,0 +1,29 @@
+C:\xampp\htdocs\stu\app\admin\DatabaseAI.php:16        CamelCasePropertyName   The property $ai_provider is not named in camelCase.
+C:\xampp\htdocs\stu\app\admin\DatabaseAI.php:23        MissingImport           Missing class import via use statement (line '23', column '34').
+C:\xampp\htdocs\stu\app\admin\DatabaseAI.php:152       CamelCaseVariableName   The variable $enhanced_query is not named in camelCase.
+C:\xampp\htdocs\stu\app\admin\DatabaseAI.php:178       CamelCaseParameterName  The parameter $search_term is not named in camelCase.
+C:\xampp\htdocs\stu\app\admin\DatabaseAI.php:189       CamelCaseVariableName   The variable $search_pattern is not named in camelCase.
+C:\xampp\htdocs\stu\app\admin\DatabaseAI.php:189       CamelCaseVariableName   The variable $search_term is not named in camelCase.
+C:\xampp\htdocs\stu\app\admin\DatabaseAI.php:191       CamelCaseVariableName   The variable $search_results is not named in camelCase.
+C:\xampp\htdocs\stu\app\admin\complaints.php:565       ElseExpression          The method displayComplaintsTable uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:10         CamelCasePropertyName   The property $ai_engine is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:14         CamelCaseParameterName  The parameter $ai_engine is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:16         CamelCaseVariableName   The variable $ai_engine is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:19         CyclomaticComplexity    The method processQuery() has a Cyclomatic Complexity of 12. The configured cyclomatic complexity threshold is 10.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:19         NPathComplexity         The method processQuery() has an NPath complexity of 648. The configured NPath complexity threshold is 200.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:63         CamelCaseVariableName   The variable $positive_percentage is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:77         CamelCaseVariableName   The variable $negative_pct is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:79         CamelCaseVariableName   The variable $top_topic is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:93         CamelCaseVariableName   The variable $positive_pct is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:119        CamelCaseVariableName   The variable $recent_avg is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:120        CamelCaseVariableName   The variable $prev_avg is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:145        CamelCaseVariableName   The variable $urgent_count is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\ai_chat_api.php:145        ShortVariable           Avoid variables with short names like $r. Configured minimum length is 3.
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:50   Superglobals            handleFileUpload accesses the super-global variable $_FILES.
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:50   Superglobals            handleFileUpload accesses the super-global variable $_FILES.
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:52   MissingImport           Missing class import via use statement (line '52', column '19').
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:59   Superglobals            handleSheetsImport accesses the super-global variable $_POST.
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:60   CamelCaseVariableName   The variable $sheets_url is not named in camelCase.
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:63   MissingImport           Missing class import via use statement (line '63', column '19').
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:78   UnusedFormalParameter   Avoid unused parameters such as '$integrator'.
+C:\xampp\htdocs\stu\app\api\training_endpoint.php:101  Superglobals            handleExportData accesses the super-global variable $_POST.

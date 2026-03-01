@@ -1,18 +1,18 @@
 {
   "sentiment_analysis": {
     "positive_patterns": [
-      {"words": ["excellent", "outstanding", "amazing", "fantastic"], "weight": 3},
-      {"words": ["good", "great", "helpful", "useful"], "weight": 2},
-      {"words": ["nice", "okay", "fine", "satisfactory"], "weight": 1},
-      {"phrases": ["very good", "well done", "keep it up"], "weight": 2},
-      {"context_patterns": ["love.*teaching", "enjoy.*class", "best.*teacher"], "weight": 3}
+      {"words": ["excellent", "outstanding", "amazing", "fantastic", "upgraded", "extended"], "weight": 3},
+      {"words": ["good", "great", "helpful", "useful", "better", "improved"], "weight": 2},
+      {"words": ["nice", "okay", "fine", "satisfactory", "consider"], "weight": 1},
+      {"phrases": ["very good", "well done", "keep it up", "please consider", "thank you"], "weight": 2},
+      {"context_patterns": ["love.*teaching", "enjoy.*class", "best.*teacher", ".*consider.*", ".*please.*"], "weight": 3}
     ],
     "negative_patterns": [
       {"words": ["terrible", "awful", "horrible", "disgusting"], "weight": 3},
-      {"words": ["bad", "poor", "disappointing", "useless"], "weight": 2},
-      {"words": ["boring", "confusing", "difficult", "annoying"], "weight": 1},
-      {"phrases": ["waste of time", "don't understand", "too hard"], "weight": 2},
-      {"context_patterns": ["hate.*subject", "worst.*teacher", "never.*learn"], "weight": 3}
+      {"words": ["bad", "poor", "disappointing", "useless", "broken", "deteriorated", "slow", "weak"], "weight": 2},
+      {"words": ["boring", "confusing", "difficult", "annoying", "outdated", "drops", "unable"], "weight": 1},
+      {"phrases": ["waste of time", "don't understand", "too hard", "has been broken", "very slow", "frequently drops", "unable to complete"], "weight": 2},
+      {"context_patterns": ["hate.*subject", "worst.*teacher", "never.*learn", ".*broken.*", ".*slow.*", ".*weak.*"], "weight": 3}
     ],
     "neutral_indicators": ["maybe", "perhaps", "sometimes", "usually", "generally"],
     "negation_words": ["not", "never", "hardly", "barely", "seldom"],

@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests.acceptance" tests="8" assertions="0" errors="8" failures="0" skipped="0" useless="0" time="0.002843">
+    <testcase name="testRegistrationPageLoads" class="Tests\Acceptance\RegistrationCest" file="C:\xampp\htdocs\stu\tests\acceptance\RegistrationCest.php" feature="Verify registration page loads correctly" time="0.001478" assertions="0">
+      <error type="Codeception\Exception\InjectionException">RegistrationCest: Verify registration page loads correctly
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSuccessfulStudentRegistration" class="Tests\Acceptance\RegistrationCest" file="C:\xampp\htdocs\stu\tests\acceptance\RegistrationCest.php" feature="Register a new student account" time="0.000144" assertions="0">
+      <error type="Codeception\Exception\InjectionException">RegistrationCest: Register a new student account
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testRegistrationWithExistingEmail" class="Tests\Acceptance\RegistrationCest" file="C:\xampp\htdocs\stu\tests\acceptance\RegistrationCest.php" feature="Verify registration fails with existing email" time="0.000199" assertions="0">
+      <error type="Codeception\Exception\InjectionException">RegistrationCest: Verify registration fails with existing email
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testRegistrationWithMismatchedPasswords" class="Tests\Acceptance\RegistrationCest" file="C:\xampp\htdocs\stu\tests\acceptance\RegistrationCest.php" feature="Verify registration fails with mismatched passwords" time="0.000208" assertions="0">
+      <error type="Codeception\Exception\InjectionException">RegistrationCest: Verify registration fails with mismatched passwords
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testRegistrationWithInvalidEmail" class="Tests\Acceptance\RegistrationCest" file="C:\xampp\htdocs\stu\tests\acceptance\RegistrationCest.php" feature="Verify registration fails with invalid email" time="0.000285" assertions="0">
+      <error type="Codeception\Exception\InjectionException">RegistrationCest: Verify registration fails with invalid email
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testRegistrationWithWeakPassword" class="Tests\Acceptance\RegistrationCest" file="C:\xampp\htdocs\stu\tests\acceptance\RegistrationCest.php" feature="Verify registration requires strong password" time="0.000139" assertions="0">
+      <error type="Codeception\Exception\InjectionException">RegistrationCest: Verify registration requires strong password
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testTeacherRegistrationShowsAdditionalFields" class="Tests\Acceptance\RegistrationCest" file="C:\xampp\htdocs\stu\tests\acceptance\RegistrationCest.php" feature="Verify teacher registration shows additional fields" time="0.000207" assertions="0">
+      <error type="Codeception\Exception\InjectionException">RegistrationCest: Verify teacher registration shows additional fields
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testRegistrationFormValidation" class="Tests\Acceptance\RegistrationCest" file="C:\xampp\htdocs\stu\tests\acceptance\RegistrationCest.php" feature="Test client-side form validation" time="0.000184" assertions="0">
+      <error type="Codeception\Exception\InjectionException">RegistrationCest: Test client-side form validation
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Acceptance\RegistrationCest'. Failed to create instance of 'Tests\Support\AcceptanceTester'. Class "Tests\Support\AcceptanceTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="Tests.functional" tests="21" assertions="0" errors="21" failures="0" skipped="0" useless="0" time="0.004573">
+    <testcase name="testApiHealthCheck" class="Tests\Functional\ApiCest" file="C:\xampp\htdocs\stu\tests\functional\ApiCest.php" feature="Test API health check endpoint" time="0.000269" assertions="0">
+      <error type="Codeception\Exception\InjectionException">ApiCest: Test API health check endpoint
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testGetFeedbackList" class="Tests\Functional\ApiCest" file="C:\xampp\htdocs\stu\tests\functional\ApiCest.php" feature="Test getting feedback list from API" time="0.000172" assertions="0">
+      <error type="Codeception\Exception\InjectionException">ApiCest: Test getting feedback list from API
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testCreateFeedbackViaApi" class="Tests\Functional\ApiCest" file="C:\xampp\htdocs\stu\tests\functional\ApiCest.php" feature="Create feedback via API" time="0.000163" assertions="0">
+      <error type="Codeception\Exception\InjectionException">ApiCest: Create feedback via API
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testGetSpecificFeedback" class="Tests\Functional\ApiCest" file="C:\xampp\htdocs\stu\tests\functional\ApiCest.php" feature="Get specific feedback by ID" time="0.000140" assertions="0">
+      <error type="Codeception\Exception\InjectionException">ApiCest: Get specific feedback by ID
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testUpdateFeedbackViaApi" class="Tests\Functional\ApiCest" file="C:\xampp\htdocs\stu\tests\functional\ApiCest.php" feature="Update feedback via API" time="0.000178" assertions="0">
+      <error type="Codeception\Exception\InjectionException">ApiCest: Update feedback via API
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testDeleteFeedbackViaApi" class="Tests\Functional\ApiCest" file="C:\xampp\htdocs\stu\tests\functional\ApiCest.php" feature="Delete feedback via API" time="0.000199" assertions="0">
+      <error type="Codeception\Exception\InjectionException">ApiCest: Delete feedback via API
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testApiRequiresAuthentication" class="Tests\Functional\ApiCest" file="C:\xampp\htdocs\stu\tests\functional\ApiCest.php" feature="Verify protected endpoints require authentication" time="0.000216" assertions="0">
+      <error type="Codeception\Exception\InjectionException">ApiCest: Verify protected endpoints require authentication
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testApiReturnsProperErrorForNotFound" class="Tests\Functional\ApiCest" file="C:\xampp\htdocs\stu\tests\functional\ApiCest.php" feature="Verify API returns 404 for non-existent resources" time="0.000182" assertions="0">
+      <error type="Codeception\Exception\InjectionException">ApiCest: Verify API returns 404 for non-existent resources
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\ApiCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testFeedbackPageLoads" class="Tests\Functional\FeedbackCest" file="C:\xampp\htdocs\stu\tests\functional\FeedbackCest.php" feature="Verify feedback page loads for logged-in student" time="0.000186" assertions="0">
+      <error type="Codeception\Exception\InjectionException">FeedbackCest: Verify feedback page loads for logged-in student
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\FeedbackCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSubmitBasicFeedback" class="Tests\Functional\FeedbackCest" file="C:\xampp\htdocs\stu\tests\functional\FeedbackCest.php" feature="Submit basic feedback as a student" time="0.000154" assertions="0">
+      <error type="Codeception\Exception\InjectionException">FeedbackCest: Submit basic feedback as a student
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\FeedbackCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSubmitAnonymousFeedback" class="Tests\Functional\FeedbackCest" file="C:\xampp\htdocs\stu\tests\functional\FeedbackCest.php" feature="Submit anonymous feedback" time="0.000164" assertions="0">
+      <error type="Codeception\Exception\InjectionException">FeedbackCest: Submit anonymous feedback
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\FeedbackCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testViewFeedbackHistory" class="Tests\Functional\FeedbackCest" file="C:\xampp\htdocs\stu\tests\functional\FeedbackCest.php" feature="View my feedback history" time="0.000232" assertions="0">
+      <error type="Codeception\Exception\InjectionException">FeedbackCest: View my feedback history
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\FeedbackCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testCannotSubmitEmptyFeedback" class="Tests\Functional\FeedbackCest" file="C:\xampp\htdocs\stu\tests\functional\FeedbackCest.php" feature="Ensure empty feedback cannot be submitted" time="0.000277" assertions="0">
+      <error type="Codeception\Exception\InjectionException">FeedbackCest: Ensure empty feedback cannot be submitted
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\FeedbackCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testFeedbackRequiresLogin" class="Tests\Functional\FeedbackCest" file="C:\xampp\htdocs\stu\tests\functional\FeedbackCest.php" feature="Verify feedback page requires authentication" time="0.000164" assertions="0">
+      <error type="Codeception\Exception\InjectionException">FeedbackCest: Verify feedback page requires authentication
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\FeedbackCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testLoginPageLoads" class="Tests\Functional\LoginCest" file="C:\xampp\htdocs\stu\tests\functional\LoginCest.php" feature="Verify login page loads correctly" time="0.000187" assertions="0">
+      <error type="Codeception\Exception\InjectionException">LoginCest: Verify login page loads correctly
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\LoginCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSuccessfulStudentLogin" class="Tests\Functional\LoginCest" file="C:\xampp\htdocs\stu\tests\functional\LoginCest.php" feature="test successful student login" time="0.000224" assertions="0">
+      <error type="Codeception\Exception\InjectionException">LoginCest: Test successful student login
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\LoginCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSuccessfulTeacherLogin" class="Tests\Functional\LoginCest" file="C:\xampp\htdocs\stu\tests\functional\LoginCest.php" feature="test successful teacher login" time="0.000255" assertions="0">
+      <error type="Codeception\Exception\InjectionException">LoginCest: Test successful teacher login
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\LoginCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testFailedLoginWithWrongPassword" class="Tests\Functional\LoginCest" file="C:\xampp\htdocs\stu\tests\functional\LoginCest.php" feature="test failed login with wrong password" time="0.000177" assertions="0">
+      <error type="Codeception\Exception\InjectionException">LoginCest: Test failed login with wrong password
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\LoginCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testFailedLoginWithEmptyFields" class="Tests\Functional\LoginCest" file="C:\xampp\htdocs\stu\tests\functional\LoginCest.php" feature="Test login fails with empty fields" time="0.000290" assertions="0">
+      <error type="Codeception\Exception\InjectionException">LoginCest: Test login fails with empty fields
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\LoginCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testFailedLoginWithNonexistentUser" class="Tests\Functional\LoginCest" file="C:\xampp\htdocs\stu\tests\functional\LoginCest.php" feature="Test login fails with nonexistent user" time="0.000271" assertions="0">
+      <error type="Codeception\Exception\InjectionException">LoginCest: Test login fails with nonexistent user
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\LoginCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testLogoutFunctionality" class="Tests\Functional\LoginCest" file="C:\xampp\htdocs\stu\tests\functional\LoginCest.php" feature="test logout functionality" time="0.000473" assertions="0">
+      <error type="Codeception\Exception\InjectionException">LoginCest: Test logout functionality
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Functional\LoginCest'. Failed to create instance of 'Tests\Support\FunctionalTester'. Class "Tests\Support\FunctionalTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="Tests.unit" tests="104" assertions="9" errors="84" failures="10" skipped="0" useless="0" time="0.390452">
+    <testcase name="testUserCreation" class="Tests\Unit\UserCest" file="C:\xampp\htdocs\stu\tests\unit\UserCest.php" feature="Test user object creation" time="0.000274" assertions="0">
+      <error type="Codeception\Exception\InjectionException">UserCest: Test user object creation
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Unit\UserCest'. Failed to create instance of 'Tests\Support\UnitTester'. Class "Tests\Support\UnitTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testEmailValidation" class="Tests\Unit\UserCest" file="C:\xampp\htdocs\stu\tests\unit\UserCest.php" feature="Test email validation logic" time="0.000142" assertions="0">
+      <error type="Codeception\Exception\InjectionException">UserCest: Test email validation logic
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Unit\UserCest'. Failed to create instance of 'Tests\Support\UnitTester'. Class "Tests\Support\UnitTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testPasswordHashing" class="Tests\Unit\UserCest" file="C:\xampp\htdocs\stu\tests\unit\UserCest.php" feature="Test password hashing functionality" time="0.000154" assertions="0">
+      <error type="Codeception\Exception\InjectionException">UserCest: Test password hashing functionality
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Unit\UserCest'. Failed to create instance of 'Tests\Support\UnitTester'. Class "Tests\Support\UnitTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testUserRoleAssignment" class="Tests\Unit\UserCest" file="C:\xampp\htdocs\stu\tests\unit\UserCest.php" feature="Test user role assignment" time="0.000261" assertions="0">
+      <error type="Codeception\Exception\InjectionException">UserCest: Test user role assignment
+Codeception\Exception\InjectionException: Failed to inject dependencies in instance of 'Tests\Unit\UserCest'. Failed to create instance of 'Tests\Support\UnitTester'. Class "Tests\Support\UnitTester" does not exist
+
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testViewSurveyCompletionRate" class="Tests\Unit\BlackBox\AnalyticsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php" time="0.019452" assertions="0">
+      <error type="Error">AnalyticsBlackBoxTest::testView survey completion rate
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testViewAverageTeacherRating" class="Tests\Unit\BlackBox\AnalyticsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php" time="0.002911" assertions="0">
+      <error type="Error">AnalyticsBlackBoxTest::testView average teacher rating
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testFilterAnalyticsByDateRange" class="Tests\Unit\BlackBox\AnalyticsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php" time="0.002883" assertions="0">
+      <error type="Error">AnalyticsBlackBoxTest::testFilter analytics by date range
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testRatingDistributionChartData" class="Tests\Unit\BlackBox\AnalyticsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php" time="0.002603" assertions="0">
+      <error type="Error">AnalyticsBlackBoxTest::testRating distribution chart data
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testExportAnalyticsData" class="Tests\Unit\BlackBox\AnalyticsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php" time="0.002933" assertions="0">
+      <error type="Error">AnalyticsBlackBoxTest::testExport analytics data
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testCompareTeacherPerformance" class="Tests\Unit\BlackBox\AnalyticsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php" time="0.003455" assertions="0">
+      <error type="Error">AnalyticsBlackBoxTest::testCompare teacher performance
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testViewResponseTrends" class="Tests\Unit\BlackBox\AnalyticsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php" time="0.003548" assertions="0">
+      <error type="Error">AnalyticsBlackBoxTest::testView response trends
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testPendingIssuesSummary" class="Tests\Unit\BlackBox\AnalyticsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php" time="0.003151" assertions="0">
+      <error type="Error">AnalyticsBlackBoxTest::testPending issues summary
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testDepartmentWiseAnalytics" class="Tests\Unit\BlackBox\AnalyticsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php" time="0.003043" assertions="0">
+      <error type="Error">AnalyticsBlackBoxTest::testDepartment wise analytics
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testGenerateSummaryStatistics" class="Tests\Unit\BlackBox\AnalyticsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AnalyticsBlackBoxTest.php" time="0.002612" assertions="0">
+      <error type="Error">AnalyticsBlackBoxTest::testGenerate summary statistics
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testValidUserLogin" class="Tests\Unit\BlackBox\AuthenticationBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AuthenticationBlackBoxTest.php" time="0.004205" assertions="0">
+      <error type="Error">AuthenticationBlackBoxTest::testValid user login
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testLoginWithInvalidPassword" class="Tests\Unit\BlackBox\AuthenticationBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AuthenticationBlackBoxTest.php" time="0.003002" assertions="0">
+      <error type="Error">AuthenticationBlackBoxTest::testLogin with invalid password
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testLoginWithNonExistentUser" class="Tests\Unit\BlackBox\AuthenticationBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AuthenticationBlackBoxTest.php" time="0.002999" assertions="0">
+      <error type="Error">AuthenticationBlackBoxTest::testLogin with non existent user
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testRegisterNewStudentUser" class="Tests\Unit\BlackBox\AuthenticationBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AuthenticationBlackBoxTest.php" time="0.002831" assertions="0">
+      <error type="Error">AuthenticationBlackBoxTest::testRegister new student user
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testRegisterWithDuplicateEmail" class="Tests\Unit\BlackBox\AuthenticationBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AuthenticationBlackBoxTest.php" time="0.002993" assertions="0">
+      <error type="Error">AuthenticationBlackBoxTest::testRegister with duplicate email
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testUserLogout" class="Tests\Unit\BlackBox\AuthenticationBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AuthenticationBlackBoxTest.php" time="0.002872" assertions="0">
+      <error type="Error">AuthenticationBlackBoxTest::testUser logout
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testRegisterDifferentUserRoles" class="Tests\Unit\BlackBox\AuthenticationBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AuthenticationBlackBoxTest.php" time="0.003047" assertions="0">
+      <error type="Error">AuthenticationBlackBoxTest::testRegister different user roles
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testUserCanUpdateProfile" class="Tests\Unit\BlackBox\AuthenticationBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AuthenticationBlackBoxTest.php" time="0.002891" assertions="0">
+      <error type="Error">AuthenticationBlackBoxTest::testUser can update profile
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testInactiveUserCannotLogin" class="Tests\Unit\BlackBox\AuthenticationBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AuthenticationBlackBoxTest.php" time="0.003571" assertions="0">
+      <error type="Error">AuthenticationBlackBoxTest::testInactive user cannot login
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testEmailValidationOnRegistration" class="Tests\Unit\BlackBox\AuthenticationBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\AuthenticationBlackBoxTest.php" time="0.003326" assertions="0">
+      <error type="Error">AuthenticationBlackBoxTest::testEmail validation on registration
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSubmitComplaintSuccessfully" class="Tests\Unit\BlackBox\ComplaintsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\ComplaintsBlackBoxTest.php" time="0.005334" assertions="0">
+      <error type="Error">ComplaintsBlackBoxTest::testSubmit complaint successfully
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSubmitSuggestion" class="Tests\Unit\BlackBox\ComplaintsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\ComplaintsBlackBoxTest.php" time="0.002997" assertions="0">
+      <error type="Error">ComplaintsBlackBoxTest::testSubmit suggestion
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testViewComplaintStatus" class="Tests\Unit\BlackBox\ComplaintsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\ComplaintsBlackBoxTest.php" time="0.003066" assertions="0">
+      <error type="Error">ComplaintsBlackBoxTest::testView complaint status
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testTrackComplaintResolution" class="Tests\Unit\BlackBox\ComplaintsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\ComplaintsBlackBoxTest.php" time="0.002690" assertions="0">
+      <error type="Error">ComplaintsBlackBoxTest::testTrack complaint resolution
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testFilterComplaintsByType" class="Tests\Unit\BlackBox\ComplaintsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\ComplaintsBlackBoxTest.php" time="0.003049" assertions="0">
+      <error type="Error">ComplaintsBlackBoxTest::testFilter complaints by type
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testFilterComplaintsByStatus" class="Tests\Unit\BlackBox\ComplaintsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\ComplaintsBlackBoxTest.php" time="0.003087" assertions="0">
+      <error type="Error">ComplaintsBlackBoxTest::testFilter complaints by status
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSearchComplaints" class="Tests\Unit\BlackBox\ComplaintsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\ComplaintsBlackBoxTest.php" time="0.002765" assertions="0">
+      <error type="Error">ComplaintsBlackBoxTest::testSearch complaints
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testComplaintPriority" class="Tests\Unit\BlackBox\ComplaintsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\ComplaintsBlackBoxTest.php" time="0.002780" assertions="0">
+      <error type="Error">ComplaintsBlackBoxTest::testComplaint priority
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testPendingComplaintsCountDisplay" class="Tests\Unit\BlackBox\ComplaintsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\ComplaintsBlackBoxTest.php" time="0.003670" assertions="0">
+      <error type="Error">ComplaintsBlackBoxTest::testPending complaints count display
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSubmitComplaintWithMinimalFields" class="Tests\Unit\BlackBox\ComplaintsBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\ComplaintsBlackBoxTest.php" time="0.003159" assertions="0">
+      <error type="Error">ComplaintsBlackBoxTest::testSubmit complaint with minimal fields
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testValidLoginPass" class="Tests\Unit\BlackBox\DemoFailuresBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php" time="0.005235" assertions="1"/>
+    <testcase name="testInvalidPasswordFail" class="Tests\Unit\BlackBox\DemoFailuresBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php" time="0.008558" assertions="0">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">DemoFailuresBlackBoxTest::testInvalid password fail
+Password validation failed - expected error but got success
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'error'
++'success'
+
+C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php:27
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</failure>
+    </testcase>
+    <testcase name="testUserRegistrationPass" class="Tests\Unit\BlackBox\DemoFailuresBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php" time="0.002214" assertions="1"/>
+    <testcase name="testEmailValidationFail" class="Tests\Unit\BlackBox\DemoFailuresBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php" time="0.001924" assertions="0">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">DemoFailuresBlackBoxTest::testEmail validation fail
+Email should contain @ symbol
+Failed asserting that 'invalid-email' [ASCII](length: 13) contains "@" [ASCII](length: 1).
+
+C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php:44
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</failure>
+    </testcase>
+    <testcase name="testSessionCreationPass" class="Tests\Unit\BlackBox\DemoFailuresBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php" time="0.001711" assertions="1"/>
+    <testcase name="testPasswordStrengthFail" class="Tests\Unit\BlackBox\DemoFailuresBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php" time="0.001999" assertions="0">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">DemoFailuresBlackBoxTest::testPassword strength fail
+Password must be longer than 8 characters
+Failed asserting that 3 is greater than 8.
+
+C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php:61
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</failure>
+    </testcase>
+    <testcase name="testUserLogoutPass" class="Tests\Unit\BlackBox\DemoFailuresBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php" time="0.000607" assertions="1"/>
+    <testcase name="testRoleValidationFail" class="Tests\Unit\BlackBox\DemoFailuresBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php" time="0.002429" assertions="0">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">DemoFailuresBlackBoxTest::testRole validation fail
+Role must be valid
+Failed asserting that an array contains 'guest'.
+
+C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php:78
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</failure>
+    </testcase>
+    <testcase name="testProfileUpdatePass" class="Tests\Unit\BlackBox\DemoFailuresBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php" time="0.000278" assertions="1"/>
+    <testcase name="testAccountActivationFail" class="Tests\Unit\BlackBox\DemoFailuresBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php" time="0.001938" assertions="0">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">DemoFailuresBlackBoxTest::testAccount activation fail
+Account should be activated
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'active'
++'pending'
+
+C:\xampp\htdocs\stu\tests\unit\blackbox\DemoFailuresBlackBoxTest.php:95
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</failure>
+    </testcase>
+    <testcase name="testLoadSurveySuccessfully" class="Tests\Unit\BlackBox\SurveyBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\SurveyBlackBoxTest.php" time="0.004066" assertions="0">
+      <error type="Error">SurveyBlackBoxTest::testLoad survey successfully
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSurveyContainsQuestions" class="Tests\Unit\BlackBox\SurveyBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\SurveyBlackBoxTest.php" time="0.002972" assertions="0">
+      <error type="Error">SurveyBlackBoxTest::testSurvey contains questions
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSubmitSurveyWithValidRatings" class="Tests\Unit\BlackBox\SurveyBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\SurveyBlackBoxTest.php" time="0.002795" assertions="0">
+      <error type="Error">SurveyBlackBoxTest::testSubmit survey with valid ratings
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testCannotSubmitSurveyTwice" class="Tests\Unit\BlackBox\SurveyBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\SurveyBlackBoxTest.php" time="0.002995" assertions="0">
+      <error type="Error">SurveyBlackBoxTest::testCannot submit survey twice
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSubmitWithMissingFields" class="Tests\Unit\BlackBox\SurveyBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\SurveyBlackBoxTest.php" time="0.003018" assertions="0">
+      <error type="Error">SurveyBlackBoxTest::testSubmit with missing fields
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testViewSurveyResults" class="Tests\Unit\BlackBox\SurveyBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\SurveyBlackBoxTest.php" time="0.003249" assertions="0">
+      <error type="Error">SurveyBlackBoxTest::testView survey results
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testInactiveSurveyCannotBeAccessed" class="Tests\Unit\BlackBox\SurveyBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\SurveyBlackBoxTest.php" time="0.002903" assertions="0">
+      <error type="Error">SurveyBlackBoxTest::testInactive survey cannot be accessed
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSaveSurveyDraft" class="Tests\Unit\BlackBox\SurveyBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\SurveyBlackBoxTest.php" time="0.004053" assertions="0">
+      <error type="Error">SurveyBlackBoxTest::testSave survey draft
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testRateSpecificTeacher" class="Tests\Unit\BlackBox\SurveyBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\SurveyBlackBoxTest.php" time="0.004466" assertions="0">
+      <error type="Error">SurveyBlackBoxTest::testRate specific teacher
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testGetTeacherAverageRating" class="Tests\Unit\BlackBox\SurveyBlackBoxTest" file="C:\xampp\htdocs\stu\tests\unit\blackbox\SurveyBlackBoxTest.php" time="0.003236" assertions="0">
+      <error type="Error">SurveyBlackBoxTest::testGet teacher average rating
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testAverageRatingCalculation" class="Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php" time="0.004104" assertions="0">
+      <error type="Error">AnalyticsWhiteBoxTest::testAverage rating calculation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testPercentageCalculation" class="Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php" time="0.002904" assertions="0">
+      <error type="Error">AnalyticsWhiteBoxTest::testPercentage calculation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testAggregationQueryPerformance" class="Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php" time="0.002986" assertions="0">
+      <error type="Error">AnalyticsWhiteBoxTest::testAggregation query performance
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testResponseCountByRating" class="Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php" time="0.003085" assertions="0">
+      <error type="Error">AnalyticsWhiteBoxTest::testResponse count by rating
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testDateRangeFiltering" class="Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php" time="0.003287" assertions="0">
+      <error type="Error">AnalyticsWhiteBoxTest::testDate range filtering
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testHandlingMissingData" class="Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php" time="0.002948" assertions="0">
+      <error type="Error">AnalyticsWhiteBoxTest::testHandling missing data
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testPercentileCalculations" class="Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php" time="0.002767" assertions="0">
+      <error type="Error">AnalyticsWhiteBoxTest::testPercentile calculations
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testTeacherRanking" class="Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php" time="0.002568" assertions="0">
+      <error type="Error">AnalyticsWhiteBoxTest::testTeacher ranking
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testCompletionRateCalculation" class="Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php" time="0.003163" assertions="0">
+      <error type="Error">AnalyticsWhiteBoxTest::testCompletion rate calculation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testTrendAnalysis" class="Tests\Unit\WhiteBox\AnalyticsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AnalyticsWhiteBoxTest.php" time="0.004250" assertions="0">
+      <error type="Error">AnalyticsWhiteBoxTest::testTrend analysis
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testPasswordHashingFunction" class="Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AuthenticationWhiteBoxTest.php" time="0.003411" assertions="0">
+      <error type="Error">AuthenticationWhiteBoxTest::testPassword hashing function
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testPasswordStrengthValidation" class="Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AuthenticationWhiteBoxTest.php" time="0.002733" assertions="0">
+      <error type="Error">AuthenticationWhiteBoxTest::testPassword strength validation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testEmailValidationLogic" class="Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AuthenticationWhiteBoxTest.php" time="0.002191" assertions="0">
+      <error type="Error">AuthenticationWhiteBoxTest::testEmail validation logic
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testRoleBasedAccessControl" class="Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AuthenticationWhiteBoxTest.php" time="0.001912" assertions="0">
+      <error type="Error">AuthenticationWhiteBoxTest::testRole based access control
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testJWTTokenGeneration" class="Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AuthenticationWhiteBoxTest.php" time="0.001727" assertions="0">
+      <error type="Error">AuthenticationWhiteBoxTest::testJwt token generation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSessionTimeoutLogic" class="Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AuthenticationWhiteBoxTest.php" time="0.002228" assertions="0">
+      <error type="Error">AuthenticationWhiteBoxTest::testSession timeout logic
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testInputSanitization" class="Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AuthenticationWhiteBoxTest.php" time="0.002659" assertions="0">
+      <error type="Error">AuthenticationWhiteBoxTest::testInput sanitization
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testPasswordResetTokenGeneration" class="Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AuthenticationWhiteBoxTest.php" time="0.002691" assertions="0">
+      <error type="Error">AuthenticationWhiteBoxTest::testPassword reset token generation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testAccountActivationFlow" class="Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AuthenticationWhiteBoxTest.php" time="0.003739" assertions="0">
+      <error type="Error">AuthenticationWhiteBoxTest::testAccount activation flow
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testRateLimitingOnFailedLogins" class="Tests\Unit\WhiteBox\AuthenticationWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\AuthenticationWhiteBoxTest.php" time="0.003724" assertions="0">
+      <error type="Error">AuthenticationWhiteBoxTest::testRate limiting on failed logins
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSubjectValidation" class="Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\ComplaintsWhiteBoxTest.php" time="0.006065" assertions="0">
+      <error type="Error">ComplaintsWhiteBoxTest::testSubject validation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testDescriptionValidation" class="Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\ComplaintsWhiteBoxTest.php" time="0.002593" assertions="0">
+      <error type="Error">ComplaintsWhiteBoxTest::testDescription validation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testTypeValidation" class="Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\ComplaintsWhiteBoxTest.php" time="0.003081" assertions="0">
+      <error type="Error">ComplaintsWhiteBoxTest::testType validation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testStatusWorkflow" class="Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\ComplaintsWhiteBoxTest.php" time="0.002787" assertions="0">
+      <error type="Error">ComplaintsWhiteBoxTest::testStatus workflow
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSQLInjectionPrevention" class="Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\ComplaintsWhiteBoxTest.php" time="0.003188" assertions="0">
+      <error type="Error">ComplaintsWhiteBoxTest::testSql injection prevention
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testComplaintCountByStatus" class="Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\ComplaintsWhiteBoxTest.php" time="0.003859" assertions="0">
+      <error type="Error">ComplaintsWhiteBoxTest::testComplaint count by status
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testAutoTimestampOnCreation" class="Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\ComplaintsWhiteBoxTest.php" time="0.003533" assertions="0">
+      <error type="Error">ComplaintsWhiteBoxTest::testAuto timestamp on creation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testResolutionNotesLogic" class="Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\ComplaintsWhiteBoxTest.php" time="0.003556" assertions="0">
+      <error type="Error">ComplaintsWhiteBoxTest::testResolution notes logic
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testComplaintAssignmentToAdmin" class="Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\ComplaintsWhiteBoxTest.php" time="0.003527" assertions="0">
+      <error type="Error">ComplaintsWhiteBoxTest::testComplaint assignment to admin
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testComplaintPagination" class="Tests\Unit\WhiteBox\ComplaintsWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\ComplaintsWhiteBoxTest.php" time="0.003187" assertions="0">
+      <error type="Error">ComplaintsWhiteBoxTest::testComplaint pagination
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testHashGenerationPass" class="Tests\Unit\WhiteBox\DemoFailuresWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php" time="0.095255" assertions="1"/>
+    <testcase name="testNullHandlingFail" class="Tests\Unit\WhiteBox\DemoFailuresWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php" time="0.000985" assertions="0">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">DemoFailuresWhiteBoxTest::testNull handling fail
+Value should not be null but it is
+Failed asserting that null is not null.
+
+C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php:28
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</failure>
+    </testcase>
+    <testcase name="testArrayManipulationPass" class="Tests\Unit\WhiteBox\DemoFailuresWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php" time="0.000496" assertions="1"/>
+    <testcase name="testTypeCheckingFail" class="Tests\Unit\WhiteBox\DemoFailuresWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php" time="0.000852" assertions="0">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">DemoFailuresWhiteBoxTest::testType checking fail
+Expected integer but got string
+Failed asserting that '123' is of type int.
+
+C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php:46
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</failure>
+    </testcase>
+    <testcase name="testStringOperationsPass" class="Tests\Unit\WhiteBox\DemoFailuresWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php" time="0.000311" assertions="1"/>
+    <testcase name="testBoundaryConditionFail" class="Tests\Unit\WhiteBox\DemoFailuresWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php" time="0.001215" assertions="0">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">DemoFailuresWhiteBoxTest::testBoundary condition fail
+Age cannot exceed 120 years
+Failed asserting that 150 is less than 120.
+
+C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php:64
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</failure>
+    </testcase>
+    <testcase name="testBooleanLogicPass" class="Tests\Unit\WhiteBox\DemoFailuresWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php" time="0.000132" assertions="1"/>
+    <testcase name="testRegexMatchFail" class="Tests\Unit\WhiteBox\DemoFailuresWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php" time="0.001044" assertions="0">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">DemoFailuresWhiteBoxTest::testRegex match fail
+Email format invalid
+Failed asserting that 'test@example' matches PCRE pattern "/^[\w\-\.]+@[\w\-]+\.\w+$/".
+
+C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php:82
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</failure>
+    </testcase>
+    <testcase name="testExceptionHandlingPass" class="Tests\Unit\WhiteBox\DemoFailuresWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php" time="0.000126" assertions="0"/>
+    <testcase name="testEmptyArrayFail" class="Tests\Unit\WhiteBox\DemoFailuresWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php" time="0.001196" assertions="0">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">DemoFailuresWhiteBoxTest::testEmpty array fail
+Data array should not be empty
+Failed asserting that an array is not empty.
+
+C:\xampp\htdocs\stu\tests\unit\whitebox\DemoFailuresWhiteBoxTest.php:100
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</failure>
+    </testcase>
+    <testcase name="testRatingValidation" class="Tests\Unit\WhiteBox\SurveyWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php" time="0.002862" assertions="0">
+      <error type="Error">SurveyWhiteBoxTest::testRating validation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testAverageRatingCalculation" class="Tests\Unit\WhiteBox\SurveyWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php" time="0.001791" assertions="0">
+      <error type="Error">SurveyWhiteBoxTest::testAverage rating calculation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testDuplicateSubmissionPrevention" class="Tests\Unit\WhiteBox\SurveyWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php" time="0.001833" assertions="0">
+      <error type="Error">SurveyWhiteBoxTest::testDuplicate submission prevention
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testQuestionOrdering" class="Tests\Unit\WhiteBox\SurveyWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php" time="0.002732" assertions="0">
+      <error type="Error">SurveyWhiteBoxTest::testQuestion ordering
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testRatingDistributionAnalysis" class="Tests\Unit\WhiteBox\SurveyWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php" time="0.002233" assertions="0">
+      <error type="Error">SurveyWhiteBoxTest::testRating distribution analysis
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testStudentProgressTracking" class="Tests\Unit\WhiteBox\SurveyWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php" time="0.002155" assertions="0">
+      <error type="Error">SurveyWhiteBoxTest::testStudent progress tracking
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testTeacherResponseValidation" class="Tests\Unit\WhiteBox\SurveyWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php" time="0.002391" assertions="0">
+      <error type="Error">SurveyWhiteBoxTest::testTeacher response validation
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testSurveyStatusTransitions" class="Tests\Unit\WhiteBox\SurveyWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php" time="0.002286" assertions="0">
+      <error type="Error">SurveyWhiteBoxTest::testSurvey status transitions
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testResponseDateTracking" class="Tests\Unit\WhiteBox\SurveyWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php" time="0.001958" assertions="0">
+      <error type="Error">SurveyWhiteBoxTest::testResponse date tracking
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+    <testcase name="testBulkTeacherRatings" class="Tests\Unit\WhiteBox\SurveyWhiteBoxTest" file="C:\xampp\htdocs\stu\tests\unit\whitebox\SurveyWhiteBoxTest.php" time="0.001742" assertions="0">
+      <error type="Error">SurveyWhiteBoxTest::testBulk teacher ratings
+Error: Class "Tests\TestDatabase" not found
+
+C:\xampp\htdocs\stu\tests\BaseTestCase.php:19
+C:\xampp\htdocs\stu\vendor\bin\codecept:119</error>
+    </testcase>
+  </testsuite>
+</testsuites>

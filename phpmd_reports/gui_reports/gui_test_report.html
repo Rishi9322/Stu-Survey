@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUI Testing Report - Student Survey System</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .stat-card.total .stat-number { color: #007bff; }
+        .stat-card.passed .stat-number { color: #28a745; }
+        .stat-card.failed .stat-number { color: #dc3545; }
+        .stat-card.rate .stat-number { color: #17a2b8; }
+        
+        .test-section {
+            padding: 30px;
+        }
+        .test-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        .test-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .test-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .test-table tr:hover {
+            background: #f8f9fa;
+        }
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .badge.pass {
+            background: #d4edda;
+            color: #155724;
+        }
+        .badge.fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .type-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.75em;
+            background: #e9ecef;
+            color: #495057;
+            margin-right: 5px;
+        }
+        .details {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🖥️ GUI Testing Report</h1>
+            <p>Student Satisfaction Survey System</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Generated: December 22, 2025 - 08:08:49</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card total">
+                <div class="stat-label">Total Tests</div>
+                <div class="stat-number">19</div>
+            </div>
+            <div class="stat-card passed">
+                <div class="stat-label">Passed</div>
+                <div class="stat-number">19</div>
+            </div>
+            <div class="stat-card failed">
+                <div class="stat-label">Failed</div>
+                <div class="stat-number">0</div>
+            </div>
+            <div class="stat-card rate">
+                <div class="stat-label">Pass Rate</div>
+                <div class="stat-number">100%</div>
+            </div>
+        </div>
+        
+        <div style="padding: 0 30px;">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 100%">
+                    100% Passed
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📋 Test Results</h2>
+            <table class="test-table">
+                <thead>
+                    <tr>
+                        <th style="width: 5%">#</th>
+                        <th style="width: 20%">Test Type</th>
+                        <th style="width: 30%">Test Name</th>
+                        <th style="width: 10%">Status</th>
+                        <th style="width: 35%">Details</th>
+                    </tr>
+                </thead>
+                <tbody><tr>
+                    <td>1</td>
+                    <td><span class='type-badge'>Page Load</span></td>
+                    <td><strong>Homepage Load</strong><br><small style='color:#6c757d'>http://localhost/stu/</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>Load Time: 0.05s | HTTP: 200 | Size: 28,523 bytes</td>
+                  </tr><tr>
+                    <td>2</td>
+                    <td><span class='type-badge'>Page Load</span></td>
+                    <td><strong>Index Page Load</strong><br><small style='color:#6c757d'>http://localhost/stu/index.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>Load Time: 0.012s | HTTP: 200 | Size: 28,523 bytes</td>
+                  </tr><tr>
+                    <td>3</td>
+                    <td><span class='type-badge'>Page Load</span></td>
+                    <td><strong>Public Homepage Load</strong><br><small style='color:#6c757d'>http://localhost/stu/public/index.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>Load Time: 0.006s | HTTP: 200 | Size: 28,523 bytes</td>
+                  </tr><tr>
+                    <td>4</td>
+                    <td><span class='type-badge'>Page Load</span></td>
+                    <td><strong>Login Page Load</strong><br><small style='color:#6c757d'>http://localhost/stu/public/login.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>Load Time: 0.063s | HTTP: 200 | Size: 18,941 bytes</td>
+                  </tr><tr>
+                    <td>5</td>
+                    <td><span class='type-badge'>Page Load</span></td>
+                    <td><strong>Registration Page Load</strong><br><small style='color:#6c757d'>http://localhost/stu/public/register.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>Load Time: 0.081s | HTTP: 200 | Size: 22,076 bytes</td>
+                  </tr><tr>
+                    <td>6</td>
+                    <td><span class='type-badge'>Page Load</span></td>
+                    <td><strong>About Page Load</strong><br><small style='color:#6c757d'>http://localhost/stu/public/about.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>Load Time: 0.01s | HTTP: 200 | Size: 26,091 bytes</td>
+                  </tr><tr>
+                    <td>7</td>
+                    <td><span class='type-badge'>Page Load</span></td>
+                    <td><strong>Contact Page Load</strong><br><small style='color:#6c757d'>http://localhost/stu/public/contact.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>Load Time: 0.01s | HTTP: 200 | Size: 30,330 bytes</td>
+                  </tr><tr>
+                    <td>8</td>
+                    <td><span class='type-badge'>Page Load</span></td>
+                    <td><strong>Help Page Load</strong><br><small style='color:#6c757d'>http://localhost/stu/public/help.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>Load Time: 0.018s | HTTP: 200 | Size: 32,734 bytes</td>
+                  </tr><tr>
+                    <td>9</td>
+                    <td><span class='type-badge'>Page Load</span></td>
+                    <td><strong>Privacy Policy Page Load</strong><br><small style='color:#6c757d'>http://localhost/stu/public/privacy.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>Load Time: 0.025s | HTTP: 200 | Size: 24,907 bytes</td>
+                  </tr><tr>
+                    <td>10</td>
+                    <td><span class='type-badge'>Page Load</span></td>
+                    <td><strong>Terms Page Load</strong><br><small style='color:#6c757d'>http://localhost/stu/public/terms.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>Load Time: 0.017s | HTTP: 200 | Size: 27,602 bytes</td>
+                  </tr><tr>
+                    <td>11</td>
+                    <td><span class='type-badge'>Form Elements</span></td>
+                    <td><strong>Login Form Elements</strong><br><small style='color:#6c757d'>http://localhost/stu/public/login.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>HTTP: 200 | Form: ✓ | Inputs: ✓ | Buttons: ✓</td>
+                  </tr><tr>
+                    <td>12</td>
+                    <td><span class='type-badge'>Form Elements</span></td>
+                    <td><strong>Registration Form Elements</strong><br><small style='color:#6c757d'>http://localhost/stu/public/register.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>HTTP: 200 | Form: ✓ | Inputs: ✓ | Buttons: ✓</td>
+                  </tr><tr>
+                    <td>13</td>
+                    <td><span class='type-badge'>Form Elements</span></td>
+                    <td><strong>Contact Form Elements</strong><br><small style='color:#6c757d'>http://localhost/stu/public/contact.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>HTTP: 200 | Form: ✓ | Inputs: ✓ | Buttons: ✓</td>
+                  </tr><tr>
+                    <td>14</td>
+                    <td><span class='type-badge'>Responsive Design</span></td>
+                    <td><strong>Root Responsive</strong><br><small style='color:#6c757d'>http://localhost/stu/</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>Viewport: ✓ | Media Query: ✓ | Responsive: ✓</td>
+                  </tr><tr>
+                    <td>15</td>
+                    <td><span class='type-badge'>Responsive Design</span></td>
+                    <td><strong>Index Responsive</strong><br><small style='color:#6c757d'>http://localhost/stu/index.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>Viewport: ✓ | Media Query: ✓ | Responsive: ✓</td>
+                  </tr><tr>
+                    <td>16</td>
+                    <td><span class='type-badge'>Responsive Design</span></td>
+                    <td><strong>Login Page Responsive</strong><br><small style='color:#6c757d'>http://localhost/stu/public/login.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>Viewport: ✓ | Media Query: ✓ | Responsive: ✓</td>
+                  </tr><tr>
+                    <td>17</td>
+                    <td><span class='type-badge'>Assets Loading</span></td>
+                    <td><strong>Root Assets</strong><br><small style='color:#6c757d'>http://localhost/stu/</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>CSS: ✓ | JS: ✓ | Images: ✗</td>
+                  </tr><tr>
+                    <td>18</td>
+                    <td><span class='type-badge'>Assets Loading</span></td>
+                    <td><strong>Index Assets</strong><br><small style='color:#6c757d'>http://localhost/stu/index.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>CSS: ✓ | JS: ✓ | Images: ✗</td>
+                  </tr><tr>
+                    <td>19</td>
+                    <td><span class='type-badge'>Assets Loading</span></td>
+                    <td><strong>Login Page Assets</strong><br><small style='color:#6c757d'>http://localhost/stu/public/login.php</small></td>
+                    <td><span class="badge pass">✓ PASS</span></td>
+                    <td class='details'>CSS: ✓ | JS: ✓ | Images: ✗</td>
+                  </tr></tbody>
+            </table>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Student Survey System</strong> | GUI Testing Suite v1.0</p>
+            <p>Automated GUI testing completed successfully</p>
+        </div>
+    </div>
+</body>
+</html>

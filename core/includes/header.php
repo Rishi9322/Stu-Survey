@@ -66,12 +66,44 @@ $basePath = str_replace('/public/public/', '/public/', $basePath);
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#6366f1">
+    
+    <!-- Notification Badge Style -->
+    <style>
+        .notification-badge {
+            font-size: 0.65rem;
+            padding: 0.25rem 0.4rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+        
+        /* GLOBAL: Prevent modal backdrop from blocking clicks when no modal is open */
+        body:not(.modal-open) .modal-backdrop,
+        .modal-backdrop.orphan {
+            display: none !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            visibility: hidden !important;
+            z-index: -1 !important;
+        }
+        
+        /* Ensure modals appear above backdrops */
+        .modal {
+            z-index: 1055 !important;
+        }
+        
+        .modal-backdrop.show {
+            z-index: 1050 !important;
+        }
+    </style>
 </head>
 <body class="has-fixed-header">
     <header class="header" id="header">
         <div class="container">
             <nav class="navbar navbar-expand-lg">
-                <a href="<?php echo $basePath; ?>public/index.php" class="navbar-brand">
+                <a href="/stu/public/index.php" class="navbar-brand">
                     <i class="fas fa-graduation-cap me-2"></i>
                     EduSurvey Pro
                 </a>
@@ -89,105 +121,123 @@ $basePath = str_replace('/public/public/', '/public/', $basePath);
                         <?php if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true): ?>
                             <?php if ($_SESSION["role"] === "student"): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/student/dashboard.php" class="nav-link">
+                                    <a href="/stu/app/student/dashboard.php" class="nav-link">
                                         <i class="fas fa-tachometer-alt me-1"></i>
                                         Dashboard
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/student/profile.php" class="nav-link">
+                                    <a href="/stu/app/student/profile.php" class="nav-link">
                                         <i class="fas fa-user me-1"></i>
                                         Profile
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/student/survey.php" class="nav-link">
+                                    <a href="/stu/app/student/survey.php" class="nav-link">
                                         <i class="fas fa-poll me-1"></i>
                                         Survey
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/student/analytics.php" class="nav-link">
+                                    <a href="/stu/app/student/analytics.php" class="nav-link">
                                         <i class="fas fa-chart-bar me-1"></i>
                                         Analytics
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>core/includes/logout.php" class="nav-link">
+                                    <a href="/stu/core/includes/logout.php" class="nav-link">
                                         <i class="fas fa-sign-out-alt me-1"></i>
                                         Logout
                                     </a>
                                 </li>
                             <?php elseif ($_SESSION["role"] === "teacher"): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/teacher/dashboard.php" class="nav-link">
+                                    <a href="/stu/app/teacher/dashboard.php" class="nav-link">
                                         <i class="fas fa-tachometer-alt me-1"></i>
                                         Dashboard
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/teacher/profile.php" class="nav-link">
+                                    <a href="/stu/app/teacher/profile.php" class="nav-link">
                                         <i class="fas fa-user me-1"></i>
                                         Profile
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/teacher/survey.php" class="nav-link">
+                                    <a href="/stu/app/teacher/survey.php" class="nav-link">
                                         <i class="fas fa-poll me-1"></i>
                                         Survey
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/teacher/analytics.php" class="nav-link">
+                                    <a href="/stu/app/teacher/analytics.php" class="nav-link">
                                         <i class="fas fa-chart-line me-1"></i>
                                         Analytics
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>core/includes/logout.php" class="nav-link">
+                                    <a href="/stu/core/includes/logout.php" class="nav-link">
                                         <i class="fas fa-sign-out-alt me-1"></i>
                                         Logout
                                     </a>
                                 </li>
                             <?php elseif ($_SESSION["role"] === "admin"): ?>
+                                <?php 
+                                // Get unread notification count for admin (only if function and connection exist)
+                                $unreadCount = 0;
+                                if (function_exists('getUnreadNotificationCount') && isset($conn)) {
+                                    $unreadCount = getUnreadNotificationCount($conn);
+                                }
+                                ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/admin/dashboard.php" class="nav-link">
+                                    <a href="/stu/app/admin/dashboard.php" class="nav-link">
                                         <i class="fas fa-tachometer-alt me-1"></i>
                                         Dashboard
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/admin/profile.php" class="nav-link">
+                                    <a href="/stu/app/admin/profile.php" class="nav-link">
                                         <i class="fas fa-user me-1"></i>
                                         Profile
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/admin/survey_management.php" class="nav-link">
+                                    <a href="/stu/app/admin/survey_management.php" class="nav-link">
                                         <i class="fas fa-tasks me-1"></i>
                                         Surveys
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/admin/user_management.php" class="nav-link">
+                                    <a href="/stu/app/admin/user_management.php" class="nav-link">
                                         <i class="fas fa-users me-1"></i>
                                         Users
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/admin/complaints.php" class="nav-link">
-                                        <i class="fas fa-comment-alt me-1"></i>
-                                        Feedback
+                                    <a href="/stu/app/admin/access_codes.php" class="nav-link">
+                                        <i class="fas fa-key me-1"></i>
+                                        Access Codes
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>app/api/ai_insights.php" class="nav-link">
+                                    <a href="/stu/app/admin/complaints.php" class="nav-link position-relative">
+                                        <i class="fas fa-comment-alt me-1"></i>
+                                        Feedback
+                                        <?php if ($unreadCount > 0): ?>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge">
+                                            <?php echo $unreadCount > 99 ? '99+' : $unreadCount; ?>
+                                        </span>
+                                        <?php endif; ?>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/stu/app/api/ai_insights.php" class="nav-link">
                                         <i class="fas fa-brain me-1"></i>
                                         AI Insights
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo $basePath; ?>core/includes/logout.php" class="nav-link">
+                                    <a href="/stu/core/includes/logout.php" class="nav-link">
                                         <i class="fas fa-sign-out-alt me-1"></i>
                                         Logout
                                     </a>
@@ -195,19 +245,19 @@ $basePath = str_replace('/public/public/', '/public/', $basePath);
                             <?php endif; ?>
                         <?php else: ?>
                             <li class="nav-item">
-                                <a href="<?php echo $basePath; ?>public/index.php" class="nav-link">
+                                <a href="/stu/public/index.php" class="nav-link">
                                     <i class="fas fa-home me-1"></i>
                                     Home
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?php echo $basePath; ?>public/login.php" class="nav-link">
+                                <a href="/stu/public/login.php" class="nav-link">
                                     <i class="fas fa-sign-in-alt me-1"></i>
                                     Login
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?php echo $basePath; ?>public/register.php" class="btn btn-primary btn-sm ms-2">
+                                <a href="/stu/public/register.php" class="btn btn-primary btn-sm ms-2">
                                     <i class="fas fa-user-plus me-1"></i>
                                     Get Started
                                 </a>
@@ -342,11 +392,47 @@ $basePath = str_replace('/public/public/', '/public/', $basePath);
             echo '</div>';
         }
         ?>
-        <?php if (isset($alertMessage) && isset($alertType)): ?>
-            <div class="container mt-4">
-                <div class="alert alert-<?php echo $alertType; ?> alert-dismissible fade show" role="alert">
-                    <?php echo $alertMessage; ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <?php if (!empty($alertMessage) && isset($alertType)): ?>
+            <?php
+                $toastIcon = $alertType === 'success' ? 'check-circle' : ($alertType === 'danger' ? 'exclamation-circle' : 'info-circle');
+                $toastColor = $alertType === 'success' ? '#10b981' : ($alertType === 'danger' ? '#ef4444' : '#3b82f6');
+            ?>
+            <div id="globalToast" style="
+                position:fixed; top:20px; right:20px; z-index:9999;
+                min-width:320px; max-width:440px;
+                background:white; border-radius:12px;
+                box-shadow:0 20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05);
+                overflow:hidden; transform:translateX(120%); opacity:0;
+                transition:transform 0.4s cubic-bezier(0.22,1,0.36,1), opacity 0.4s ease;
+            ">
+                <div style="display:flex; align-items:center; gap:12px; padding:16px 18px;">
+                    <div style="width:38px;height:38px;border-radius:10px;background:<?php echo $toastColor; ?>15;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <i class="fas fa-<?php echo $toastIcon; ?>" style="color:<?php echo $toastColor; ?>;font-size:1.1rem;"></i>
+                    </div>
+                    <div style="flex-grow:1;font-size:0.9rem;font-weight:500;color:#1f2937;line-height:1.4;">
+                        <?php echo $alertMessage; ?>
+                    </div>
+                    <button onclick="dismissToast()" style="background:none;border:none;color:#9ca3af;cursor:pointer;padding:4px;font-size:1.1rem;line-height:1;" title="Dismiss">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div style="height:3px;background:#e5e7eb;">
+                    <div id="toastProgress" style="height:100%;background:<?php echo $toastColor; ?>;width:100%;transition:width 4s linear;"></div>
                 </div>
             </div>
+            <script>
+                (function(){
+                    var t = document.getElementById('globalToast');
+                    if (!t) return;
+                    setTimeout(function(){ t.style.transform='translateX(0)'; t.style.opacity='1'; }, 100);
+                    setTimeout(function(){ var p=document.getElementById('toastProgress'); if(p) p.style.width='0%'; }, 200);
+                    setTimeout(function(){ dismissToast(); }, 4200);
+                })();
+                function dismissToast(){
+                    var t=document.getElementById('globalToast');
+                    if(!t) return;
+                    t.style.transform='translateX(120%)'; t.style.opacity='0';
+                    setTimeout(function(){ t.remove(); }, 400);
+                }
+            </script>
         <?php endif; ?>

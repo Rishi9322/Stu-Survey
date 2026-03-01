@@ -1,0 +1,18 @@
+actor: FunctionalTester
+modules:
+    enabled:
+        - PhpBrowser:
+            url: http://localhost/stu/public
+        - Asserts
+        - Db:
+            dsn: 'mysql:host=localhost;dbname=student_feedback'
+            user: 'root'
+            password: ''
+            dump: tests/_data/dump.sql
+            populate: false
+            cleanup: false
+        - REST:
+            url: http://localhost/stu/api
+            depends: PhpBrowser
+        - \Tests\Helper\Functional
+    step_decorators: ~

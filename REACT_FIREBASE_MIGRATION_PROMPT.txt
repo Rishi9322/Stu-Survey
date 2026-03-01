@@ -1,0 +1,380 @@
+================================================================================
+REACT + FIREBASE MIGRATION PROMPT
+================================================================================
+
+PROJECT OVERVIEW
+================================================================================
+You are building a Student Feedback Management System in React (TypeScript) with 
+Firebase (Firestore + Authentication) as the backend. The application is a 
+comprehensive educational feedback platform that allows students, teachers, and 
+admins to manage surveys, collect feedback, and handle suggestions/complaints 
+with AI-powered analytics.
+
+
+CORE DATABASE COLLECTIONS (FIRESTORE)
+================================================================================
+
+Create the following Firestore collections with these document structures:
+
+1. USERS COLLECTION
+   - id (string, uid from Firebase Auth)
+   - name (string)
+   - email (string)
+   - password (hashed if needed, else use Firebase Auth)
+   - role (enum: 'student' | 'teacher' | 'admin')
+   - isActive (boolean)
+   - createdAt (timestamp)
+   - updatedAt (timestamp)
+
+2. SURVEYS COLLECTION
+   - id (string, auto-generated)
+   - title (string)
+   - description (string)
+   - isActive (boolean)
+   - createdAt (timestamp)
+   - updatedAt (timestamp)
+
+3. QUESTIONS COLLECTION
+   - id (string, auto-generated)
+   - surveyId (string, reference to surveys)
+   - question (string)
+   - questionType (enum: 'rating' | 'text' | 'multiple_choice')
+   - isActive (boolean)
+   - order (number)
+   - createdAt (timestamp)
+   - updatedAt (timestamp)
+
+4. RESPONSES COLLECTION
+   - id (string, auto-generated)
+   - surveyId (string, reference)
+   - studentId (string, reference)
+   - teacherId (string, reference)
+   - questionId (string, reference)
+   - rating (number, 1-5, optional)
+   - textResponse (string, optional)
+   - submittedAt (timestamp, optional)
+   - createdAt (timestamp)
+   - updatedAt (timestamp)
+
+5. SUGGESTIONS_COMPLAINTS COLLECTION
+   - id (string, auto-generated)
+   - subject (string)
+   - description (string)
+   - type (enum: 'complaint' | 'suggestion')
+   - submittedByRole (enum: 'student' | 'teacher' | 'admin')
+   - status (enum: 'open' | 'pending_review' | 'resolved' | 'closed')
+   - resolutionNotes (string, optional)
+   - resolvedBy (string, reference to users, optional)
+   - resolvedAt (timestamp, optional)
+   - createdAt (timestamp)
+   - updatedAt (timestamp)
+
+
+CORE FEATURES & MODULES
+================================================================================
+
+1. AUTHENTICATION MODULE
+   - Firebase Auth integration (email/password, optional: Google/social login)
+   - Login page with email validation
+   - Registration page with role selection (student/teacher, admin by invitation only)
+   - Password reset functionality
+   - Session management and token refresh
+   - Protected routes based on user role
+
+2. USER MANAGEMENT (ADMIN)
+   - View all users with filters (by role, status, email)
+   - Create, update, delete users
+   - Bulk user import (CSV/Excel with validation)
+   - Bulk user export (CSV/Excel format)
+   - User import error reporting
+   - Set user roles (student, teacher, admin)
+   - Activate/deactivate users
+
+3. SURVEY MANAGEMENT (ADMIN & TEACHER)
+   - Create surveys with title and description
+   - Add questions to surveys (rating, text, multiple choice)
+   - Reorder questions
+   - Preview surveys
+   - Activate/deactivate surveys
+   - Edit existing surveys
+   - Delete surveys
+   - View survey statistics and responses
+
+4. STUDENT SURVEY TAKING
+   - List available active surveys
+   - Display surveys with all question types
+   - Save responses (rating 1-5, text input, multiple choice selection)
+   - Submit survey responses with timestamp
+   - View survey progress
+   - Prevent duplicate submissions for same user/survey
+   - Display confirmation on successful submission
+
+5. TEACHER FEEDBACK DASHBOARD
+   - View surveys created by them
+   - View all responses to their surveys
+   - View student ratings and feedback
+   - Filter responses by student, date range, rating
+   - Export responses to CSV/Excel
+
+6. ADMIN ANALYTICS DASHBOARD
+   - Overall statistics (total users, surveys, responses, complaints)
+   - Survey completion rates
+   - Response trends over time
+   - Complaint/suggestion statistics
+   - User activity metrics
+   - Data visualization (charts and graphs)
+
+7. SUGGESTIONS & COMPLAINTS MODULE
+   - Submit complaints/suggestions (anonymous option available)
+   - View all submissions (admin only)
+   - Filter by type (complaint/suggestion), status, date range
+   - Change status (open → pending_review → resolved/closed)
+   - Add resolution notes
+   - Track which admin resolved it
+   - Auto-timestamp resolutions
+
+8. AI INTEGRATION (Optional but Present)
+   - Sentiment analysis for text responses
+   - Topic extraction from suggestions/complaints
+   - Automated response categorization
+   - Predictive analytics for survey trends
+   - API integration with external AI services (Grok, OpenRouter, local Python)
+   - Real-time data analysis
+
+9. DATA IMPORT/EXPORT
+   - CSV/Excel user import with validation and error handling
+   - Batch user creation from imported data
+   - Email notifications to imported users
+   - User export with filters
+   - Response data export
+   - Survey templates export/import
+
+10. REPORTING & DOCUMENTATION
+    - Generate PDF reports for surveys
+    - HTML-based analytics reports
+    - Documentation pages (about, features, help, terms, privacy)
+    - Contact form for support
+
+
+KEY PAGES/ROUTES STRUCTURE
+================================================================================
+
+/
+├── /login (Public)
+├── /register (Public)
+├── /forgot-password (Public)
+├── /dashboard (Protected, shows role-specific dashboard)
+├── /admin (Admin only)
+│   ├── /users (manage users, import/export)
+│   ├── /surveys (create/manage surveys)
+│   ├── /analytics (system-wide analytics)
+│   ├── /complaints (view/manage complaints & suggestions)
+│   └── /reports (generate reports)
+├── /teacher (Teacher only)
+│   ├── /surveys (view own surveys)
+│   ├── /responses (view survey responses)
+│   ├── /analytics (survey analytics)
+│   └── /export (data export)
+├── /student (Student only)
+│   ├── /surveys (available surveys list)
+│   ├── /surveys/:id/take (take survey)
+│   ├── /feedback (submit suggestions/complaints)
+│   └── /my-submissions (view own submissions)
+├── /public
+│   ├── /about
+│   ├── /features
+│   ├── /help
+│   ├── /documentation
+│   ├── /contact
+│   ├── /privacy
+│   └── /terms
+└── /404 (Not Found)
+
+
+CORE FUNCTIONS & SERVICES REQUIRED
+================================================================================
+
+1. AUTH SERVICE
+   - signUp(email, password, name, role)
+   - login(email, password)
+   - logout()
+   - resetPassword(email)
+   - getCurrentUser()
+   - updateUserProfile(updates)
+   - changePassword(oldPassword, newPassword)
+
+2. SURVEY SERVICE
+   - createSurvey(title, description)
+   - updateSurvey(surveyId, updates)
+   - deleteSurvey(surveyId)
+   - getSurvey(surveyId)
+   - listSurveys(filters)
+   - toggleSurveyActive(surveyId)
+   - addQuestion(surveyId, question, type)
+   - updateQuestion(questionId, updates)
+   - deleteQuestion(questionId)
+   - reorderQuestions(surveyId, orderArray)
+
+3. RESPONSE SERVICE
+   - submitResponse(surveyId, responses[])
+   - getResponse(responseId)
+   - listResponses(surveyId, filters)
+   - updateResponse(responseId, updates)
+   - deleteResponse(responseId)
+   - getSurveyStatistics(surveyId)
+   - checkIfUserSubmitted(userId, surveyId)
+   - exportResponses(surveyId, format)
+
+4. USER SERVICE
+   - createUser(email, password, name, role)
+   - updateUser(userId, updates)
+   - deleteUser(userId)
+   - getUser(userId)
+   - listUsers(filters)
+   - toggleUserActive(userId)
+   - importUsers(csvData)
+   - exportUsers(filters, format)
+   - hasPermission(userId, action)
+
+5. COMPLAINTS SERVICE
+   - submitComplaint(subject, description, type)
+   - getComplaint(complaintId)
+   - listComplaints(filters)
+   - updateComplaintStatus(complaintId, newStatus)
+   - resolveComplaint(complaintId, resolutionNotes, resolvedById)
+   - getStatistics()
+
+6. AI SERVICE (if AI integration needed)
+   - analyzeSentiment(text)
+   - extractTopics(text)
+   - generateInsights(data)
+   - analyzeTrends(surveyId)
+
+7. FILE SERVICE
+   - uploadFile(file, type)
+   - downloadFile(fileName, format)
+   - parseCSV(file)
+   - generateCSV(data)
+   - generatePDF(data)
+
+
+STATE MANAGEMENT
+================================================================================
+
+Use Redux/Zustand with these slices:
+- auth (user, isAuthenticated, role)
+- surveys (list, current, loading, errors)
+- responses (list, current, loading)
+- user (currentUser, profile, preferences)
+- ui (loading, modals, notifications, theme)
+- complaints (list, filters, statistics)
+- analytics (metrics, trends, charts)
+
+
+STYLING & COMPONENTS
+================================================================================
+
+- Use Tailwind CSS or Material-UI
+- Responsive design (mobile, tablet, desktop)
+- Light/dark theme support
+- Toast notifications for user feedback
+- Form validation with detailed error messages
+- Data tables with pagination, filtering, sorting
+- Modal dialogs for confirmations and forms
+- Charts/graphs for analytics (Chart.js, Recharts, or Plotly)
+
+
+AUTHENTICATION & AUTHORIZATION
+================================================================================
+
+- Firebase Authentication for user login/registration
+- Role-based access control (RBAC) for routes
+- Firestore security rules based on user roles
+- JWT tokens for API calls (if needed)
+- Session timeout after inactivity
+
+
+ERROR HANDLING & VALIDATION
+================================================================================
+
+- Input validation on all forms
+- Error boundaries for crash handling
+- Try-catch blocks in async operations
+- User-friendly error messages
+- Logging system for debugging
+- Network error handling with retry logic
+
+
+PERFORMANCE OPTIMIZATION
+================================================================================
+
+- Lazy loading of routes
+- Code splitting
+- Image optimization
+- Memoization of components
+- Efficient Firestore queries with indexes
+- Pagination for large datasets
+- Caching strategies
+
+
+TESTING
+================================================================================
+
+- Unit tests for services (Jest)
+- Component tests (React Testing Library)
+- Integration tests for critical flows
+- E2E tests with Cypress/Playwright
+- Test coverage minimum 70%
+
+
+ADDITIONAL REQUIREMENTS
+================================================================================
+
+- Environment variables for Firebase config, API keys, feature flags
+- Dark mode support
+- Multi-language support (i18n) if needed
+- Mobile-responsive design
+- Offline support with service workers
+- Error tracking (Sentry optional)
+- Analytics tracking
+- Email notifications for important events
+- Search functionality across surveys, users, complaints
+
+
+DEVELOPMENT STACK
+================================================================================
+
+Framework:              React 18+ with TypeScript
+State Management:       Redux Toolkit or Zustand
+Firebase:              Firestore, Authentication, Storage
+UI Library:            Tailwind CSS + Headless UI, or Material-UI
+Routing:               React Router v6+
+Forms:                 React Hook Form + Zod/Yup for validation
+HTTP Client:           Axios (for any HTTP calls)
+Testing:               Jest + React Testing Library + Cypress
+Build Tool:            Vite or Next.js
+Package Manager:       npm or yarn
+
+
+DEPLOYMENT
+================================================================================
+
+- Firebase Hosting for frontend
+- Firestore for database
+- Firebase Storage for file uploads
+- Environment-specific configs (dev, staging, prod)
+- CI/CD pipeline (GitHub Actions recommended)
+- Database backups and versioning
+
+
+USAGE INSTRUCTIONS
+================================================================================
+
+Submit this prompt to Claude, ChatGPT, or another AI. The AI will generate a 
+fully functional React application with Firebase integration covering all the 
+features mentioned above. Specify which AI integration features you want (if any) 
+and the preferred UI library (Tailwind CSS vs Material-UI).
+
+================================================================================
+END OF PROMPT
+================================================================================

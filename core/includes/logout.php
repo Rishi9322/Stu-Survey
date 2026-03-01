@@ -8,7 +8,7 @@ $_SESSION = array();
 // Destroy the session.
 session_destroy();
 
-// Redirect to login page
-header("location: ../index.php");
+// Redirect to home page
+header("location: /stu/public/index.php");
 exit;
 ?>
